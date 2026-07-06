@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="精艺达成果展示 — GJB 9001C-2017与ISO 9001:2015双认证，200+客户信赖。">
+  <title>成果展示 | 无锡精艺达科技有限公司</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/animations.css">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="无锡精艺达科技有限公司">
+  <meta property="og:locale" content="zh_CN">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <style>
+    /* === Hero Canvas === */
+    #quality-hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+    /* === Ambient glow orbs === */
+    .amb-orb { position: fixed; border-radius: 50%; pointer-events: none; filter: blur(120px); opacity: 0.12; z-index: 0; }
+    .amb-orb-1 { width: 600px; height: 600px; top: -200px; right: -150px; background: radial-gradient(circle, rgba(45,95,165,0.5), transparent 70%); animation: ambientFloat 20s ease-in-out infinite; }
+    .amb-orb-2 { width: 400px; height: 400px; bottom: -100px; left: -100px; background: radial-gradient(circle, rgba(200,164,92,0.3), transparent 70%); animation: ambientFloat 25s ease-in-out infinite reverse; }
+
+    /* === Stats Banner === */
+    #achievement-stats { padding: var(--space-2xl) 0; background: var(--navy); position: relative; z-index: 1; }
+    .stats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-md); }
+    .stat-card { text-align: center; padding: var(--space-xl) var(--space-md); background: rgba(13,30,56,0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(200,164,92,0.06); border-radius: var(--radius-xl); transition: all 0.4s; }
+    .stat-card:hover { border-color: rgba(200,164,92,0.2); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(6,13,24,0.3); }
+    .stat-num { font-family: var(--font-serif); font-size: 2.2rem; font-weight: 900; background: var(--num-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.1; margin-bottom: 4px; }
+    .stat-label { font-size: 0.82rem; color: var(--white); font-weight: 500; }
+    .stat-sub { font-size: 0.68rem; color: var(--silver); margin-top: 2px; }
+    @media (max-width: 1024px) { .stats-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 768px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    /* === Certifications === */
+    #cert-hero { padding: var(--section-pad) 0; background: linear-gradient(180deg,var(--navy-deep) 0%,var(--navy) 100%); position: relative; z-index: 1; }
+    .cert-featured { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xl); }
+    .cert-feat-card { text-align: center; padding: var(--space-2xl); background: rgba(13,30,56,0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(200,164,92,0.08); border-radius: var(--radius-xl); transition: all 0.5s cubic-bezier(0.25,0.46,0.45,0.94); position: relative; overflow: hidden; }
+    .cert-feat-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(200,164,92,0.08) 0%, transparent 60%); opacity: 0; transition: opacity 0.4s; }
+    .cert-feat-card:hover { transform: translateY(-8px); border-color: rgba(200,164,92,0.25); box-shadow: 0 20px 60px rgba(6,13,24,0.4), 0 0 40px rgba(200,164,92,0.06); }
+    .cert-feat-card:hover::before { opacity: 1; }
+    .cert-badge { width: 72px; height: 72px; margin: 0 auto var(--space-lg); border-radius: 50%; border: 2px solid rgba(200,164,92,0.3); display: flex; align-items: center; justify-content: center; color: var(--gold); transition: all 0.5s; }
+    .cert-feat-card:hover .cert-badge { border-color: var(--gold); box-shadow: 0 0 40px rgba(200,164,92,0.2); transform: scale(1.05); }
+    .cert-feat-card h3 { font-size: 1.15rem; margin-bottom: var(--space-sm); }
+    .cert-id { font-family: var(--font-mono); font-size: 0.85rem; color: var(--gold); letter-spacing: 0.05em; margin-bottom: var(--space-md); }
+    .cert-feat-card p { font-size: 0.85rem; line-height: 1.8; }
+
+    /* === Product Showcase === */
+    #product-showcase { padding: var(--section-pad) 0; background: var(--navy-deep); position: relative; z-index: 1; }
+    #product-showcase::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 600px; height: 1px; background: linear-gradient(90deg,transparent,rgba(200,164,92,0.2),transparent); }
+    .showcase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xl); }
+    .showcase-card { background: rgba(13,30,56,0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(200,164,92,0.06); border-radius: var(--radius-xl); overflow: hidden; transition: all 0.5s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .showcase-card:hover { transform: translateY(-8px); border-color: rgba(200,164,92,0.2); box-shadow: 0 20px 60px rgba(6,13,24,0.4); }
+    .showcase-visual { aspect-ratio: 16/10; background: var(--navy-light); position: relative; overflow: hidden; }
+    .showcase-visual img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .showcase-card:hover .showcase-visual img { transform: scale(1.08); }
+    .showcase-tag { position: absolute; top: 12px; left: 12px; padding: 4px 12px; background: rgba(10,22,40,0.9); border: 0.5px solid rgba(200,164,92,0.3); border-radius: 20px; font-family: var(--font-en); font-size: 0.6rem; letter-spacing: 0.08em; color: var(--gold); }
+    .showcase-body { padding: var(--space-xl); }
+    .showcase-body .field { font-family: var(--font-en); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--gold); text-transform: uppercase; margin-bottom: var(--space-xs); }
+    .showcase-body h4 { font-size: 1.05rem; margin-bottom: var(--space-sm); }
+    .showcase-body p { font-size: 0.85rem; line-height: 1.8; margin-bottom: var(--space-md); }
+    .showcase-specs { display: flex; flex-wrap: wrap; gap: var(--space-sm) var(--space-lg); padding-top: var(--space-md); border-top: 1px solid rgba(200,164,92,0.06); font-size: 0.78rem; }
+    .showcase-specs .ssk { color: var(--silver); } .showcase-specs .ssv { font-family: var(--font-mono); color: var(--silver-light); font-weight: 500; }
+
+    /* === Tech Metrics with Laser Beam === */
+    #tech-excellence { padding: var(--section-pad) 0; background: linear-gradient(180deg,var(--navy) 0%,var(--navy-deep) 100%); position: relative; z-index: 1; overflow: hidden; }
+    .laser-beam { position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(180,210,255,0.2) 20%, rgba(220,240,255,0.9) 45%, #fff 50%, rgba(220,240,255,0.9) 55%, rgba(180,210,255,0.2) 80%, transparent); pointer-events: none; opacity: 0; transition: opacity 0.6s; }
+    .laser-beam.active { opacity: 1; }
+    .laser-beam::after { content: ''; position: absolute; top: -2px; left: 50%; width: 4px; height: 4px; border-radius: 50%; background: #fff; box-shadow: 0 0 12px rgba(180,210,255,0.8), 0 0 30px rgba(150,190,240,0.4); transform: translateX(-50%); }
+    .laser-vertical { position: absolute; top: 0; left: 50%; width: 1px; height: 0; background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(180,210,255,0.4), rgba(200,164,92,0.2), transparent); pointer-events: none; transform: translateX(-50%); transition: height 1.5s cubic-bezier(0.16,1,0.3,1); }
+    .laser-vertical.active { height: 100%; }
+
+    .metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-xl); opacity: 0; transform: translateY(20px); transition: opacity 0.8s 0.6s, transform 0.8s 0.6s; }
+    .metrics-grid.revealed { opacity: 1; transform: translateY(0); }
+    .metric-card { text-align: center; padding: var(--space-2xl) var(--space-lg); position: relative; opacity: 0; transform: translateY(16px); transition: opacity 0.6s, transform 0.6s; }
+    .metric-card:nth-child(1) { transition-delay: 0.8s; }
+    .metric-card:nth-child(2) { transition-delay: 1.0s; }
+    .metric-card:nth-child(3) { transition-delay: 1.2s; }
+    .metric-card:nth-child(4) { transition-delay: 1.4s; }
+    .metrics-grid.revealed .metric-card { opacity: 1; transform: translateY(0); }
+    .metric-card::after { content: ''; position: absolute; right: 0; top: 20%; height: 60%; width: 1px; background: linear-gradient(180deg,transparent,rgba(200,164,92,0.12),transparent); }
+    .metric-card:last-child::after { display: none; }
+    .metric-value { font-family: var(--font-serif); font-size: clamp(2.2rem,4vw,3rem); font-weight: 900; color: var(--white); margin-bottom: var(--space-xs); transition: all 0.4s; }
+    .metric-card:hover .metric-value { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .metric-label { font-size: 0.9rem; color: var(--silver); font-weight: 500; }
+    .metric-sub { font-size: 0.72rem; color: var(--silver); opacity: 0.6; margin-top: 4px; }
+
+    /* === Horizontal Carousel (post-tech sections) === */
+    .h-carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .h-carousel::-webkit-scrollbar { display: none; }
+    .h-slide { min-width: 100%; scroll-snap-align: start; }
+
+    /* === Scroll Hint === */
+    .scroll-hint { text-align: center; padding: var(--space-lg) 0 var(--space-2xl); color: var(--silver); font-size: 0.75rem; letter-spacing: 0.08em; opacity: 0; transform: translateY(10px); transition: all 0.6s 1s; }
+    .scroll-hint.visible { opacity: 0.6; transform: translateY(0); animation: hintBounce 2s ease-in-out infinite; }
+    .scroll-hint.visible:hover { opacity: 1; }
+    @keyframes hintBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+    .scroll-hint-arrow { display: block; margin: 0 auto 6px; width: 20px; height: 20px; border-right: 1px solid var(--gold); border-bottom: 1px solid var(--gold); transform: rotate(45deg); opacity: 0.5; }
+
+    @media (max-width: 1024px) { .metrics-grid { grid-template-columns: repeat(2, 1fr); } .metric-card:nth-child(2)::after { display: none; } }
+    @media (max-width: 768px) { .metrics-grid { grid-template-columns: repeat(2, 1fr); } .h-carousel { flex-direction: column; overflow-x: visible; } .h-slide { min-width: auto; } }
+
+    /* === Materials Table === */
+    #materials { padding: var(--section-pad) 0; background: var(--navy-deep); position: relative; z-index: 1; }
+    .mat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-2xl); }
+    .mat-wrap { background: rgba(13,30,56,0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(200,164,92,0.06); border-radius: var(--radius-xl); padding: var(--space-2xl); transition: all 0.4s; }
+    .mat-wrap:hover { border-color: rgba(200,164,92,0.15); box-shadow: 0 8px 32px rgba(6,13,24,0.3); }
+    .mat-wrap h4 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: var(--space-lg); font-family: var(--font-en); }
+    .mat-table { width: 100%; border-collapse: collapse; }
+    .mat-table th { text-align: left; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--silver); padding: var(--space-sm) var(--space-md); border-bottom: 1px solid rgba(200,164,92,0.08); font-weight: 500; font-family: var(--font-en); }
+    .mat-table td { padding: var(--space-sm) var(--space-md); font-size: 0.85rem; border-bottom: 1px solid rgba(200,164,92,0.03); }
+    .mat-table td:first-child { color: var(--white); font-weight: 500; }
+    .mat-table td:nth-child(2) { font-family: var(--font-mono); font-size: 0.8rem; color: var(--silver-light); }
+    .mat-table td:last-child { font-size: 0.8rem; color: var(--silver); }
+    .mat-table tbody tr { transition: all 0.25s; }
+    .mat-table tbody tr:hover { background: rgba(200,164,92,0.04); }
+
+    /* === Premium Growing Bar Chart === */
+    #capability-bars { padding: var(--section-pad) 0; background: var(--navy-deep); position: relative; z-index: 1; }
+    #capability-bars::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 600px; height: 1px; background: linear-gradient(90deg,transparent,rgba(200,164,92,0.2),transparent); }
+    .bars-container { max-width: 750px; margin: 0 auto; display: flex; flex-direction: column; gap: 22px; }
+    .bar-row { display: flex; align-items: center; gap: var(--space-lg); }
+    .bar-label { width: 130px; text-align: right; font-size: 0.82rem; color: var(--silver-light); font-weight: 500; flex-shrink: 0; letter-spacing: 0.03em; }
+    .bar-track { flex: 1; height: 28px; background: rgba(10,20,36,0.6); border-radius: 14px; overflow: hidden; position: relative; border: 0.5px solid rgba(200,164,92,0.08); box-shadow: inset 0 2px 4px rgba(0,0,0,0.2); }
+    .bar-fill { height: 100%; border-radius: 14px; background: linear-gradient(90deg, rgba(180,140,90,0.6), rgba(200,164,92,0.7) 40%, rgba(220,190,140,0.8) 70%, rgba(200,164,92,0.5)); transition: width 2.2s cubic-bezier(0.16,1,0.3,1); width: 0%; position: relative; overflow: hidden; box-shadow: 0 0 12px rgba(200,164,92,0.2); }
+    .bar-fill.animated { width: var(--bar-width); }
+    .bar-fill::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 40%; background: linear-gradient(180deg, rgba(255,255,255,0.2), transparent); border-radius: 14px 14px 0 0; }
+    .bar-value { width: 55px; font-family: var(--font-serif); font-size: 1.05rem; font-weight: 700; color: var(--gold); text-align: left; flex-shrink: 0; }
+    .bar-shimmer { position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); }
+    .bar-fill.animated .bar-shimmer { animation: shimmer 2.8s ease-in-out infinite; }
+    .bar-glow { position: absolute; right: 0; top: 50%; transform: translate(50%,-50%); width: 8px; height: 8px; border-radius: 50%; background: rgba(220,190,140,0.8); box-shadow: 0 0 10px rgba(200,164,92,0.5), 0 0 20px rgba(200,164,92,0.2); opacity: 0; transition: opacity 0.5s; }
+    .bar-fill.animated .bar-glow { opacity: 1; }
+
+    @media (max-width: 768px) {
+      .bar-label { width: 90px; font-size: 0.72rem; }
+      .bar-value { width: 40px; font-size: 0.85rem; }
+      .bar-track { height: 24px; }
+    }
+
+    /* === Process Flow === */
+    #process { padding: var(--section-pad) 0; background: linear-gradient(180deg,var(--navy-deep) 0%,var(--navy) 100%); position: relative; z-index: 1; }
+    .process-flow { display: flex; align-items: stretch; justify-content: center; gap: 0; margin-top: var(--space-3xl); }
+    .proc-step { flex: 1; min-width: 130px; max-width: 180px; text-align: center; padding: var(--space-xl) var(--space-sm); background: rgba(13,30,56,0.4); border: 1px solid rgba(200,164,92,0.04); transition: all 0.4s; position: relative; cursor: pointer; }
+    .proc-step:first-child { border-radius: var(--radius-xl) 0 0 var(--radius-xl); }
+    .proc-step:last-child { border-radius: 0 var(--radius-xl) var(--radius-xl) 0; }
+    .proc-step:hover { background: rgba(13,30,56,0.7); border-color: rgba(200,164,92,0.15); z-index: 2; box-shadow: 0 0 30px rgba(200,164,92,0.06); }
+    .proc-step.expanded { max-width: 600px; flex: 3; z-index: 3; border-color: rgba(200,164,92,0.3); box-shadow: 0 0 40px rgba(200,164,92,0.1); background: rgba(13,30,56,0.85); }
+    .proc-num { width: 36px; height: 36px; margin: 0 auto var(--space-md); border-radius: 50%; background: var(--navy-deep); border: 1px solid rgba(200,164,92,0.2); display: flex; align-items: center; justify-content: center; font-family: var(--font-en); font-size: 0.85rem; font-weight: 600; color: var(--gold); transition: all 0.4s; }
+    .proc-step:hover .proc-num, .proc-step.expanded .proc-num { background: var(--gold); color: var(--navy-deep); border-color: var(--gold); box-shadow: 0 0 24px rgba(200,164,92,0.3); }
+    .proc-step h5 { font-size: 0.9rem; margin-bottom: var(--space-xs); color: var(--white); }
+    .proc-step p { font-size: 0.72rem; color: var(--silver); line-height: 1.6; margin: 0; }
+
+    /* Expandable detail */
+    .proc-detail { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .proc-step.expanded .proc-detail { max-height: 400px; }
+    .proc-detail-inner { padding: var(--space-lg) 0 0; text-align: left; border-top: 1px solid rgba(200,164,92,0.1); margin-top: var(--space-md); }
+    .proc-detail-inner h6 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold); margin-bottom: var(--space-sm); font-family: var(--font-en); }
+    .proc-detail-inner ul { list-style: none; padding: 0; margin: 0 0 var(--space-md); }
+    .proc-detail-inner li { font-size: 0.75rem; color: var(--silver); padding: 3px 0 3px 16px; position: relative; line-height: 1.6; }
+    .proc-detail-inner li::before { content: ''; position: absolute; left: 0; top: 10px; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); opacity: 0.5; }
+
+    /* Responsive */
+    @media (max-width: 1200px) { .showcase-grid { grid-template-columns: repeat(2,1fr); } .showcase-grid .showcase-card:last-child { grid-column: 1/-1; max-width: 400px; justify-self: center; } }
+    @media (max-width: 1024px) { .cert-featured { grid-template-columns: repeat(3,1fr); } .mat-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { .cert-featured, .showcase-grid { grid-template-columns: 1fr; } .showcase-grid { max-width: 420px; margin: 0 auto; } .showcase-grid .showcase-card:last-child { max-width: none; } .cert-featured { max-width: 380px; margin: 0 auto; } .process-flow { flex-direction: column; align-items: center; gap: var(--space-sm); } .proc-step { max-width: 280px; width: 100%; } .proc-step:first-child, .proc-step:last-child { border-radius: var(--radius-xl); } }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">跳到主要内容</a>
+
+  <div class="amb-orb amb-orb-1"></div>
+  <div class="amb-orb amb-orb-2"></div>
+
+  <header>
+    <nav>
+      <a href="index.html" class="nav-logo"><img loading="lazy" src="assets/logo.svg" alt="精艺达" width="40" height="40"><div class="nav-logo-text"><span class="nav-logo-cn">精艺达</span><span class="nav-logo-en">Jingyida</span></div></a>
+      <ul class="nav-links">
+        <li><a href="index.html">首页</a></li><li><a href="about.html">关于我们</a></li><li><a href="equipment.html">装备展示</a></li><li><a href="products.html">产品中心</a></li><li><a href="quality.html">成果展示</a></li><li><a href="contact.html">联系我们</a></li>
+      </ul>
+      <button class="menu-toggle" aria-label="菜单"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+  <div id="scroll-progress"></div>
+
+  <main id="main-content">
+    <section class="page-hero" style="overflow:hidden;">
+      <canvas id="quality-hero-canvas"></canvas>
+      <div class="page-hero-bg-grid"></div>
+      <div class="page-hero-content reveal">
+        <div class="accent-line"></div>
+        <h1>成果展示</h1>
+        <p>以技术实力铸就品质标杆，以交付承诺赢得客户信赖</p>
+      </div>
+    </section>
+
+    <!-- Stats Banner -->
+    <section id="achievement-stats">
+      <div class="container">
+        <div class="stats-grid reveal-stagger">
+          <div class="stat-card"><div class="stat-num"><span class="stat-number" data-target="200" data-suffix="+">0</span></div><div class="stat-label">全球客户</div><div class="stat-sub">航空航天 · 半导体 · 汽车</div></div>
+          <div class="stat-card"><div class="stat-num"><span class="stat-number" data-target="98" data-suffix="%">0</span></div><div class="stat-label">客户满意度</div><div class="stat-sub">连续 5 年 98% 以上</div></div>
+          <div class="stat-card"><div class="stat-num"><span class="stat-number" data-target="16" data-suffix="+">0</span></div><div class="stat-label">年行业深耕</div><div class="stat-sub">2009 年成立至今</div></div>
+          <div class="stat-card"><div class="stat-num"><span class="stat-number" data-target="18" data-suffix=" 台">0</span></div><div class="stat-label">精密设备规模</div><div class="stat-sub">Mazak · Brother · 蔡司等</div></div>
+          <div class="stat-card"><div class="stat-num"><span class="stat-number" data-target="98" data-suffix="%">0</span></div><div class="stat-label">按时交付率</div><div class="stat-sub">柔性生产 · 标准化流程</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certifications -->
+    <section id="cert-hero">
+      <div class="container">
+        <div class="section-header text-center reveal">
+          <span class="section-label centered">权威认证</span>
+          <h2>以高标准体系保障卓越品质</h2>
+          <p>拥有军工与民用双重质量管理体系认证</p>
+        </div>
+        <div class="cert-featured reveal-stagger">
+          <div class="cert-feat-card flow-border" onmousemove="var r=this.getBoundingClientRect();this.style.setProperty('--mx',((event.clientX-r.left)/r.width*100)+'%');this.style.setProperty('--my',((event.clientY-r.top)/r.height*100)+'%')">
+            <div class="cert-badge"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 2L4 8v10c0 7 5.5 13 12 14.5C22.5 31 28 25 28 18V8L16 2z" stroke="currentColor" stroke-width="1.8"/><path d="M10 16l4 4 8-9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>GJB 9001C-2017</h3><div class="cert-id">国军标质量管理体系</div>
+            <p>证明我们具备为军工装备提供精密零部件的质量管理能力，体系覆盖研发、生产与服务全过程。</p>
+          </div>
+          <div class="cert-feat-card flow-border" onmousemove="var r=this.getBoundingClientRect();this.style.setProperty('--mx',((event.clientX-r.left)/r.width*100)+'%');this.style.setProperty('--my',((event.clientY-r.top)/r.height*100)+'%')">
+            <div class="cert-badge"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="1.8"/><path d="M10 16l4 4 8-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>ISO 9001:2015</h3><div class="cert-id">国际质量管理体系</div>
+            <p>建立从原材料到成品出库的全流程标准化质量管控，确保每一件产品的品质一致性与可追溯性。</p>
+          </div>
+          <div class="cert-feat-card flow-border" onmousemove="var r=this.getBoundingClientRect();this.style.setProperty('--mx',((event.clientX-r.left)/r.width*100)+'%');this.style.setProperty('--my',((event.clientY-r.top)/r.height*100)+'%')">
+            <div class="cert-badge"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="3" y="5" width="26" height="22" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M10 12h12M10 17h12M10 22h7" stroke="currentColor" stroke-width="1.8"/></svg></div>
+            <h3>GB/T 19001-2016</h3><div class="cert-id">国家质量管理标准</div>
+            <p>等同采用ISO 9001:2015国家标准，双认证体系为产品出口与国内高端市场提供双重质量背书。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section id="product-showcase">
+      <div class="container">
+        <div class="section-header text-center reveal">
+          <span class="section-label centered">制造实例</span>
+          <h2>精密零部件产品展示</h2>
+          <p>覆盖航空航天、半导体设备与高端装备三大战略领域</p>
+        </div>
+        <div class="showcase-grid reveal-stagger">
+          <div class="showcase-card spotlight">
+            <div class="showcase-visual"><img loading="lazy" src="assets/images/products/product-01.jpg" alt="精密腔体"><div class="showcase-tag">Aerospace</div></div>
+            <div class="showcase-body"><div class="field">航空航天 · 半导体</div><h4>精密腔体 / 壳体组件</h4><p>不锈钢多面精密加工腔体，四轴一次装夹完成六面铣削与镗孔，垂直度≤0.01mm。</p><div class="showcase-specs"><span><span class="ssk">材料</span> <span class="ssv">316L / 304L</span></span> &nbsp; <span><span class="ssk">平面度</span> <span class="ssv">≤0.01/300mm</span></span></div></div>
+          </div>
+          <div class="showcase-card spotlight">
+            <div class="showcase-visual"><img loading="lazy" src="assets/images/products/product-02.jpg" alt="精密组件"><div class="showcase-tag">Semiconductor</div></div>
+            <div class="showcase-body"><div class="field">半导体装备 · 流体控制</div><h4>高纯流体歧管 / 集成块</h4><p>多通道精密流道，交叉孔系经精密钻镗，蔡司三坐标100%全检流道位置度。</p><div class="showcase-specs"><span><span class="ssk">位置度</span> <span class="ssv">±0.01mm</span></span> &nbsp; <span><span class="ssk">粗糙度</span> <span class="ssv">Ra≤0.13μm</span></span></div></div>
+          </div>
+          <div class="showcase-card spotlight">
+            <div class="showcase-visual"><img loading="lazy" src="assets/images/products/product-04.jpg" alt="复杂结构件"><div class="showcase-tag">5-Axis</div></div>
+            <div class="showcase-body"><div class="field">航空航天 · 特种金属</div><h4>复杂精密结构件</h4><p>五轴联动一次成形复杂曲面与多角度特征，大幅减少工序流转与累积误差。</p><div class="showcase-specs"><span><span class="ssk">精度</span> <span class="ssv">IT5-IT6</span></span> &nbsp; <span><span class="ssk">材料</span> <span class="ssv">TC4 / Inconel 718</span></span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Excellence -->
+    <section id="tech-excellence">
+      <div class="laser-beam" id="laser-beam"></div>
+      <div class="laser-vertical" id="laser-vertical"></div>
+      <div class="container">
+        <div class="section-header text-center reveal"><span class="section-label centered">技术实力</span><h2>Technical Excellence</h2></div>
+        <div class="metrics-grid reveal-stagger">
+          <div class="metric-card"><div class="metric-value">IT5</div><div class="metric-label">最高加工精度等级</div><div class="metric-sub">等同国际公差等级</div></div>
+          <div class="metric-card"><div class="metric-value">Ra 0.2</div><div class="metric-label">最优表面粗糙度</div><div class="metric-sub">镜面级表面处理能力</div></div>
+          <div class="metric-card"><div class="metric-value">Ø0.3mm</div><div class="metric-label">最小可加工孔径</div><div class="metric-sub">微孔加工技术</div></div>
+          <div class="metric-card"><div class="metric-value">200+</div><div class="metric-label">累计交付产品型号</div><div class="metric-sub">定制化精密零部件</div></div>
+        </div>
+      </div>
+    </section>
+
+      <div class="scroll-hint" id="hint-tech"><div class="scroll-hint-arrow"></div>继续向下浏览更多内容</div>
+    </section>
+
+    <!-- ===== Horizontal Carousel: 材料 → 能力 → 品质 → 承诺 ===== -->
+    <div class="h-carousel" id="h-carousel">
+      <div class="h-slide">
+
+    <!-- Materials -->
+    <section id="materials">
+      <div class="container">
+        <div class="mat-grid reveal-stagger">
+          <div class="mat-wrap">
+            <h4>常加工材料</h4>
+            <table class="mat-table"><thead><tr><th>材料牌号</th><th>类型</th><th>典型应用</th></tr></thead><tbody>
+              <tr><td>Inconel 718</td><td>镍基高温合金</td><td>航空发动机热端件</td></tr>
+              <tr><td>TC4 (Ti-6Al-4V)</td><td>钛合金</td><td>航空结构件、医疗植入物</td></tr>
+              <tr><td>316L VIM/VAR</td><td>超低碳不锈钢</td><td>半导体真空腔体</td></tr>
+              <tr><td>17-4PH</td><td>沉淀硬化不锈钢</td><td>精密阀体、传感器座</td></tr>
+              <tr><td>7075-T651</td><td>超高强铝合金</td><td>航空结构件、光学基座</td></tr>
+              <tr><td>40CrNiMoA</td><td>合金结构钢</td><td>传动轴、齿轮</td></tr>
+            </tbody></table>
+          </div>
+          <div class="mat-wrap">
+            <h4>加工能力指标</h4>
+            <table class="mat-table"><thead><tr><th>能力指标</th><th>参数范围</th><th>适用工艺</th></tr></thead><tbody>
+              <tr><td>车削外圆精度</td><td>IT5-IT6</td><td>CNC 车削 / 车铣复合</td></tr>
+              <tr><td>铣削平面度</td><td>≤0.01mm/300mm</td><td>三轴/四轴/五轴铣削</td></tr>
+              <tr><td>孔位置度</td><td>±0.01mm</td><td>加工中心钻镗</td></tr>
+              <tr><td>表面粗糙度</td><td>Ra 0.2-0.8μm</td><td>精车/磨削</td></tr>
+              <tr><td>圆度</td><td>≤0.003mm</td><td>精密车削/磨削</td></tr>
+              <tr><td>同轴度</td><td>≤0.01mm</td><td>双主轴一次装夹</td></tr>
+            </tbody></table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Growing Bar Chart -->
+    <section id="capability-bars">
+      <div class="container">
+        <div class="section-header text-center reveal"><span class="section-label centered">能力指标</span><h2>核心能力量化评估</h2><p>基于实际生产数据的综合能力分析</p></div>
+        <div class="bars-container reveal-stagger">
+          <div class="bar-row">
+            <div class="bar-label">加工精度达标率</div>
+            <div class="bar-track"><div class="bar-fill" data-width="99%"><div class="bar-shimmer"></div><div class="bar-glow"></div></div></div>
+            <div class="bar-value">99%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">客户满意度指数</div>
+            <div class="bar-track"><div class="bar-fill" data-width="98%"><div class="bar-shimmer"></div><div class="bar-glow"></div></div></div>
+            <div class="bar-value">98%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">按时交付履约率</div>
+            <div class="bar-track"><div class="bar-fill" data-width="98%"><div class="bar-shimmer"></div><div class="bar-glow"></div></div></div>
+            <div class="bar-value">98%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">一次合格通过率</div>
+            <div class="bar-track"><div class="bar-fill" data-width="96%"><div class="bar-shimmer"></div><div class="bar-glow"></div></div></div>
+            <div class="bar-value">96%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">设备综合利用率</div>
+            <div class="bar-track"><div class="bar-fill" data-width="92%"><div class="bar-shimmer"></div><div class="bar-glow"></div></div></div>
+            <div class="bar-value">92%</div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label">年度客诉率控制</div>
+            <div class="bar-track"><div class="bar-fill" data-width="99.5%"><div class="bar-shimmer"></div><div class="bar-glow"></div></div></div>
+            <div class="bar-value">≤0.5%</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process Flow -->
+    <section id="process">
+      <div class="container">
+        <div class="section-header text-center reveal"><span class="section-label centered">品质管控</span><h2>全流程质量管理体系</h2><p>从来料入库到成品交付，五道关卡层层把关</p></div>
+        <div class="process-flow reveal-stagger">
+          <div class="proc-step" onclick="this.classList.toggle('expanded')">
+            <div class="proc-num">01</div><h5>来料检验</h5><p>光谱仪材料验证<br>硬度检测 · 尺寸复验<br>批次追溯建档</p>
+            <div class="proc-detail"><div class="proc-detail-inner">
+              <h6>检验工具与标准</h6><ul><li>直读光谱仪 — 化学成分定量分析，ASTM E415 标准</li><li>洛氏/维氏硬度计 — 机械性能验证</li><li>数显千分尺/卡尺 — 外形尺寸复验</li><li>表面粗糙度对比样块 — 表面质量初判</li></ul>
+              <h6>管控要点</h6><ul><li>每批次核对材料牌号与炉号</li><li>建立入库批次追溯档案</li><li>不合格材料立即隔离标识</li><li>供应商来料质量评分月度汇总</li></ul>
+            </div></div>
+          </div>
+          <div class="proc-step" onclick="this.classList.toggle('expanded')">
+            <div class="proc-num">02</div><h5>首件验证</h5><p>CNC程序审核放行<br>首件全尺寸检测<br>CPK≥1.33</p>
+            <div class="proc-detail"><div class="proc-detail-inner">
+              <h6>检验工具与标准</h6><ul><li>蔡司三坐标 — 全尺寸首件检测，AS9102 FAI 标准</li><li>对刀仪 — 刀具参数自动补偿</li><li>在线测头 — 机内自动测量</li></ul>
+              <h6>管控要点</h6><ul><li>新程序/换型/修刀后必须首件全检</li><li>过程能力 CPK≥1.33 方可批量生产</li><li>首件检测报告归档留存</li><li>不合格首件→程序修正→重新首件验证</li></ul>
+            </div></div>
+          </div>
+          <div class="proc-step" onclick="this.classList.toggle('expanded')">
+            <div class="proc-num">03</div><h5>过程控制</h5><p>在线SPC实时监控<br>刀具寿命预警<br>蔡司三坐标巡检</p>
+            <div class="proc-detail"><div class="proc-detail-inner">
+              <h6>监控工具与方法</h6><ul><li>SPC 统计过程控制 — X-bar/R 控制图实时监控</li><li>刀具寿命管理系统 — 自动计数预警换刀</li><li>蔡司三坐标定时巡检 — 关键尺寸抽样验证</li></ul>
+              <h6>管控要点</h6><ul><li>CPK 趋势异常→立即停机排查</li><li>刀具达到寿命 80%→预警，100%→强制更换</li><li>巡检频率根据 CPK 表现动态调整</li><li>所有检测数据上传质量管理系统</li></ul>
+            </div></div>
+          </div>
+          <div class="proc-step" onclick="this.classList.toggle('expanded')">
+            <div class="proc-num">04</div><h5>成品检测</h5><p>蔡司全自动三坐标<br>TESA复检确认<br>轮廓度/粗糙度仪</p>
+            <div class="proc-detail"><div class="proc-detail-inner">
+              <h6>检测设备</h6><ul><li>蔡司全自动扫描三坐标 — 全尺寸编程检测</li><li>TESA 手动三坐标 — 关键尺寸复检确认</li><li>轮廓度仪 — 复杂曲面轮廓评定，ISO 4287</li><li>粗糙度仪 — Ra/Rz/Rq 参数检测</li></ul>
+              <h6>管控要点</h6><ul><li>按 AQL 抽样标准执行成品检验</li><li>外观检查——无划伤/毛刺/锈蚀</li><li>不合格品→根因分析→纠正措施</li><li>检测数据自动生成可视化报告</li></ul>
+            </div></div>
+          </div>
+          <div class="proc-step" onclick="this.classList.toggle('expanded')">
+            <div class="proc-num">05</div><h5>出货放行</h5><p>终检报告签发<br>防锈包装 · 批次标签<br>全流程数据可追溯</p>
+            <div class="proc-detail"><div class="proc-detail-inner">
+              <h6>放行条件</h6><ul><li>所有前置检验项合格→质量工程师签发终检报告</li><li>核对订单数量/图号/版本号</li><li>防锈处理→真空包装/防锈纸包裹</li></ul>
+              <h6>追溯体系</h6><ul><li>每件产品带唯一批次追溯标签</li><li>从原材料炉号到成品出货全链路可追溯</li><li>质量档案保存期限≥10年</li><li>客户验收→满意度回访→持续改进闭环</li></ul>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    </section>
+      </div>
+      <div class="h-slide">
+
+    <!-- Commitment -->
+    <section style="padding:var(--section-pad) 0;background:var(--navy-deep);text-align:center;position:relative;z-index:1;">
+      <div class="container">
+        <div class="reveal" style="max-width:700px;margin:0 auto;">
+          <div style="font-family:var(--font-en);font-size:6rem;line-height:1;color:var(--gold);opacity:0.12;margin-bottom:var(--space-lg);">"</div>
+          <blockquote style="font-size:clamp(1.2rem,2.5vw,1.7rem);font-weight:600;line-height:1.8;color:var(--white);margin-bottom:var(--space-2xl);">
+            坚持<span style="color:var(--gold);">"交付即承诺"</span>，通过柔性化生产响应小批量定制需求，<br>以标准化流程保障大批量订单的稳定性。
+          </blockquote>
+          <div style="display:flex;gap:var(--space-xl);justify-content:center;flex-wrap:wrap;">
+            <div style="text-align:center;"><div style="font-family:var(--font-en);font-size:1.5rem;font-weight:700;color:var(--gold);">98%</div><div style="font-size:0.8rem;color:var(--silver);">客户满意度 · 连续5年</div></div>
+            <div style="text-align:center;"><div style="font-family:var(--font-en);font-size:1.5rem;font-weight:700;color:var(--gold);">98%</div><div style="font-size:0.8rem;color:var(--silver);">按时交付率</div></div>
+            <div style="text-align:center;"><div style="font-family:var(--font-en);font-size:1.5rem;font-weight:700;color:var(--gold);">≤0.5%</div><div style="font-size:0.8rem;color:var(--silver);">年度客诉率</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><div class="footer-logo"><img loading="lazy" src="assets/logo.svg" alt="精艺达" width="36" height="36"><div class="footer-logo-text"><strong>无锡精艺达科技有限公司</strong><span>Jingyida Technology</span></div></div><p>以精密制造为核心，聚焦航空航天、半导体零部件及高端装备领域的高新技术企业。</p></div>
+        <div class="footer-col"><h4>快速导航</h4><ul><li><a href="about.html">关于我们</a></li><li><a href="equipment.html">装备展示</a></li><li><a href="products.html">产品中心</a></li><li><a href="quality.html">成果展示</a></li></ul></div>
+        <div class="footer-col"><h4>核心领域</h4><ul><li><a href="#">航空航天</a></li><li><a href="#">半导体零部件</a></li><li><a href="#">高端装备制造</a></li></ul></div>
+        <div class="footer-col"><h4>联系方式</h4><div class="footer-contact-item"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="6" r="2.5" stroke="currentColor" stroke-width="1.2"/><path d="M3 13c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="currentColor" stroke-width="1.2"/></svg><span>江苏省无锡市</span></div><div class="footer-contact-item"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 4l6 5 6-5" stroke="currentColor" stroke-width="1.2"/></svg><span>info@jingyida.com</span></div><div class="footer-contact-item"><svg viewBox="0 0 16 16" fill="none"><path d="M3 2h10a1.5 1.5 0 011.5 1.5v9A1.5 1.5 0 0113 14H3" stroke="currentColor" stroke-width="1.2"/><path d="M1.5 5h4l2 2-2 2h-4" stroke="currentColor" stroke-width="1.2"/></svg><span>0510-85885656</span></div></div>
+      </div>
+      <div class="footer-bottom"><span>&copy; 2025 无锡精艺达科技有限公司. All rights reserved.</span><span>苏ICP备XXXXXXXX号</span></div>
+    </div>
+  </footer>
+  <div id="back-to-top">↑</div>
+  <script src="js/main.js" defer></script>
+  <script>
+    /* ==============================================
+       Quality Page — Creative Animations
+       精密靶心 · 粒子流程 · 扫描线 · 公差带
+       ============================================== */
+    (function() {
+      // ============ 1. Hero: Precision Measurement Canvas ============
+      var hCanvas = document.getElementById('quality-hero-canvas');
+      if (hCanvas) {
+        var hCtx = hCanvas.getContext('2d');
+        var hW = 0, hH = 0, hTime = 0;
+
+        function hResize() {
+          var r = hCanvas.parentElement.getBoundingClientRect();
+          hW = hCanvas.width = r.width;
+          hH = hCanvas.height = r.height;
+        }
+        hResize();
+        window.addEventListener('resize', hResize);
+
+        function hDraw() {
+          requestAnimationFrame(hDraw);
+          hCtx.clearRect(0, 0, hW, hH);
+          hTime += 0.016;
+
+          var cx = hW * 0.55, cy = hH * 0.5;
+          var s = Math.min(hW, hH) * 0.38;
+
+          // Concentric target rings (like CMM measurement or optical comparator)
+          var rings = [1.0, 0.78, 0.55, 0.32, 0.14];
+          for (var ri = 0; ri < rings.length; ri++) {
+            var rr = s * rings[ri];
+            var pulse = 1 + Math.sin(hTime * 1.5 + ri * 0.8) * 0.03;
+            var r = rr * pulse;
+
+            hCtx.beginPath();
+            hCtx.arc(cx, cy, r, 0, Math.PI * 2);
+            var alpha = 0.06 + (ri === rings.length-1 ? 0.1 : 0);
+            hCtx.strokeStyle = 'rgba(200,164,92,' + alpha + ')';
+            hCtx.lineWidth = ri === rings.length-1 ? 1.2 : 0.4;
+            if (ri % 2 === 0) hCtx.setLineDash([3, 12]);
+            else hCtx.setLineDash([]);
+            hCtx.stroke();
+            hCtx.setLineDash([]);
+          }
+
+          // Crosshair scanning (like CMM probe path)
+          var scanPhase = (hTime * 0.4) % (Math.PI * 2);
+          var scanR = s * 0.7;
+          var sx = cx + Math.cos(scanPhase) * scanR;
+          var sy = cy + Math.sin(scanPhase) * scanR;
+
+          // Horizontal crosshair line
+          hCtx.beginPath();
+          hCtx.moveTo(cx - s * 1.05, sy);
+          hCtx.lineTo(cx + s * 1.05, sy);
+          hCtx.strokeStyle = 'rgba(200,164,92,0.08)';
+          hCtx.lineWidth = 0.5;
+          hCtx.stroke();
+
+          // Vertical crosshair line
+          hCtx.beginPath();
+          hCtx.moveTo(sx, cy - s * 1.05);
+          hCtx.lineTo(sx, cy + s * 1.05);
+          hCtx.strokeStyle = 'rgba(200,164,92,0.08)';
+          hCtx.stroke();
+
+          // Scanning dot (CMM probe)
+          var dotGlow = hCtx.createRadialGradient(sx, sy, 0, sx, sy, 12);
+          dotGlow.addColorStop(0, 'rgba(200,164,92,0.5)');
+          dotGlow.addColorStop(0.5, 'rgba(200,164,92,0.12)');
+          dotGlow.addColorStop(1, 'rgba(0,0,0,0)');
+          hCtx.beginPath();
+          hCtx.arc(sx, sy, 12, 0, Math.PI * 2);
+          hCtx.fillStyle = dotGlow;
+          hCtx.fill();
+
+          // Probe dot
+          hCtx.beginPath();
+          hCtx.arc(sx, sy, 2.5, 0, Math.PI * 2);
+          hCtx.fillStyle = 'rgba(212,184,122,0.9)';
+          hCtx.fill();
+
+          // Tick marks around outer ring
+          for (var i = 0; i < 36; i++) {
+            var a = (Math.PI * 2 * i) / 36;
+            var isMajor = i % 6 === 0;
+            var t1 = s * (isMajor ? 0.94 : 0.97);
+            var t2 = s * 1.0;
+            hCtx.beginPath();
+            hCtx.moveTo(cx + Math.cos(a) * t1, cy + Math.sin(a) * t1);
+            hCtx.lineTo(cx + Math.cos(a) * t2, cy + Math.sin(a) * t2);
+            hCtx.strokeStyle = 'rgba(200,164,92,' + (isMajor ? 0.2 : 0.08) + ')';
+            hCtx.lineWidth = isMajor ? 0.8 : 0.4;
+            hCtx.stroke();
+          }
+
+          // Rotating angle indicator (like a protractor)
+          var angLine = hTime * 0.25;
+          hCtx.beginPath();
+          hCtx.moveTo(cx, cy);
+          hCtx.lineTo(cx + Math.cos(angLine) * s * 0.9, cy + Math.sin(angLine) * s * 0.9);
+          hCtx.strokeStyle = 'rgba(200,164,92,0.15)';
+          hCtx.lineWidth = 1;
+          hCtx.setLineDash([2, 6]);
+          hCtx.stroke();
+          hCtx.setLineDash([]);
+        }
+        hDraw();
+      }
+
+      // ============ 2. Process Flow Particle Streams ============
+      var procSteps = document.querySelectorAll('.proc-step');
+      if (procSteps.length > 0) {
+        var streamCanvas = document.createElement('canvas');
+        streamCanvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;';
+        var procSection = document.getElementById('process');
+        if (procSection) {
+          procSection.style.position = 'relative';
+          procSection.appendChild(streamCanvas);
+
+          var sCtx = streamCanvas.getContext('2d');
+          var sW = 0, sH = 0, sTime = 0;
+          var streamParticles = [];
+
+          function sResize() {
+            var r = procSection.getBoundingClientRect();
+            sW = streamCanvas.width = r.width;
+            sH = streamCanvas.height = r.height;
+            initStreamParticles();
+          }
+          sResize();
+          window.addEventListener('resize', sResize);
+
+          function initStreamParticles() {
+            streamParticles = [];
+            if (procSteps.length < 2) return;
+            for (var i = 0; i < procSteps.length - 1; i++) {
+              var from = procSteps[i].getBoundingClientRect();
+              var to = procSteps[i+1].getBoundingClientRect();
+              var pRect = procSection.getBoundingClientRect();
+              var fx = from.left + from.width/2 - pRect.left;
+              var fy = from.top + from.height/2 - pRect.top;
+              var tx = to.left + to.width/2 - pRect.left;
+              var ty = to.top + to.height/2 - pRect.top;
+
+              for (var j = 0; j < 20; j++) {
+                streamParticles.push({
+                  fromX: fx, fromY: fy, toX: tx, toY: ty,
+                  progress: Math.random(),
+                  speed: 0.002 + Math.random() * 0.006,
+                  size: 0.5 + Math.random() * 1.2,
+                  color: '200,164,92',
+                  opacity: 0.1 + Math.random() * 0.3
+                });
+              }
+            }
+          }
+
+          function sDraw() {
+            requestAnimationFrame(sDraw);
+            sCtx.clearRect(0, 0, sW, sH);
+            sTime += 0.016;
+
+            for (var i = 0; i < streamParticles.length; i++) {
+              var sp = streamParticles[i];
+              sp.progress += sp.speed;
+              if (sp.progress > 1) sp.progress -= 1;
+
+              // Ease in-out for organic flow
+              var t = sp.progress;
+              var ease = t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2)/2;
+              var px = sp.fromX + (sp.toX - sp.fromX) * ease;
+              var py = sp.fromY + (sp.toY - sp.fromY) * ease;
+
+              sCtx.beginPath();
+              sCtx.arc(px, py, sp.size, 0, Math.PI * 2);
+              sCtx.fillStyle = 'rgba(' + sp.color + ',' + sp.opacity + ')';
+              sCtx.fill();
+            }
+          }
+          sDraw();
+        }
+      }
+
+      // ============ 3. Certification Card Magnetic Glow ============
+      document.querySelectorAll('.cert-feat-card').forEach(function(card) {
+        card.addEventListener('mousemove', function(e) {
+          var r = card.getBoundingClientRect();
+          var x = ((e.clientX - r.left) / r.width * 100).toFixed(1);
+          var y = ((e.clientY - r.top) / r.height * 100).toFixed(1);
+          card.style.setProperty('--mx', x + '%');
+          card.style.setProperty('--my', y + '%');
+        });
+      });
+
+
+      // ============ 5. Growing bar chart animation ============
+      var barObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var bar = entry.target;
+            bar.style.setProperty('--bar-width', bar.dataset.width);
+            bar.classList.add('animated');
+            barObserver.unobserve(bar);
+          }
+        });
+      }, { threshold: 0.3 });
+
+      document.querySelectorAll('.bar-fill').forEach(function(bar) {
+        barObserver.observe(bar);
+      });
+
+      // ============ 5. Laser Beam Activation ============
+      var techSection = document.getElementById('tech-excellence');
+      var laserBeam = document.getElementById('laser-beam');
+      var laserVert = document.getElementById('laser-vertical');
+      var metricsGrid = techSection ? techSection.querySelector('.metrics-grid') : null;
+      var laserFired = false;
+
+      if (techSection && laserBeam && laserVert && metricsGrid) {
+        var laserObserver = new IntersectionObserver(function(entries) {
+          if (entries[0].isIntersecting && !laserFired) {
+            laserFired = true;
+            // Fire laser beam
+            setTimeout(function() {
+              laserBeam.classList.add('active');
+            }, 200);
+            setTimeout(function() {
+              laserVert.classList.add('active');
+            }, 500);
+            setTimeout(function() {
+              metricsGrid.classList.add('revealed');
+            }, 800);
+            laserObserver.unobserve(techSection);
+          }
+        }, { threshold: 0.3 });
+        laserObserver.observe(techSection);
+      }
+
+      // ============ 6. Scroll Hints ============
+      document.querySelectorAll('.scroll-hint').forEach(function(hint) {
+        var hintObserver = new IntersectionObserver(function(entries) {
+          if (entries[0].isIntersecting) {
+            hint.classList.add('visible');
+            hintObserver.unobserve(hint);
+          }
+        }, { threshold: 0.8 });
+        hintObserver.observe(hint);
+      });
+
+      // ============ 7. Spotlight tracking on showcase cards ============
+      document.querySelectorAll('.spotlight').forEach(function(el) {
+        el.addEventListener('mousemove', function(e) {
+          var r = el.getBoundingClientRect();
+          var x = ((e.clientX - r.left) / r.width * 100).toFixed(1);
+          var y = ((e.clientY - r.top) / r.height * 100).toFixed(1);
+          el.style.setProperty('--sx', x + '%');
+          el.style.setProperty('--sy', y + '%');
+        });
+      });
+
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="无锡精艺达科技有限公司 — 精密制造核心供应商，专注航空航天、半导体零部件及高端装备领域。始于2009年，200+全球客户信赖。">
+  <title>无锡精艺达科技有限公司 | 精密制造 · 航空航天 · 半导体零部件</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/animations.css">
+
+  <!-- Favicon -->
+  
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="无锡精艺达科技有限公司">
+  <meta property="og:locale" content="zh_CN">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+
+  <style>
+    /* ===== Hero ===== */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(15, 31, 61, 0.9) 0%, var(--navy-deep) 70%);
+    }
+
+    /* Ambient floating orbs */
+    .hero-ambient-orb {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(80px);
+      opacity: 0.35;
+    }
+    .hero-ambient-orb.orb-1 {
+      width: 500px; height: 500px;
+      top: -15%; left: -10%;
+      background: radial-gradient(circle, rgba(45, 95, 165, 0.5) 0%, transparent 70%);
+      animation: ambientFloat 18s ease-in-out infinite;
+    }
+    .hero-ambient-orb.orb-2 {
+      width: 400px; height: 400px;
+      bottom: -10%; right: -8%;
+      background: radial-gradient(circle, rgba(200, 164, 92, 0.25) 0%, transparent 70%);
+      animation: ambientFloat 22s ease-in-out infinite reverse;
+    }
+    .hero-ambient-orb.orb-3 {
+      width: 300px; height: 300px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(50, 80, 140, 0.3) 0%, transparent 70%);
+      animation: ambientFloat 25s ease-in-out infinite 5s;
+    }
+
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-bg-grid {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.05;
+      background-image:
+        linear-gradient(rgba(200,164,92,0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,164,92,0.3) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse 60% 50% at 50% 50%, black 40%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 50%, black 40%, transparent 70%);
+    }
+
+    .hero-glow-top {
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 500px;
+      background: radial-gradient(ellipse, rgba(200,164,92,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-glow-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 200px;
+      background: radial-gradient(ellipse, rgba(10,22,40,0.9) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 clamp(6px, 1vw, 16px);
+      padding-top: var(--nav-height);
+    }
+
+    .hero-content .accent-line {
+      width: 80px;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2.4rem, 5.5vw, 4.8rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: var(--space-lg);
+      max-width: 800px;
+      text-shadow: 0 0 120px rgba(200, 164, 92, 0.06);
+    }
+
+    .hero-content h1 .gold {
+      background: linear-gradient(135deg, #E0C88A 0%, #C8A45C 40%, #A8853A 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 6s ease-in-out infinite;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-cn);
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      font-weight: 400;
+      color: var(--silver);
+      margin-bottom: var(--space-sm);
+      max-width: 560px;
+      line-height: 1.8;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-en);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(180deg, var(--gold), transparent);
+    }
+
+    .hero-scroll-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: scrollDown 2s var(--ease-in-out) infinite;
+    }
+
+    /* ===== Company Intro ===== */
+    #intro {
+      position: relative;
+      padding: var(--section-pad) 0;
+      background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 50%, var(--navy-deep) 100%);
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 8vw, 100px);
+      align-items: center;
+    }
+
+    .intro-visual {
+      position: relative;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #intro-geo-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .intro-highlights {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+      margin-top: var(--space-2xl);
+    }
+
+    .intro-highlight {
+      text-align: center;
+    }
+
+    .intro-highlight-number {
+      font-family: var(--font-en);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: var(--space-2xs);
+    }
+
+    .intro-highlight-label {
+      font-size: 0.8rem;
+      color: var(--silver);
+      letter-spacing: 0.03em;
+    }
+
+    /* ===== Pillars ===== */
+    #pillars {
+      position: relative;
+      padding: var(--section-pad) 0;
+      background: var(--navy-deep);
+    }
+
+    #pillars::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(200,164,92,0.2), transparent);
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xl);
+    }
+
+    .pillar-card {
+      padding: var(--space-2xl) var(--space-lg);
+      position: relative;
+      transition: all 0.4s var(--ease-smooth);
+    }
+
+    .pillar-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(200,164,92,0.2), transparent);
+      transition: all 0.4s;
+    }
+
+    .pillar-card:hover::after {
+      left: 0; right: 0;
+      background: linear-gradient(90deg, transparent, rgba(200,164,92,0.4), transparent);
+    }
+
+    .pillar-icon {
+      width: 44px;
+      height: 44px;
+      margin-bottom: var(--space-md);
+      color: var(--gold);
+      opacity: 0.85;
+      transition: all 0.4s;
+    }
+
+    .pillar-card:hover .pillar-icon {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+
+    .pillar-card h3 {
+      margin-bottom: var(--space-xs);
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .pillar-card p {
+      color: var(--silver);
+      font-size: 0.88rem;
+      line-height: 1.85;
+      max-width: 320px;
+    }
+
+    .pillar-stat {
+      margin-top: var(--space-md);
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-xs);
+    }
+
+    .pillar-stat-val {
+      font-family: var(--font-en);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .pillar-stat-unit {
+      font-size: 0.8rem;
+      color: var(--silver);
+    }
+
+    /* ===== Equipment Preview ===== */
+    #equip-preview {
+      position: relative;
+      padding: var(--section-pad) 0;
+      background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 100%);
+    }
+
+    .equip-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xl);
+      margin-bottom: var(--space-3xl);
+    }
+
+    .equip-card {
+      background: var(--navy-mid);
+      border: 1px solid rgba(200, 164, 92, 0.08);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.4s var(--ease-smooth);
+      position: relative;
+    }
+
+    .equip-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg), 0 8px 40px rgba(200, 164, 92, 0.15);
+      border-color: rgba(200, 164, 92, 0.2);
+    }
+
+    .equip-card-image {
+      aspect-ratio: 4/3;
+      background: var(--navy-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .equip-card-image .machine-illustration {
+      width: 60%;
+      height: 60%;
+      opacity: 0.7;
+    }
+
+    .equip-card-image::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, var(--navy-mid) 100%);
+    }
+
+    .equip-card-body {
+      padding: var(--space-lg);
+    }
+
+    .equip-card-body .machine-model {
+      font-family: var(--font-en);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: var(--space-xs);
+    }
+
+    .equip-card-body h4 {
+      font-size: 1.05rem;
+      margin-bottom: var(--space-sm);
+    }
+
+    .equip-card-body .machine-specs {
+      display: flex;
+      gap: var(--space-lg);
+      font-size: 0.8rem;
+      color: var(--silver);
+    }
+
+    .equip-card-body .machine-specs span {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2xs);
+    }
+
+    .equip-card-body .machine-specs strong {
+      font-family: var(--font-mono);
+      color: var(--silver-light);
+      font-weight: 500;
+    }
+
+    .equip-card-hover {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(10, 22, 40, 0.7);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      transition: opacity 0.3s var(--ease-smooth);
+    }
+
+    .equip-card:hover .equip-card-hover {
+      opacity: 1;
+    }
+
+    /* ===== Stats ===== */
+    #stats {
+      position: relative;
+      padding: var(--space-4xl) 0;
+      background: var(--navy-deep);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-xl);
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: var(--space-xl);
+      position: relative;
+    }
+
+    .stat-item::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 20%;
+      height: 60%;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, rgba(200,164,92,0.15), transparent);
+    }
+
+    .stat-item:last-child::after {
+      display: none;
+    }
+
+    .stat-number {
+      display: block;
+      font-family: var(--font-en);
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: var(--space-xs);
+      transition: color 0.6s var(--ease-smooth);
+    }
+
+    .stat-item:hover .stat-number {
+      color: var(--gold);
+    }
+
+    .stat-number .suffix {
+      color: var(--gold);
+      margin-left: 2px;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--silver);
+    }
+
+    .stat-desc {
+      font-size: 0.75rem;
+      color: var(--silver);
+      opacity: 0.6;
+      margin-top: var(--space-2xs);
+    }
+
+    /* ===== CTA ===== */
+    #cta {
+      position: relative;
+      padding: var(--space-5xl) 0;
+      text-align: center;
+      overflow: hidden;
+      background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy-mid) 100%);
+    }
+
+    #cta::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(200,164,92,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-content h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      margin-bottom: var(--space-md);
+    }
+
+    .cta-content p {
+      font-size: 1.1rem;
+      color: var(--silver);
+      max-width: 500px;
+      margin: 0 auto var(--space-2xl);
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 1024px) {
+      .pillars-grid,
+      .equip-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .equip-grid .equip-card:last-child {
+        grid-column: 1 / -1;
+        max-width: 400px;
+        justify-self: center;
+      }
+      .intro-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-2xl);
+      }
+      .intro-visual {
+        order: -1;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .stat-item:nth-child(2)::after {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      #hero {
+        min-height: 100vh;
+        min-height: 100dvh;
+      }
+      .pillars-grid,
+      .equip-grid {
+        grid-template-columns: 1fr;
+        max-width: 420px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .equip-grid .equip-card:last-child {
+        max-width: none;
+        grid-column: auto;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-md);
+      }
+      .stat-item::after {
+        display: none;
+      }
+      .intro-highlights {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-md);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .hero-actions {
+        flex-direction: column;
+      }
+      .hero-actions .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">跳到主要内容</a>
+
+  <!-- Loader -->
+  <div id="loader">
+    <div class="loader-container">
+      <div class="loader-glass">
+        <svg class="loader-ring" viewBox="0 0 140 140">
+          <defs>
+            <linearGradient id="loaderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#4da8f0"/>
+              <stop offset="50%" stop-color="#2d6fbf"/>
+              <stop offset="100%" stop-color="#1a4d8f"/>
+            </linearGradient>
+          </defs>
+          <circle class="loader-ring-bg" cx="70" cy="70" r="65"/>
+          <circle class="loader-ring-fill" cx="70" cy="70" r="65"/>
+        </svg>
+        <div class="loader-percent">0<sup>%</sup></div>
+      </div>
+      <div class="loader-label">加载中</div>
+      <div class="loader-brand">JINGYIDA TECHNOLOGY</div>
+    </div>
+  </div>
+
+  <!-- Scroll Progress -->
+  <div id="scroll-progress"></div>
+
+  <!-- Header -->
+  <header>
+    <nav>
+      <a href="index.html" class="nav-logo">
+        <img loading="lazy" src="assets/logo.svg" alt="精艺达" width="40" height="40" style="display:block;">
+        <div class="nav-logo-text">
+          <span class="nav-logo-cn">精艺达</span>
+          <span class="nav-logo-en">Jingyida</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="about.html">关于我们</a></li>
+        <li><a href="equipment.html">装备展示</a></li>
+        <li><a href="products.html">产品中心</a></li>
+        <li><a href="quality.html">成果展示</a></li>
+        <li><a href="contact.html">联系我们</a></li>
+      </ul>
+      <button class="menu-toggle" aria-label="菜单">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ==================== MAIN ==================== -->
+  <main id="main-content">
+
+    <!-- Hero -->
+    <section id="hero">
+      <canvas id="hero-canvas"></canvas>
+      <div class="hero-ambient-orb orb-1"></div>
+      <div class="hero-ambient-orb orb-2"></div>
+      <div class="hero-ambient-orb orb-3"></div>
+      <div class="hero-bg-grid"></div>
+      <div class="hero-glow-top"></div>
+      <div class="hero-glow-bottom"></div>
+
+      <div class="hero-content">
+        <div class="accent-line hero-reveal-line"></div>
+        <h1 class="hero-reveal-title">
+          以<span class="gold">精密</span>之名<br>铸就<span class="gold">卓越</span>品质
+        </h1>
+        <p class="hero-subtitle hero-reveal-subtitle">
+          专注航空航天、半导体零部件及高端装备精密制造<br>
+          以技术突破引领品质升级，从单一车间到行业标杆
+        </p>
+        <p class="hero-tagline hero-reveal-tagline">Founded 2009 · Safety · Quality · Development</p>
+        <div class="hero-actions hero-reveal-tagline">
+          <a href="about.html" class="btn btn-gold btn-lg btn-arrow">了解精艺达</a>
+          <a href="contact.html" class="btn btn-outline btn-lg">联系我们</a>
+        </div>
+      </div>
+
+      <div class="hero-scroll">
+        <div class="hero-scroll-line"></div>
+        <div class="hero-scroll-dot"></div>
+      </div>
+    </section>
+
+    <!-- Company Intro -->
+    <section id="intro" class="section">
+      <div class="container">
+        <div class="intro-grid">
+          <div class="reveal-left">
+            <span class="section-label">关于精艺达</span>
+            <h2>始于 2009，以精密制造为核心</h2>
+            <p style="margin-top:var(--space-lg);font-size:1.05rem;line-height:2;">
+              无锡精艺达科技有限公司是一家以<span style="color:var(--white);font-weight:500;">“精密制造”</span>为核心，聚焦航空航天、半导体零部件及高端装备领域的高新技术企业。从最初的单一加工车间起步，经过十余年的深耕发展，我们已成长为拥有完整研发、生产、检测体系的行业标杆企业。
+            </p>
+            <p style="color:var(--silver);line-height:2;">
+              累计服务超过<span style="color:var(--gold);font-weight:600;">200家</span>国内外知名客户，涵盖航空航天龙头企业、半导体设备核心供应商及高端汽车零部件制造商。
+            </p>
+            <div class="intro-highlights">
+              <div class="intro-highlight">
+                <div class="intro-highlight-number">200+</div>
+                <div class="intro-highlight-label">全球客户</div>
+              </div>
+              <div class="intro-highlight">
+                <div class="intro-highlight-number">15+</div>
+                <div class="intro-highlight-label">年行业深耕</div>
+              </div>
+              <div class="intro-highlight">
+                <div class="intro-highlight-number">98<span style="font-size:0.6em;">%</span></div>
+                <div class="intro-highlight-label">客户满意度</div>
+              </div>
+            </div>
+          </div>
+          <div class="intro-visual reveal-right">
+            <canvas id="intro-geo-canvas"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Three Pillars -->
+    <section id="pillars" class="section">
+      <div class="container">
+        <div class="section-header text-center reveal">
+          <span class="section-label centered">核心价值</span>
+          <h2>以<span style="color:var(--gold);">人</span>为根本，以<span style="color:var(--gold);">质</span>为生命</h2>
+          <p>三维价值驱动，构建可持续发展的精密制造标杆企业</p>
+        </div>
+
+        <div class="pillars-grid reveal-stagger">
+          <!-- Customers -->
+          <div class="pillar-card" data-tilt>
+            <div class="card-glow"></div>
+            <div class="pillar-icon">
+              <svg viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="14" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <path d="M12 38c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <path d="M6 40c0-4 3-8 7-8M42 40c0-4-3-8-7-8" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+              </svg>
+            </div>
+            <h3>对客户</h3>
+            <p>坚持“交付即承诺”，通过柔性化生产响应小批量定制需求，以标准化流程保障大批量订单的稳定性。</p>
+            <div class="pillar-stat">
+              <span class="pillar-stat-val">98%</span>
+              <span class="pillar-stat-unit">满意度 / 连续5年</span>
+            </div>
+          </div>
+
+          <!-- Employees -->
+          <div class="pillar-card" data-tilt>
+            <div class="card-glow"></div>
+            <div class="pillar-icon">
+              <svg viewBox="0 0 48 48" fill="none">
+                <rect x="6" y="16" width="14" height="20" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <rect x="22" y="10" width="14" height="26" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <path d="M13 16V10a5 5 0 0110 0v6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <circle cx="29" cy="18" r="2" fill="currentColor" opacity="0.5"/>
+                <line x1="29" y1="24" x2="29" y2="30" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <h3>对员工</h3>
+            <p>视人才为核心资产，建立“技术+管理”双晋升通道，提供专项目奖金与股权激励，让每一位技术人才都能获得成长与回报。</p>
+            <div class="pillar-stat">
+              <span class="pillar-stat-val">双通道</span>
+              <span class="pillar-stat-unit">技术 + 管理</span>
+            </div>
+          </div>
+
+          <!-- Industry -->
+          <div class="pillar-card" data-tilt>
+            <div class="card-glow"></div>
+            <div class="pillar-icon">
+              <svg viewBox="0 0 48 48" fill="none">
+                <path d="M24 4L42 14v20L24 44 6 34V14L24 4z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                <circle cx="24" cy="24" r="8" stroke="currentColor" stroke-width="1.2" fill="none"/>
+                <circle cx="24" cy="24" r="2" fill="currentColor" opacity="0.6"/>
+                <line x1="24" y1="16" x2="24" y2="12" stroke="currentColor" stroke-width="1"/>
+                <line x1="31" y1="20" x2="34" y2="17" stroke="currentColor" stroke-width="1"/>
+                <line x1="31" y1="28" x2="34" y2="31" stroke="currentColor" stroke-width="1"/>
+              </svg>
+            </div>
+            <h3>对行业</h3>
+            <p>积极推动精密制造技术的普及与创新，参与制定行业加工标准，与高校共建“精密制造联合实验室”，助力行业技术升级。</p>
+            <div class="pillar-stat">
+              <span class="pillar-stat-val">2<span style="font-size:0.5em;"> 项</span></span>
+              <span class="pillar-stat-unit">行业标准制定</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Equipment Preview -->
+    <section id="equip-preview" class="section">
+      <div class="container">
+        <div class="section-header text-center reveal">
+          <span class="section-label centered">精密装备</span>
+          <h2>Advanced Manufacturing Equipment</h2>
+          <p>引进国际顶尖品牌设备，构建完整的精密加工矩阵</p>
+        </div>
+
+        <div class="equip-grid reveal-stagger">
+          <!-- Machine 1 -->
+          <div class="equip-card" data-tilt data-machine="qtn200ms">
+            <div class="card-glow"></div>
+            <div class="equip-card-image">
+              <svg class="machine-illustration" viewBox="0 0 200 160" fill="none">
+                <rect x="20" y="30" width="160" height="100" rx="6" stroke="#C8A45C" stroke-width="1.5" fill="none" opacity="0.6"/>
+                <rect x="40" y="50" width="40" height="60" rx="3" stroke="#D4B87A" stroke-width="1" fill="none" opacity="0.5"/>
+                <circle cx="60" cy="80" r="15" stroke="#C8A45C" stroke-width="1.2" fill="none" opacity="0.6"/>
+                <circle cx="60" cy="80" r="3" fill="#C8A45C" opacity="0.5"/>
+                <rect x="90" y="60" width="70" height="40" rx="3" stroke="#C8A45C" stroke-width="0.8" fill="none" opacity="0.4"/>
+                <line x1="130" y1="60" x2="130" y2="100" stroke="#C8A45C" stroke-width="0.8" opacity="0.3"/>
+              </svg>
+              <div class="equip-card-hover">
+                <span class="btn btn-outline btn-sm">查看详情 →</span>
+              </div>
+            </div>
+            <div class="equip-card-body">
+              <div class="machine-model">Mazak Twin-Spindle</div>
+              <h4>马扎克 QTN200ms</h4>
+              <div class="machine-specs">
+                <span>主轴 <strong>5,000rpm</strong></span>
+                <span>刀库 <strong>12工位</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Machine 2 -->
+          <div class="equip-card" data-tilt data-machine="vcn510cl">
+            <div class="card-glow"></div>
+            <div class="equip-card-image">
+              <svg class="machine-illustration" viewBox="0 0 200 160" fill="none">
+                <rect x="10" y="20" width="180" height="120" rx="6" stroke="#C8A45C" stroke-width="1.5" fill="none" opacity="0.6"/>
+                <rect x="30" y="35" width="140" height="90" rx="4" stroke="#D4B87A" stroke-width="1" fill="none" opacity="0.5"/>
+                <rect x="50" y="50" width="100" height="60" rx="2" stroke="#C8A45C" stroke-width="0.8" fill="none" opacity="0.4"/>
+                <circle cx="100" cy="65" r="12" stroke="#C8A45C" stroke-width="1.2" fill="none" opacity="0.6"/>
+                <rect x="80" y="90" width="40" height="10" rx="2" stroke="#C8A45C" stroke-width="0.8" fill="none" opacity="0.4"/>
+              </svg>
+              <div class="equip-card-hover">
+                <span class="btn btn-outline btn-sm">查看详情 →</span>
+              </div>
+            </div>
+            <div class="equip-card-body">
+              <div class="machine-model">Mazak Vertical Center</div>
+              <h4>马扎克 VCN-510C L</h4>
+              <div class="machine-specs">
+                <span>主轴 <strong>12,000rpm</strong></span>
+                <span>精度 <strong>±2μm</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Machine 3 -->
+          <div class="equip-card" data-tilt data-machine="f500">
+            <div class="card-glow"></div>
+            <div class="equip-card-image">
+              <svg class="machine-illustration" viewBox="0 0 200 160" fill="none">
+                <rect x="30" y="10" width="140" height="140" rx="8" stroke="#C8A45C" stroke-width="1.5" fill="none" opacity="0.6"/>
+                <circle cx="100" cy="75" r="50" stroke="#D4B87A" stroke-width="1" fill="none" opacity="0.4"/>
+                <circle cx="100" cy="75" r="30" stroke="#C8A45C" stroke-width="0.8" fill="none" opacity="0.3"/>
+                <circle cx="100" cy="75" r="4" fill="#C8A45C" opacity="0.6"/>
+                <line x1="100" y1="25" x2="100" y2="10" stroke="#C8A45C" stroke-width="1" opacity="0.5"/>
+                <line x1="150" y1="75" x2="170" y2="75" stroke="#C8A45C" stroke-width="1" opacity="0.5"/>
+                <line x1="50" y1="75" x2="30" y2="75" stroke="#C8A45C" stroke-width="1" opacity="0.5"/>
+              </svg>
+              <div class="equip-card-hover">
+                <span class="btn btn-outline btn-sm">查看详情 →</span>
+              </div>
+            </div>
+            <div class="equip-card-body">
+              <div class="machine-model">5-Axis Machining Center</div>
+              <h4>五轴加工中心 F500</h4>
+              <div class="machine-specs">
+                <span>主轴 <strong>15,000rpm</strong></span>
+                <span>精度 <strong>±1.5μm</strong></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center reveal">
+          <a href="equipment.html" class="btn btn-outline btn-lg btn-arrow">查看全部设备</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section id="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-item reveal">
+            <span class="stat-number" data-target="200" data-suffix="+">0</span>
+            <span class="stat-label">国内外知名客户</span>
+            <span class="stat-desc">Global Clients</span>
+          </div>
+          <div class="stat-item reveal">
+            <span class="stat-number" data-target="98" data-suffix="%">0</span>
+            <span class="stat-label">客户满意度</span>
+            <span class="stat-desc">连续 5 年保持</span>
+          </div>
+          <div class="stat-item reveal">
+            <span class="stat-number" data-target="15" data-suffix="+">0</span>
+            <span class="stat-label">年行业深耕</span>
+            <span class="stat-desc">Since 2009</span>
+          </div>
+          <div class="stat-item reveal">
+            <span class="stat-number" data-target="2" data-suffix=" 项">0</span>
+            <span class="stat-label">行业加工标准制定</span>
+            <span class="stat-desc">Industry Standards</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta">
+      <div class="container">
+        <div class="cta-content reveal">
+          <span class="section-label centered">未来展望</span>
+          <h2>从<span style="color:var(--gold);">精密</span>到<span style="color:var(--gold);">智造</span></h2>
+          <p>不止于加工。我们正在构建智能化、数字化的精密制造新范式，以技术突破持续推动产业升级。</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="btn btn-gold btn-lg btn-arrow">与我们合作</a>
+            <a href="about.html" class="btn btn-outline btn-lg">了解更多</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img loading="lazy" src="assets/logo.svg" alt="精艺达" width="36" height="36" style="display:block;">
+            <div class="footer-logo-text">
+              <strong>无锡精艺达科技有限公司</strong>
+              <span>Jingyida Technology</span>
+            </div>
+          </div>
+          <p>以精密制造为核心，聚焦航空航天、半导体零部件及高端装备领域的高新技术企业。安全、优质、快速发展。</p>
+        </div>
+        <div class="footer-col">
+          <h4>快速导航</h4>
+          <ul>
+            <li><a href="about.html">关于我们</a></li>
+            <li><a href="equipment.html">装备展示</a></li>
+            <li><a href="products.html">产品中心</a></li>
+            <li><a href="quality.html">成果展示</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>核心领域</h4>
+          <ul>
+            <li><a href="#">航空航天</a></li>
+            <li><a href="#">半导体零部件</a></li>
+            <li><a href="#">高端装备制造</a></li>
+            <li><a href="#">精密加工</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>联系方式</h4>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="6" r="2.5" stroke="currentColor" stroke-width="1.2"/><path d="M3 13c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="currentColor" stroke-width="1.2"/></svg>
+            <span>江苏省无锡市</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 4l6 5 6-5" stroke="currentColor" stroke-width="1.2"/></svg>
+            <span>info@jingyida.com</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 16 16" fill="none"><path d="M3 2h10a1.5 1.5 0 011.5 1.5v9A1.5 1.5 0 0113 14H3" stroke="currentColor" stroke-width="1.2"/><path d="M1.5 5h4l2 2-2 2h-4" stroke="currentColor" stroke-width="1.2"/></svg>
+            <span>0510-85885656</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 无锡精艺达科技有限公司. All rights reserved.</span>
+        <span>苏ICP备XXXXXXXX号</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <div id="back-to-top">↑</div>
+
+  <!-- Equipment Detail Modal -->
+  <div id="equip-modal" class="modal-overlay">
+    <div class="modal-container">
+      <button class="modal-close" aria-label="关闭">&times;</button>
+      <div class="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Modal Styles -->
+  <style>
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(6, 13, 24, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-lg);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s var(--ease-smooth), visibility 0.35s;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-container {
+      background: var(--navy-mid);
+      border: 1px solid rgba(200, 164, 92, 0.15);
+      border-radius: var(--radius-lg);
+      max-width: 640px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      position: relative;
+      padding: var(--space-2xl);
+      transform: translateY(20px);
+      transition: transform 0.4s var(--ease-out-expo);
+    }
+    .modal-overlay.active .modal-container {
+      transform: translateY(0);
+    }
+    .modal-close {
+      position: absolute;
+      top: var(--space-md);
+      right: var(--space-md);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(200, 164, 92, 0.2);
+      color: var(--gold);
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s var(--ease-smooth);
+    }
+    .modal-close:hover {
+      background: rgba(200, 164, 92, 0.1);
+      border-color: var(--gold);
+    }
+    .modal-machine-header {
+      margin-bottom: var(--space-xl);
+      padding-bottom: var(--space-lg);
+      border-bottom: 1px solid rgba(200, 164, 92, 0.1);
+    }
+    .modal-machine-header h2 {
+      margin-bottom: var(--space-xs);
+    }
+    .modal-specs {
+      margin-bottom: var(--space-xl);
+    }
+    .modal-specs h4,
+    .modal-desc h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      margin-bottom: var(--space-md);
+      font-family: var(--font-en);
+    }
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .spec-table tr {
+      border-bottom: 1px solid rgba(200, 164, 92, 0.06);
+    }
+    .spec-table td {
+      padding: var(--space-sm) var(--space-md);
+      font-size: 0.9rem;
+    }
+    .spec-label {
+      color: var(--silver);
+      width: 40%;
+    }
+    .spec-value {
+      font-family: var(--font-mono);
+      color: var(--white);
+      font-weight: 500;
+    }
+    .modal-desc p {
+      line-height: 1.9;
+      color: var(--silver);
+    }
+  </style>
+
+  <script src="js/main.js" defer></script>
+  <script>
+    /* ==============================================
+       Index — Intro Hexagon Particle Animation
+       动态六边形粒子流 · 保持原外形与金色调
+       ============================================== */
+    /* ==============================================
+       Precision Instrument — particle composition
+       精密测量仪表主题：刻度环+齿轮+十字线+靶环
+       ============================================== */
+    (function() {
+      var canvas = document.getElementById('intro-geo-canvas');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var W = 0, H = 0, cx = 0, cy = 0, sc = 0;
+      var particles = [];
+      var time = 0;
+      var mx = -500, my = -500, smx = -500, smy = -500;
+
+      function resize() {
+        var r = canvas.parentElement.getBoundingClientRect();
+        W = canvas.width = r.width; H = canvas.height = r.height;
+        cx = W / 2; cy = H / 2;
+        sc = Math.min(W, H) / 310;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      var visualEl = canvas.parentElement;
+      visualEl.addEventListener('mousemove', function(e) {
+        var r = visualEl.getBoundingClientRect();
+        mx = e.clientX - r.left; my = e.clientY - r.top;
+      });
+      visualEl.addEventListener('mouseleave', function() { mx = -500; my = -500; });
+
+      function buildParticles() {
+        particles = [];
+        var R1 = 185, R2 = 140, R3 = 95, R4 = 50, R5 = 22;
+        var i, a, cos, sin;
+
+        // === 1. OUTER DIAL RING — 60 tick marks, like a micrometer ===
+        for (i = 0; i < 60; i++) {
+          a = (Math.PI * 2 * i) / 60;
+          cos = Math.cos(a); sin = Math.sin(a);
+          var isMajor = (i % 10 === 0);
+          var r1 = isMajor ? R1 - 8 : R1 - 4;
+          var r2 = R1 + 2;
+          particles.push({
+            radius: R1, angle: a, rInner: r1, rOuter: r2,
+            x: 0, y: 0, size: isMajor ? 1.2 : 0.7,
+            color: isMajor ? '212,184,122' : '200,164,92',
+            baseOp: isMajor ? 0.6 : 0.4, phase: Math.random() * Math.PI * 2,
+            type: 'dial'
+          });
+        }
+        // Dial ring circumference flowing particles
+        for (i = 0; i < 90; i++) {
+          a = Math.random() * Math.PI * 2;
+          particles.push({
+            radius: R1, angle: a, rInner: R1, rOuter: R1,
+            x: 0, y: 0, size: 0.5 + Math.random() * 1.3,
+            color: '200,164,92', baseOp: 0.25 + Math.random() * 0.4,
+            phase: Math.random() * Math.PI * 2, type: 'orbit', speed: 0.25 + Math.random() * 0.35
+          });
+        }
+
+        // === 2. GEAR RING — 24-tooth gear ===
+        for (i = 0; i < 24; i++) {
+          a = (Math.PI * 2 * i) / 24;
+          cos = Math.cos(a); sin = Math.sin(a);
+          // Tooth tip
+          particles.push({
+            radius: R2 + 10, angle: a, rInner: R2 + 10, rOuter: R2 + 10,
+            x: 0, y: 0, size: 0.9, color: '212,184,122', baseOp: 0.55, phase: a, type: 'static'
+          });
+          // Tooth valley
+          a = ((Math.PI * 2 * i) + Math.PI / 24) / 24 * 24 / (Math.PI * 2);
+          var av = (Math.PI * 2 * (i + 0.5)) / 24;
+          particles.push({
+            radius: R2 - 6, angle: av, rInner: R2 - 6, rOuter: R2 - 6,
+            x: 0, y: 0, size: 0.5, color: '200,164,92', baseOp: 0.32, phase: av, type: 'static'
+          });
+          // Connection between tooth and valley (radial)
+          var at = (Math.PI * 2 * i) / 24;
+          for (var j = 0; j < 5; j++) {
+            var rr = (R2 - 6) + j * 3.2;
+            var aa = at + (Math.random() - 0.5) * 0.1;
+            particles.push({
+              radius: rr, angle: aa, rInner: rr, rOuter: rr,
+              x: 0, y: 0, size: 0.4 + Math.random() * 0.6,
+              color: j % 2 === 0 ? '212,184,122' : '200,164,92',
+              baseOp: 0.2 + Math.random() * 0.2, phase: Math.random() * Math.PI * 2, type: 'static'
+            });
+          }
+        }
+        // Gear ring orbiting particles
+        for (i = 0; i < 50; i++) {
+          a = Math.random() * Math.PI * 2;
+          particles.push({
+            radius: R2, angle: a, rInner: R2, rOuter: R2,
+            x: 0, y: 0, size: 0.4 + Math.random() * 0.9,
+            color: '212,184,122', baseOp: 0.2 + Math.random() * 0.2,
+            phase: Math.random() * Math.PI * 2, type: 'orbit', speed: -0.3 - Math.random() * 0.4
+          });
+        }
+
+        // === 3. CROSSHAIR — measurement reticle ===
+        for (i = 0; i < 40; i++) {
+          var t = (i - 20) / 20;
+          var dist = Math.abs(t) * R1 * 0.9;
+          // Horizontal line
+          particles.push({
+            cx: cx, cy: cy, ox: t * R1 * 0.9, oy: 0,
+            x: 0, y: 0, size: Math.abs(t) < 0.4 ? 1.0 : 0.5,
+            color: Math.abs(t) < 0.1 ? '212,184,122' : '200,164,92',
+            baseOp: 0.12 + (1 - Math.abs(t)) * 0.2, phase: Math.random() * Math.PI * 2,
+            type: 'cross', axis: 'h'
+          });
+          // Vertical line
+          particles.push({
+            cx: cx, cy: cy, ox: 0, oy: t * R1 * 0.9,
+            x: 0, y: 0, size: Math.abs(t) < 0.4 ? 1.0 : 0.5,
+            color: Math.abs(t) < 0.1 ? '212,184,122' : '200,164,92',
+            baseOp: 0.12 + (1 - Math.abs(t)) * 0.2, phase: Math.random() * Math.PI * 2,
+            type: 'cross', axis: 'v'
+          });
+        }
+        // Hash marks along crosshair
+        for (i = 0; i < 16; i++) {
+          var ht = (i - 8 + 0.5) / 8;
+          var hd = ht * R1 * 0.8;
+          var hl = (Math.abs(i - 8) % 3 === 0) ? 10 : 5;
+          // Horizontal hash
+          particles.push({ radius: hl, angle: Math.PI / 2, rInner: hl, rOuter: hl, x: cx + hd, y: cy, size: 0.6, color: '200,164,92', baseOp: 0.4, phase: 0, type: 'hash', hx: cx + hd, hy: cy, len: hl });
+          // Vertical hash
+          particles.push({ radius: hl, angle: 0, rInner: hl, rOuter: hl, x: cx, y: cy + hd, size: 0.6, color: '200,164,92', baseOp: 0.4, phase: 0, type: 'hash', hx: cx, hy: cy + hd, len: hl });
+        }
+
+        // === 4. CONCENTRIC TARGET RINGS ===
+        var rings = [R3, R4, R5];
+        for (var ri = 0; ri < rings.length; ri++) {
+          var rr = rings[ri];
+          var n = Math.floor(rr * 0.7);
+          for (i = 0; i < n; i++) {
+            a = (Math.PI * 2 * i) / n;
+            particles.push({
+              radius: rr, angle: a, rInner: rr, rOuter: rr,
+              x: 0, y: 0, size: 0.4 + Math.random() * 0.8,
+              color: ri === 1 ? '212,184,122' : '200,164,92',
+              baseOp: 0.35 + Math.random() * 0.35,
+              phase: Math.random() * Math.PI * 2, type: 'orbit',
+              speed: (ri % 2 === 0 ? 0.3 : -0.25) * (0.7 + Math.random() * 0.6)
+            });
+          }
+        }
+
+        // === 5. CENTER PRECISION NODE ===
+        for (i = 0; i < 15; i++) {
+          a = Math.random() * Math.PI * 2;
+          var sr = Math.random() * 8;
+          particles.push({
+            radius: sr, angle: a, rInner: sr, rOuter: sr,
+            x: 0, y: 0, size: 0.6 + Math.random() * 1.5,
+            color: '212,184,122', baseOp: 0.4 + Math.random() * 0.5,
+            phase: Math.random() * Math.PI * 2, type: 'orbit',
+            speed: 0.5 + Math.random() * 0.8
+          });
+        }
+
+        // === 6. HEXAGON FRAME (subtle outer) ===
+        for (i = 0; i < 6; i++) {
+          var a1 = (Math.PI / 3) * i;
+          var a2 = (Math.PI / 3) * ((i + 1) % 6);
+          var hexR = R1 + 20;
+          var x1 = Math.cos(a1) * hexR, y1 = Math.sin(a1) * hexR;
+          var x2 = Math.cos(a2) * hexR, y2 = Math.sin(a2) * hexR;
+          for (var j = 0; j < 14; j++) {
+            var tt = j / 13;
+            particles.push({
+              cx: cx, cy: cy, ox: x1 + (x2 - x1) * tt, oy: y1 + (y2 - y1) * tt,
+              x: 0, y: 0, size: 0.6 + Math.random() * 1.0,
+              color: '200,164,92', baseOp: 0.15 + Math.random() * 0.12,
+              phase: Math.random() * Math.PI * 2, type: 'hex', vert1: { x: x1, y: y1 }, vert2: { x: x2, y: y2 }, t: tt,
+              speed: 0.08 + Math.random() * 0.1
+            });
+          }
+        }
+      }
+
+      function draw() {
+        requestAnimationFrame(draw);
+        ctx.clearRect(0, 0, W, H);
+        time += 0.016;
+
+        smx += (mx - smx) * 0.2;
+        smy += (my - smy) * 0.2;
+
+        var rotSlow = time * 0.08;
+        var rotMed = -time * 0.14;
+        var rotFast = time * 0.22;
+        var hexRot = time * 0.1;
+        var influenceR = 140;
+
+        for (var i = 0; i < particles.length; i++) {
+          var p = particles[i];
+          var px, py;
+
+          if (p.type === 'dial') {
+            var da = p.angle + rotSlow;
+            px = cx + Math.cos(da) * p.radius * sc;
+            py = cy + Math.sin(da) * p.radius * sc;
+          } else if (p.type === 'orbit') {
+            p.angle += p.speed * 0.008;
+            px = cx + Math.cos(p.angle) * p.radius * sc;
+            py = cy + Math.sin(p.angle) * p.radius * sc;
+          } else if (p.type === 'static') {
+            var sa = p.angle + rotMed;
+            px = cx + Math.cos(sa) * p.radius * sc;
+            py = cy + Math.sin(sa) * p.radius * sc;
+          } else if (p.type === 'cross') {
+            px = p.cx + p.ox * sc;
+            py = p.cy + p.oy * sc;
+          } else if (p.type === 'hash') {
+            px = p.hx; py = p.hy;
+          } else if (p.type === 'hex') {
+            p.t += p.speed * 0.002;
+            if (p.t > 1) p.t -= 1;
+            var v1 = p.vert1, v2 = p.vert2;
+            var cosH = Math.cos(hexRot), sinH = Math.sin(hexRot);
+            var rx1 = v1.x * cosH - v1.y * sinH;
+            var ry1 = v1.x * sinH + v1.y * cosH;
+            var rx2 = v2.x * cosH - v2.y * sinH;
+            var ry2 = v2.x * sinH + v2.y * cosH;
+            px = cx + (rx1 + (rx2 - rx1) * p.t) * sc;
+            py = cy + (ry1 + (ry2 - ry1) * p.t) * sc;
+          } else {
+            px = cx + p.ox * sc;
+            py = cy + p.oy * sc;
+          }
+
+          p.x = px; p.y = py;
+
+          // Mouse repulsion
+          var dxM = px - smx, dyM = py - smy;
+          var distM = Math.sqrt(dxM * dxM + dyM * dyM);
+          if (distM < influenceR && distM > 0.1 && mx > 0) {
+            var strength = (1 - distM / influenceR);
+            var force = strength * strength * 5;
+            px += (dxM / distM) * force;
+            py += (dyM / distM) * force;
+            p.x = px; p.y = py;
+          }
+
+          // Glow
+          var glowBoost = (distM < influenceR && mx > 0) ? (1 - distM / influenceR) * 0.5 : 0;
+          var alpha = Math.max(0.03, p.baseOp + glowBoost + Math.sin(time * 2.5 + p.phase) * 0.05);
+
+          ctx.beginPath();
+          ctx.arc(px, py, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(' + p.color + ',' + alpha + ')';
+          ctx.fill();
+
+          // Mouse connection line
+          if (distM < 100 && distM > 0.1 && mx > 0) {
+            var la = (1 - distM / 100) * 0.3;
+            ctx.beginPath();
+            ctx.moveTo(px, py);
+            ctx.lineTo(smx, smy);
+            ctx.strokeStyle = 'rgba(200,164,92,' + la + ')';
+            ctx.lineWidth = 0.4;
+            ctx.stroke();
+          }
+        }
+
+        // Center glow
+        var cg = ctx.createRadialGradient(cx, cy, 0, cx, cy, 40 * sc);
+        cg.addColorStop(0, 'rgba(200,164,92,0.2)');
+        cg.addColorStop(0.5, 'rgba(200,164,92,0.08)');
+        cg.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.beginPath(); ctx.arc(cx, cy, 40 * sc, 0, Math.PI * 2); ctx.fillStyle = cg; ctx.fill();
+
+        // Mouse glow
+        if (mx > 0 && my > 0) {
+          var mg = ctx.createRadialGradient(smx, smy, 0, smx, smy, 90);
+          mg.addColorStop(0, 'rgba(200,164,92,0.1)');
+          mg.addColorStop(1, 'rgba(0,0,0,0)');
+          ctx.beginPath(); ctx.arc(smx, smy, 90, 0, Math.PI * 2); ctx.fillStyle = mg; ctx.fill();
+        }
+
+        // Draw subtle ring outlines
+        var ringRadii = [R1, R2, R3, R4, R5];
+        var ringOp = [0.15, 0.18, 0.2, 0.14, 0.1];
+        for (var ri = 0; ri < ringRadii.length; ri++) {
+          ctx.beginPath();
+          ctx.arc(cx, cy, ringRadii[ri] * sc, 0, Math.PI * 2);
+          ctx.strokeStyle = 'rgba(200,164,92,' + ringOp[ri] + ')';
+          ctx.lineWidth = ri === 1 ? 1.2 : 0.5;
+          ctx.setLineDash(ri === 0 ? [4, 12] : ri === 1 ? [] : [2, 8]);
+          ctx.stroke();
+          ctx.setLineDash([]);
+        }
+      }
+
+      buildParticles();
+      draw();
+
+      window.addEventListener('resize', function() {
+        resize();
+        buildParticles();
+      });
+    })();
+  </script>
+</body>
+</html>

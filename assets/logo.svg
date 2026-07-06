@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#D4B87A"/>
+      <stop offset="50%" stop-color="#C8A45C"/>
+      <stop offset="100%" stop-color="#A07830"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer hexagon (caliper-inspired, with gaps) -->
+  <!-- Drawn as arcs: top gap then clockwise -->
+  <path d="M100 28
+           L148 55.7
+           L148 116.3
+           L100 144
+           L52 116.3
+           L52 55.7
+           Z"
+        stroke="url(#goldGrad)"
+        stroke-width="2"
+        stroke-dasharray="82 6 82 6 82 6 82 6 82 6 82 6"
+        stroke-linecap="round"
+        fill="none"
+        opacity="0.8"/>
+
+  <!-- Inner hexagon (small, for depth) -->
+  <path d="M100 48
+           L133 67
+           L133 105
+           L100 124
+           L67 105
+           L67 67
+           Z"
+        stroke="url(#goldGrad)"
+        stroke-width="0.5"
+        fill="none"
+        opacity="0.25"/>
+
+  <!-- J letterform (left) -->
+  <g transform="translate(62, 60)">
+    <!-- Vertical stroke with chamfered top -->
+    <path d="M8 0 L8 68
+             C8 78 14 84 24 84
+             L32 84
+             L32 76
+             L24 76
+             C20 76 18 74 18 68
+             L18 0"
+          fill="url(#goldGrad)"/>
+  </g>
+
+  <!-- Y letterform (center) -->
+  <g transform="translate(82, 56)">
+    <!-- Upper left arm -->
+    <path d="M18 0 L12 36 L12 92" stroke="url(#goldGrad)" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/>
+    <!-- Upper right arm -->
+    <path d="M18 0 L24 36 L24 92" stroke="url(#goldGrad)" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/>
+    <!-- The V of the Y with chamfered inner -->
+    <path d="M6 0 L18 44 L30 0" stroke="url(#goldGrad)" stroke-width="8" stroke-linecap="square" stroke-linejoin="round"/>
+  </g>
+
+  <!-- D letterform (right) -->
+  <g transform="translate(114, 60)">
+    <!-- Vertical stroke -->
+    <rect x="0" y="0" width="8" height="84" rx="1" fill="url(#goldGrad)"/>
+    <!-- Curved right side (polygon approximation) -->
+    <path d="M8 2
+             L32 6
+             L40 16
+             L44 30
+             L44 54
+             L40 68
+             L32 78
+             L8 82"
+          stroke="url(#goldGrad)"
+          stroke-width="8"
+          stroke-linejoin="round"
+          stroke-linecap="round"
+          fill="none"/>
+    <!-- Inner detail line -->
+    <path d="M14 12 L32 16 L36 26 L38 42 L38 42 L36 58 L32 68 L14 72"
+          stroke="url(#goldGrad)"
+          stroke-width="1.5"
+          fill="none"
+          opacity="0.4"/>
+  </g>
+
+  <!-- Small precision dot accents -->
+  <circle cx="56" cy="24" r="2" fill="url(#goldGrad)" opacity="0.6"/>
+  <circle cx="144" cy="24" r="2" fill="url(#goldGrad)" opacity="0.6"/>
+  <circle cx="56" cy="176" r="1.5" fill="url(#goldGrad)" opacity="0.4"/>
+  <circle cx="144" cy="176" r="1.5" fill="url(#goldGrad)" opacity="0.4"/>
+
+  <!-- Bottom crosshair mark (precision icon) -->
+  <g transform="translate(100, 168)" opacity="0.5">
+    <line x1="-8" y1="0" x2="8" y2="0" stroke="url(#goldGrad)" stroke-width="1"/>
+    <line x1="0" y1="-8" x2="0" y2="8" stroke="url(#goldGrad)" stroke-width="1"/>
+  </g>
+</svg>

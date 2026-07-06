@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>装备展示 | 无锡精艺达科技有限公司</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/animations.css">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="无锡精艺达科技有限公司">
+  <meta property="og:locale" content="zh_CN">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <style>
+    #equip-showcase { padding: var(--section-pad) 0; background: linear-gradient(180deg,var(--navy-deep) 0%,var(--navy) 100%); }
+    .equip-cat { margin-bottom: var(--space-4xl); }
+    .equip-cat-head { display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-2xl); padding-bottom: var(--space-md); border-bottom: 1px solid rgba(200,164,92,0.08); }
+    .equip-cat-head h3 { font-size: 1.15rem; margin: 0; }
+    .equip-cat-head span { font-family: var(--font-en); font-size: 0.65rem; letter-spacing: 0.1em; color: var(--silver); margin-left: auto; }
+    .equip-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); }
+
+    .e-card { background: rgba(13,30,56,0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(200,164,92,0.06); border-radius: var(--radius-lg); overflow: hidden; transition: all 0.45s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .e-toggle { position: absolute; bottom: 14px; right: 14px; width: 34px; height: 34px; border-radius: 50%; background: rgba(200,164,92,0.1); border: 0.5px solid rgba(200,164,92,0.25); color: var(--gold); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); z-index: 2; }
+    .e-toggle:hover { background: rgba(200,164,92,0.2); border-color: var(--gold); box-shadow: 0 0 16px rgba(200,164,92,0.2); transform: scale(1.1); }
+    .e-card.active .e-toggle { background: rgba(200,164,92,0.2); border-color: var(--gold); transform: rotate(180deg); }
+    .e-card.active .e-toggle:hover { transform: rotate(180deg) scale(1.1); }
+
+    .e-card:hover { transform: translateY(-6px); border-color: rgba(200,164,92,0.2); box-shadow: 0 16px 48px rgba(6,13,24,0.4); }
+    .e-card.active { border-color: rgba(200,164,92,0.35); box-shadow: 0 0 0 2px rgba(200,164,92,0.12), 0 16px 48px rgba(6,13,24,0.4); }
+    .e-card-img { aspect-ratio: 16/10; background: var(--navy-light); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .e-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+    .e-toggle { position: absolute; bottom: 14px; right: 14px; width: 34px; height: 34px; border-radius: 50%; background: rgba(200,164,92,0.1); border: 0.5px solid rgba(200,164,92,0.25); color: var(--gold); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); z-index: 2; }
+    .e-toggle:hover { background: rgba(200,164,92,0.2); border-color: var(--gold); box-shadow: 0 0 16px rgba(200,164,92,0.2); transform: scale(1.1); }
+    .e-card.active .e-toggle { background: rgba(200,164,92,0.2); border-color: var(--gold); transform: rotate(180deg); }
+    .e-card.active .e-toggle:hover { transform: rotate(180deg) scale(1.1); }
+
+    .e-card:hover .e-card-img img { transform: scale(1.06); }
+    .e-card-tag { position: absolute; top: 12px; left: 12px; padding: 4px 12px; background: rgba(10,22,40,0.85); border: 0.5px solid rgba(200,164,92,0.25); border-radius: 20px; font-family: var(--font-en); font-size: 0.6rem; letter-spacing: 0.08em; color: var(--gold); }
+    .e-card-body { padding: var(--space-lg); }
+    .e-card-body .e-brand { font-family: var(--font-en); font-size: 0.62rem; letter-spacing: 0.1em; color: var(--gold); text-transform: uppercase; margin-bottom: 4px; }
+    .e-card-body h4 { font-size: 1rem; margin-bottom: var(--space-xs); }
+    .e-card-specs { display: flex; flex-wrap: wrap; gap: var(--space-sm) var(--space-lg); font-size: 0.78rem; }
+    .e-card-specs .esv { font-family: var(--font-mono); color: var(--silver-light); font-weight: 500; }
+
+    /* Expandable detail panel */
+    .e-detail { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.25,0.46,0.45,0.94); background: rgba(10,20,36,0.6); }
+    .e-card.active .e-detail { max-height: 600px; }
+    .e-detail-inner { padding: 0 var(--space-lg) var(--space-lg); }
+    .e-detail-inner h5 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: var(--space-sm); font-family: var(--font-en); }
+    .e-detail-table { width: 100%; border-collapse: collapse; margin-bottom: var(--space-md); }
+    .e-detail-table td { padding: 6px 10px; font-size: 0.82rem; border-bottom: 1px solid rgba(200,164,92,0.04); }
+    .e-detail-table td:first-child { color: var(--silver); width: 38%; }
+    .e-detail-table td:last-child { font-family: var(--font-mono); color: var(--white); font-weight: 500; }
+    .e-detail-inner p { font-size: 0.85rem; line-height: 1.85; color: var(--silver); }
+
+    #equip-capabilities { padding: var(--section-pad) 0; background: var(--navy-deep); position: relative; }
+    #equip-capabilities::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 600px; height: 1px; background: linear-gradient(90deg,transparent,rgba(200,164,92,0.2),transparent); }
+    .cap-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-md); }
+    .cap-item { text-align: center; padding: var(--space-xl) var(--space-md); background: rgba(13,30,56,0.4); border: 1px solid rgba(200,164,92,0.04); border-radius: var(--radius-lg); transition: all 0.35s; }
+    .cap-item:hover { border-color: rgba(200,164,92,0.15); transform: translateY(-3px); }
+    .cap-val { font-family: var(--font-en); font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .cap-label { font-size: 0.8rem; color: var(--silver); }
+
+    @media (max-width: 1200px) { .equip-grid { grid-template-columns: repeat(2,1fr); } .cap-grid { grid-template-columns: repeat(3,1fr); } }
+    @media (max-width: 768px) { .equip-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; } .cap-grid { grid-template-columns: repeat(2,1fr); } }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">跳到主要内容</a>
+  <header>
+    <nav>
+      <a href="index.html" class="nav-logo"><img loading="lazy" src="assets/logo.svg" alt="精艺达" width="40" height="40"><div class="nav-logo-text"><span class="nav-logo-cn">精艺达</span><span class="nav-logo-en">Jingyida</span></div></a>
+      <ul class="nav-links">
+        <li><a href="index.html">首页</a></li><li><a href="about.html">关于我们</a></li><li><a href="equipment.html">装备展示</a></li><li><a href="products.html">产品中心</a></li><li><a href="quality.html">成果展示</a></li><li><a href="contact.html">联系我们</a></li>
+      </ul>
+      <button class="menu-toggle" aria-label="菜单"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+  <div id="scroll-progress"></div>
+  <main id="main-content">
+    <section class="page-hero">
+      <div class="page-hero-bg-grid"></div>
+      <div class="page-hero-content reveal">
+        <div class="accent-line"></div>
+        <h1>装备展示</h1>
+        <p>Mazak · Brother · 现代威亚 · 程泰 · 蔡司 — 国际顶尖品牌，全工艺链精密加工矩阵</p>
+      </div>
+    </section>
+    <section id="equip-showcase"><div class="container">
+
+<div class="equip-cat reveal">
+  <div class="equip-cat-head"><h3>车铣复合加工中心</h3><span>Turn-Mill Centers</span></div>
+  <div class="equip-grid reveal-stagger">
+    <div class="e-card">
+      <div class="e-card-img"><img loading="lazy" src="assets/images/cnc-turning.jpg" alt="QTN200ms"><div class="e-card-tag">Mazak</div></div>
+      <div class="e-card-body"><div class="e-brand">Mazak — 日本</div><h4>双主轴车铣 QTN200ms</h4><div class="e-card-specs"><span class="esv">5,000rpm</span> &nbsp;<span class="esv">Ø380mm</span> &nbsp;<span class="esv">12工位</span></div></div>
+      <button class="e-toggle" onclick="this.parentElement.classList.toggle('active')">▾</button>
+      <div class="e-detail"><div class="e-detail-inner">
+        <h5>技术规格</h5>
+        <table class="e-detail-table"><tr><td>最大加工直径</td><td>Ø380 mm</td></tr><tr><td>最大加工长度</td><td>500 mm</td></tr><tr><td>主轴转速</td><td>5,000 rpm</td></tr><tr><td>铣削转速</td><td>6,000 rpm</td></tr><tr><td>刀库容量</td><td>12 工位</td></tr><tr><td>主轴通孔</td><td>Ø65 mm</td></tr><tr><td>控制系统</td><td>Mazatrol 640T</td></tr></table>
+        <h5>加工能力</h5>
+        <p>日本Mazak旗舰级双主轴车铣复合机床，搭载Mazatrol对话式编程系统。上下刀塔配合可调角度动力头，一次装夹完成外圆车削、端面铣削、钻孔、攻牙及键槽加工，彻底消除多次装夹带来的定位误差。尤其擅长航空航天精密轴类、半导体设备真空腔体和高端汽车传动部件的批量生产，单件加工周期平均缩短40%以上。</p>
+      </div></div>
+    </div>
+
+    <div class="e-card">
+      <div class="e-card-img"><img loading="lazy" src="assets/images/cnc-turning.jpg" alt="MD08D"><div class="e-card-tag">Hyundai WIA</div></div>
+      <div class="e-card-body"><div class="e-brand">Hyundai WIA — 韩国</div><h4>MD08D 车铣复合</h4><div class="e-card-specs"><span class="esv">Ø350mm</span> &nbsp;<span class="esv">4,500rpm</span> &nbsp;<span class="esv">FANUC</span></div></div>
+      <button class="e-toggle" onclick="this.parentElement.classList.toggle('active')">▾</button>
+      <div class="e-detail"><div class="e-detail-inner">
+        <h5>技术规格</h5>
+        <table class="e-detail-table"><tr><td>最大车削直径</td><td>Ø350 mm</td></tr><tr><td>最大车削长度</td><td>400 mm</td></tr><tr><td>主轴转速</td><td>4,500 rpm</td></tr><tr><td>铣削转速</td><td>5,000 rpm</td></tr><tr><td>控制系统</td><td>FANUC 0i-TF</td></tr><tr><td>刀塔工位</td><td>12 工位</td></tr></table>
+        <h5>加工能力</h5>
+        <p>韩国现代威亚经典车铣复合机型，采用整体式45°斜床身结构，热对称设计有效抵消切削热变形。搭载FANUC 0i-TF数控系统与伺服动力刀塔，可在车削循环中同步完成端面铣削与径向钻孔。紧凑的占地面积使其特别适合产线布局优化。</p>
+      </div></div>
+    </div>
+
+    <div class="e-card">
+      <div class="e-card-img"><img loading="lazy" src="assets/images/cnc-turning.jpg" alt="MD08DY"><div class="e-card-tag">Y轴</div></div>
+      <div class="e-card-body"><div class="e-brand">Hyundai WIA — 韩国</div><h4>MD08DY 车铣复合</h4><div class="e-card-specs"><span class="esv">Y±50mm</span> &nbsp;<span class="esv">4,500rpm</span> &nbsp;<span class="esv">FANUC</span></div></div>
+      <button class="e-toggle" onclick="this.parentElement.classList.toggle('active')">▾</button>
+      <div class="e-detail"><div class="e-detail-inner">
+        <h5>技术规格</h5>
+        <table class="e-detail-table"><tr><td>最大车削直径</td><td>Ø350 mm</td></tr><tr><td>Y轴行程</td><td>±50 mm</td></tr><tr><td>主轴转速</td><td>4,500 rpm</td></tr><tr><td>控制系统</td><td>FANUC 0i-TF</td></tr><tr><td>动力刀具</td><td>12 工位</td></tr><tr><td>尾座</td><td>可编程液压</td></tr></table>
+        <h5>加工能力</h5>
+        <p>MD08D的Y轴增强型号，增加±50mm的Y轴行程，使机床具备偏心铣削、偏置钻孔和端面轮廓加工能力。搭配可编程液压尾座，长轴类零件装夹更加便捷。FANUC 0i-TF系统内置高速高精控制功能，在复杂轮廓加工中兼顾表面质量与加工效率。</p>
+      </div></div>
+    </div>
+
+    <div class="e-card">
+      <div class="e-card-img"><img loading="lazy" src="assets/images/cnc-turning.jpg" alt="程泰"><div class="e-card-tag">台湾</div></div>
+      <div class="e-card-body"><div class="e-brand">Goodway 台湾程泰</div><h4>程泰车铣中心</h4><div class="e-card-specs"><span class="esv">Ø400mm</span> &nbsp;<span class="esv">4,000rpm</span> &nbsp;<span class="esv">台湾</span></div></div>
+      <button class="e-toggle" onclick="this.parentElement.classList.toggle('active')">▾</button>
+      <div class="e-detail"><div class="e-detail-inner">
+        <h5>技术规格</h5>
+        <table class="e-detail-table"><tr><td>最大加工直径</td><td>Ø400 mm</td></tr><tr><td>加工长度</td><td>600 mm</td></tr><tr><td>主轴转速</td><td>4,000 rpm</td></tr><tr><td>动力刀转速</td><td>5,000 rpm</td></tr><tr><td>产地</td><td>台湾</td></tr><tr><td>应用</td><td>精密轴类/盘类</td></tr></table>
+        <h5>加工能力</h5>
+        <p>台湾程泰机械股份有限公司出品的高精密车铣复合加工中心。床身采用米汉纳高级铸铁经二次回火处理，结构刚性与吸震性俱佳，确保长期加工精度稳定。动力刀塔搭载伺服驱动，可在单次装夹中完成车削、铣削、钻孔与刚性攻牙的完整加工流程。</p>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<div class="equip-cat reveal">
+  <div class="equip-cat-head"><h3>立式 / 多轴加工中心</h3><span>Machining Centers</span></div>
+  <div class="equip-grid reveal-stagger">
+    <div class="e-card">
+      <div class="e-card-img"><img loading="lazy" src="assets/images/cnc-milling.jpg" alt="VCN510CL"><div class="e-card-tag">4-Axis</div></div>
+      <div class="e-card-body"><div class="e-brand">Mazak — 日本</div><h4>立式加工中心 VCN-510C L</h4><div class="e-card-specs"><span class="esv">12,000rpm</span> &nbsp;<span class="esv">±2μm</span> &nbsp;<span class="esv">30把</span></div></div>
+      <button class="e-toggle" onclick="this.parentElement.classList.toggle('active')">▾</button>
+      <div class="e-detail"><div class="e-detail-inner">
+        <h5>技术规格</h5>
+        <table class="e-detail-table"><tr><td>工作台尺寸</td><td>1,300×550 mm</td></tr><tr><td>X/Y/Z行程</td><td>1,050/510/510 mm</td></tr><tr><td>主轴转速</td><td>12,000 rpm</td></tr><tr><td>快速进给</td><td>36 m/min</td></tr><tr><td>刀库容量</td><td>30 把</td></tr><tr><td>定位精度</td><td>±0.002 mm</td></tr></table>
+        <h5>加工能力</h5>
+        <p>日本Mazak高性能立式加工中心，配备精密液压第四轴旋转工作台，实现四轴联动加工。Mazatrol Matrix Nexus 2数控系统搭载智能热补偿功能，实时监测并修正主轴与滚珠丝杠的热位移，确保长时间加工精度稳定。广泛应用于航空航天结构件与高端装备基础零部件的精密镗铣作业。</p>
+      </div></div>
+    </div>
+
+    <div class="e-card">
+      <div class="e-card-img"><img loading="lazy" src="assets/images/cnc-milling.jpg" alt="F500"><div class="e-card-tag">5-Axis</div></div>
+      <div class="e-card-body"><div class="e-brand">国产高端五轴</div><h4>五轴加工中心 F500</h4><div class="e-card-specs"><span class="esv">15,000rpm</span> &nbsp;<span class="esv">±1.5μm</span> &nbsp;<span class="esv">60把</span></div></div>
+      <button class="e-toggle" onclick="this.parentElement.classList.toggle('active')">▾</button>
+      <div class="e-detail"><div class="e-detail-inner">
+        <h5>技术规格</h5>
+        <table class="e-detail-table"><tr><td>工作台尺寸</td><td>Ø500 mm</td></tr><tr><td>X/Y/Z行程</td><td>500/500/400 mm</td></tr><tr><td>A/C轴</td><td>+30°~-120°/360°</td></tr><tr><td>主轴转速</td><td>15,000 rpm</td></tr><tr><td>刀库容量</td><td>60 把</td></tr><tr><td>重复定位精度</td><td>±0.0015 mm</td></tr></table>
+        <h5>加工能力</h5>
+        <p>高性能五轴联动加工中心，A轴摆动+30°至-120°、C轴360°连续旋转，可一次装夹完成复杂异形件的五面体加工。特别适用于航空发动机整体叶盘、叶片、涡轮转子等自由曲面的精密铣削，也广泛应用于半导体设备关键结构件与医疗器械植入物的高精度制造。</p>
+      </div></div>
+    </div>
+
+    <div class="e-card">
+      <div class="e-card-img"><img loading="lazy" src="assets/images/cnc-milling.jpg" alt="Brother"><div class="e-card-tag">SPEEDIO</div></div>
+      <div class="e-card-body"><div class="e-brand">Brother — 日本</div><h4>兄弟四轴加工中心</h4><div class="e-card-specs"><span class="esv">16,000rpm</span> &nbsp;<span class="esv">56m/min</span> &nbsp;<span class="esv">BT30</span></div></div>
+      <button class="e-toggle" onclick="this.parentElement.classList.toggle('active')">▾</button>
+      <div class="e-detail"><div class="e-detail-inner">
+        <h5>技术规格</h5>
+        <table class="e-detail-table"><tr><td>主轴锥度</td><td>BT30</td></tr><tr><td>主轴转速</td><td>16,000 rpm</td></tr><tr><td>X/Y/Z行程</td><td>500/400/300 mm</td></tr><tr><td>快速进给</td><td>56 m/min</td></tr><tr><td>刀库容量</td><td>14/21 把</td></tr><tr><td>第四轴</td><td>旋转工作台</td></tr></table>
+        <h5>加工能力</h5>
+        <p>日本Brother工业SPEEDIO系列高速加工中心，以"速度就是生产力"为设计理念。BT30锥度主轴实现高转速、低惯量的快速启停，配合56m/min的高速进给系统，非切削时间大幅压缩。尤其擅长铝合金、工程塑料等轻金属的高速精密加工。</p>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<div class="equip-cat reveal">
+  <div class="equip-cat-head"><h3>CNC 精密车床</h3><span>CNC Lathes</span></div>
+  <div class="equip-grid reveal-stagger">
+    <div class="e-card">
+      <div class="e-card-img"><img loading="lazy" src="assets/images/cnc-turning.jpg" alt="M08J"><div class="e-card-tag">FANUC</div></div>
+      <div class="e-card-body"><div class="e-brand">FANUC — 日本</div><h4>M08J 精密车床</h4><div class="e-card-specs"><span class="esv">Ø280mm</span> &nbsp;<span class="esv">5,000rpm</span> &nbsp;<span class="esv">IT6</span></div></div>
+      <button class="e-toggle" onclick="this.parentElement.classList.toggle('active')">▾</button>
+      <div class="e-detail"><div class="e-detail-inner">
+        <h5>技术规格</h5>
+        <table class="e-detail-table"><tr><td>最大车削直径</td><td>Ø280 mm</td></tr><tr><td>加工长度</td><td>350 mm</td></tr><tr><td>主轴转速</td><td>5,000 rpm</td></tr><tr><td>控制系统</td><td>FANUC</td></tr><tr><td>精度等级</td><td>IT6</td></tr><tr><td>类型</td><td>平床身结构</td></tr></table>
+        <h5>加工能力</h5>
+        <p>搭载FANUC数控系统的精密平床身CNC车床，主轴采用高精度角接触球轴承组，径向与轴向刚度优异。紧凑的机身设计不牺牲加工能力，适合中小型回转体零件的IT6级精密车削。从单件试制到批量生产的柔性切换简单快捷。</p>
+      </div></div>
+    </div>
+
+    <div class="e-card">
+      <div class="e-card-img"><img loading="lazy" src="assets/images/cnc-turning.jpg" alt="M10J"><div class="e-card-tag">FANUC</div></div>
+      <div class="e-card-body"><div class="e-brand">FANUC — 日本</div><h4>M10J 精密车床</h4><div class="e-card-specs"><span class="esv">Ø360mm</span> &nbsp;<span class="esv">4,000rpm</span> &nbsp;<span class="esv">IT6</span></div></div>
+      <button class="e-toggle" onclick="this.parentElement.classList.toggle('active')">▾</button>
+      <div class="e-detail"><div class="e-detail-inner">
+        <h5>技术规格</h5>
+        <table class="e-detail-table"><tr><td>最大车削直径</td><td>Ø360 mm</td></tr><tr><td>加工长度</td><td>500 mm</td></tr><tr><td>主轴转速</td><td>4,000 rpm</td></tr><tr><td>控制系统</td><td>FANUC</td></tr><tr><td>精度等级</td><td>IT6</td></tr><tr><td>类型</td><td>平床身结构</td></tr></table>
+        <h5>加工能力</h5>
+        <p>M08J的加大型号，在保持同等精度水平的前提下提供更宽广的加工范围。适合液压阀体、传动轴套、法兰盘等中大型回转体零件的IT6级精密车削与批量生产。FANUC数控系统内置多种固定循环指令，编程效率高。</p>
+      </div></div>
+    </div>
+
+    <div class="e-card">
+      <div class="e-card-img"><img loading="lazy" src="assets/images/cnc-turning.jpg" alt="程泰车床"><div class="e-card-tag">台湾</div></div>
+      <div class="e-card-body"><div class="e-brand">Goodway 台湾程泰</div><h4>程泰精密车床</h4><div class="e-card-specs"><span class="esv">Ø350mm</span> &nbsp;<span class="esv">4,500rpm</span> &nbsp;<span class="esv">IT6</span></div></div>
+      <button class="e-toggle" onclick="this.parentElement.classList.toggle('active')">▾</button>
+      <div class="e-detail"><div class="e-detail-inner">
+        <h5>技术规格</h5>
+        <table class="e-detail-table"><tr><td>最大加工直径</td><td>Ø350 mm</td></tr><tr><td>加工长度</td><td>500 mm</td></tr><tr><td>主轴转速</td><td>4,500 rpm</td></tr><tr><td>产地</td><td>台湾</td></tr><tr><td>精度等级</td><td>IT6</td></tr><tr><td>应用</td><td>轴类/盘类件</td></tr></table>
+        <h5>加工能力</h5>
+        <p>台湾程泰高精密CNC车床，米汉纳铸铁床身经两次回火与自然时效处理，内部应力充分释放长期不变形。主轴箱采用对称散热设计，配合自动润滑系统，连续运转温升控制在极小范围。广泛应用于汽车零部件、液压阀体、精密轴套的高一致性批量加工。</p>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<div class="equip-cat reveal">
+  <div class="equip-cat-head"><h3>走心机（瑞士型自动车床）</h3><span>Swiss-type Lathes</span></div>
+  <div class="equip-grid reveal-stagger">
+    <div class="e-card">
+      <div class="e-card-img"><img loading="lazy" src="assets/images/cnc-turning.jpg" alt="SS327"><div class="e-card-tag">Swiss</div></div>
+      <div class="e-card-body"><div class="e-brand">Swiss-type CNC</div><h4>SS327 走心机</h4><div class="e-card-specs"><span class="esv">Ø20mm</span> &nbsp;<span class="esv">10,000rpm</span> &nbsp;<span class="esv">Ø0.3mm</span></div></div>
+      <button class="e-toggle" onclick="this.parentElement.classList.toggle('active')">▾</button>
+      <div class="e-detail"><div class="e-detail-inner">
+        <h5>技术规格</h5>
+        <table class="e-detail-table"><tr><td>最大加工直径</td><td>Ø20 mm</td></tr><tr><td>主轴转速</td><td>10,000 rpm</td></tr><tr><td>刀具数量</td><td>22 把</td></tr><tr><td>最小孔径</td><td>Ø0.3 mm</td></tr><tr><td>类型</td><td>瑞士型导套式</td></tr><tr><td>适用领域</td><td>医疗/钟表/电子</td></tr></table>
+        <h5>加工能力</h5>
+        <p>瑞士型走心式CNC自动车床，采用导套支撑结构，工件在加工过程中始终受到导套的径向约束，从根本上解决细长轴类零件的让刀变形问题。一次送料即可完成车削、钻孔、攻牙、铣削与切断的全部工序，最小可加工孔径达Ø0.3mm。</p>
+      </div></div>
+    </div>
+
+    <div class="e-card">
+      <div class="e-card-img"><img loading="lazy" src="assets/images/cnc-turning.jpg" alt="BW209ZJ"><div class="e-card-tag">Swiss</div></div>
+      <div class="e-card-body"><div class="e-brand">Swiss-type CNC</div><h4>BW209ZJ 走心机</h4><div class="e-card-specs"><span class="esv">Ø20mm</span> &nbsp;<span class="esv">12,000rpm</span> &nbsp;<span class="esv">IT5</span></div></div>
+      <button class="e-toggle" onclick="this.parentElement.classList.toggle('active')">▾</button>
+      <div class="e-detail"><div class="e-detail-inner">
+        <h5>技术规格</h5>
+        <table class="e-detail-table"><tr><td>最大加工直径</td><td>Ø20 mm</td></tr><tr><td>主轴转速</td><td>12,000 rpm</td></tr><tr><td>刀具数量</td><td>25 把</td></tr><tr><td>导套结构</td><td>旋转同步导套</td></tr><tr><td>精度等级</td><td>IT5</td></tr><tr><td>长径比</td><td>>10:1</td></tr></table>
+        <h5>加工能力</h5>
+        <p>高性能瑞士型走心机，配备旋转导套结构，允许导套与主轴同步旋转，进一步提升细长零件的加工圆度与表面质量。优异的床身热稳定性确保长时间连续加工中尺寸波动控制在微米级。广泛用于高端医疗器械、航空航天精密紧固件及微型传感器制造。</p>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<div class="equip-cat reveal">
+  <div class="equip-cat-head"><h3>精密检测与辅助设备</h3><span>Inspection & Auxiliary</span></div>
+  <div class="equip-grid reveal-stagger">
+    <div class="e-card">
+      <div class="e-card-img"><img loading="lazy" src="assets/images/precision-measure.jpg" alt="蔡司"><div class="e-card-tag">ZEISS</div></div>
+      <div class="e-card-body"><div class="e-brand">ZEISS — 德国</div><h4>全自动扫描三坐标</h4><div class="e-card-specs"><span class="esv">MPEE≤1.5μm</span> &nbsp;<span class="esv">接触+扫描</span></div></div>
+      <button class="e-toggle" onclick="this.parentElement.classList.toggle('active')">▾</button>
+      <div class="e-detail"><div class="e-detail-inner">
+        <h5>技术规格</h5>
+        <table class="e-detail-table"><tr><td>精度MPEE</td><td>≤1.5+L/350 μm</td></tr><tr><td>测量模式</td><td>接触式+连续扫描</td></tr><tr><td>最大速度</td><td>500 mm/s</td></tr><tr><td>品牌</td><td>德国蔡司 ZEISS</td></tr><tr><td>软件</td><td>CALYPSO</td></tr><tr><td>认证</td><td>AS9100 FAI兼容</td></tr></table>
+        <h5>加工能力</h5>
+        <p>德国卡尔·蔡司旗舰级全自动扫描三坐标测量机。搭载VAST XT gold主动式扫描测头，支持单点触发与连续扫描双模式，可自动识别零件特征并生成最优测量路径。CALYPSO测量软件自动生成可视化检测报告，为每一件精密零部件的出厂质量提供权威背书。</p>
+      </div></div>
+    </div>
+
+    <div class="e-card">
+      <div class="e-card-img"><img loading="lazy" src="assets/images/precision-measure.jpg" alt="TESA"><div class="e-card-tag">TESA</div></div>
+      <div class="e-card-body"><div class="e-brand">TESA — 瑞士</div><h4>手动三坐标测量机</h4><div class="e-card-specs"><span class="esv">±2.5μm</span> &nbsp;<span class="esv">花岗岩+空气轴承</span></div></div>
+      <button class="e-toggle" onclick="this.parentElement.classList.toggle('active')">▾</button>
+      <div class="e-detail"><div class="e-detail-inner">
+        <h5>技术规格</h5>
+        <table class="e-detail-table"><tr><td>精度</td><td>±2.5 μm</td></tr><tr><td>测量范围</td><td>中小型零件</td></tr><tr><td>操作方式</td><td>手动</td></tr><tr><td>品牌</td><td>瑞士TESA</td></tr><tr><td>材质</td><td>花岗岩+空气轴承</td></tr><tr><td>特点</td><td>高耐用低维护</td></tr></table>
+        <h5>加工能力</h5>
+        <p>瑞士TESA精密手动三坐标测量机，传承瑞士精密机械制造的工匠精神。采用天然花岗岩工作台与空气轴承导轨，移动轻便顺滑且无磨损。操作门槛低、维护简单、坚固耐用，是生产现场快速品质验证的可靠伙伴。</p>
+      </div></div>
+    </div>
+
+    <div class="e-card">
+      <div class="e-card-img"><img loading="lazy" src="assets/images/precision-measure.jpg" alt="光谱仪"><div class="e-card-tag">快速分析</div></div>
+      <div class="e-card-body"><div class="e-brand">光电直读式</div><h4>直读光谱仪</h4><div class="e-card-specs"><span class="esv"><30秒</span> &nbsp;<span class="esv">20+元素</span> &nbsp;<span class="esv">±0.01%</span></div></div>
+      <button class="e-toggle" onclick="this.parentElement.classList.toggle('active')">▾</button>
+      <div class="e-detail"><div class="e-detail-inner">
+        <h5>技术规格</h5>
+        <table class="e-detail-table"><tr><td>分析时间</td><td><30 秒/样</td></tr><tr><td>检测元素</td><td>20+ 种</td></tr><tr><td>适用基体</td><td>Fe/Al/Cu/Ti等</td></tr><tr><td>精度</td><td>±0.01%</td></tr><tr><td>牌号库</td><td>内置2000+牌号</td></tr><tr><td>标准</td><td>ASTM E415</td></tr></table>
+        <h5>加工能力</h5>
+        <p>光电直读光谱仪可在30秒内完成金属材料中20余种元素的定量分析。支持铁基、铝基、铜基、钛基等多种基体材料的牌号自动鉴定。每一批入厂原材料均经光谱仪验证化学成分与牌号一致性，从源头杜绝混料风险。</p>
+      </div></div>
+    </div>
+
+    <div class="e-card">
+      <div class="e-card-img"><img loading="lazy" src="assets/images/precision-measure.jpg" alt="轮廓度仪"><div class="e-card-tag">精密</div></div>
+      <div class="e-card-body"><div class="e-brand">接触式精密测量</div><h4>轮廓度仪</h4><div class="e-card-specs"><span class="esv">0.001μm</span> &nbsp;<span class="esv">ISO 4287</span></div></div>
+      <button class="e-toggle" onclick="this.parentElement.classList.toggle('active')">▾</button>
+      <div class="e-detail"><div class="e-detail-inner">
+        <h5>技术规格</h5>
+        <table class="e-detail-table"><tr><td>分辨率</td><td>0.001 μm</td></tr><tr><td>测量力</td><td>0.75 mN</td></tr><tr><td>类型</td><td>接触式触针法</td></tr><tr><td>功能</td><td>轮廓/台阶/半径/角度</td></tr><tr><td>标准</td><td>ISO 4287</td></tr><tr><td>应用</td><td>精密加工件形状评定</td></tr></table>
+        <h5>加工能力</h5>
+        <p>高精度接触式轮廓度测量仪，采用金刚石触针沿零件表面匀速滑行，以0.001μm的垂直分辨率记录轮廓轨迹。可测量台阶高度、圆弧半径、沟槽深度、角度等微观几何参数，是精密加工件形状精度验证不可或缺的检测工具。</p>
+      </div></div>
+    </div>
+
+    <div class="e-card">
+      <div class="e-card-img"><img loading="lazy" src="assets/images/precision-measure.jpg" alt="粗糙度仪"><div class="e-card-tag">便携</div></div>
+      <div class="e-card-body"><div class="e-brand">便携式表面检测</div><h4>粗糙度仪</h4><div class="e-card-specs"><span class="esv">Ra 0.01~10μm</span> &nbsp;<span class="esv">±5%</span></div></div>
+      <button class="e-toggle" onclick="this.parentElement.classList.toggle('active')">▾</button>
+      <div class="e-detail"><div class="e-detail-inner">
+        <h5>技术规格</h5>
+        <table class="e-detail-table"><tr><td>测量参数</td><td>Ra/Rz/Rq/Rt等</td></tr><tr><td>Ra范围</td><td>0.01~10 μm</td></tr><tr><td>精度</td><td>±5%</td></tr><tr><td>类型</td><td>便携式</td></tr><tr><td>标准</td><td>ISO 4287/GB/T 1031</td></tr><tr><td>适用场景</td><td>现场+实验室</td></tr></table>
+        <h5>加工能力</h5>
+        <p>便携式表面粗糙度测量仪，内置高灵敏度电感式传感器，可快速测量Ra、Rz、Rq、Rt等多种粗糙度参数。小巧轻便的机身设计使其既可用于计量室的精密分析，也适用于车间现场的快速巡检，确保每一道工序的表面质量达标。</p>
+      </div></div>
+    </div>
+
+    <div class="e-card">
+      <div class="e-card-img"><img loading="lazy" src="assets/images/cnc-milling.jpg" alt="磨刀机"><div class="e-card-tag">进口</div></div>
+      <div class="e-card-body"><div class="e-brand">进口五轴联动</div><h4>进口五轴磨刀机</h4><div class="e-card-specs"><span class="esv">五轴联动</span> &nbsp;<span class="esv">±5μm</span> &nbsp;<span class="esv">寿命×3~5</span></div></div>
+      <button class="e-toggle" onclick="this.parentElement.classList.toggle('active')">▾</button>
+      <div class="e-detail"><div class="e-detail-inner">
+        <h5>技术规格</h5>
+        <table class="e-detail-table"><tr><td>控制轴数</td><td>五轴联动</td></tr><tr><td>磨削精度</td><td>±0.005 mm</td></tr><tr><td>适用刀具</td><td>铣刀/钻头/铰刀/成形刀</td></tr><tr><td>冷却系统</td><td>高压冷却</td></tr><tr><td>探测</td><td>自动对刀</td></tr><tr><td>效益</td><td>刀具寿命延长3~5倍</td></tr></table>
+        <h5>加工能力</h5>
+        <p>进口五轴联动CNC刀具磨床，专为各类CNC刀具的精密修磨与再研磨而设计。五轴控制可精确复刻刀具的螺旋角、前角、后角与刃带宽度等几何参数，修磨后的刀具切削性能接近新刀水平。刀具再研磨可延长使用寿命3-5倍，显著降低刀具消耗成本。</p>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+    </div></section>
+
+    <section id="equip-capabilities">
+      <div class="container">
+        <div class="section-header text-center reveal"><span class="section-label centered">加工能力总览</span><h2>Manufacturing Capabilities</h2></div>
+        <div class="cap-grid reveal-stagger">
+          <div class="cap-item"><div class="cap-val">18+</div><div class="cap-label">精密加工与检测设备</div></div>
+          <div class="cap-item"><div class="cap-val">5-Axis</div><div class="cap-label">五轴联动加工</div></div>
+          <div class="cap-item"><div class="cap-val">±1.5μm</div><div class="cap-label">最高重复定位精度</div></div>
+          <div class="cap-item"><div class="cap-val">Ø0.3mm</div><div class="cap-label">最小可加工孔径</div></div>
+          <div class="cap-item"><div class="cap-val">6 大</div><div class="cap-label">国际顶尖品牌</div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><div class="footer-logo"><img loading="lazy" src="assets/logo.svg" alt="精艺达" width="36" height="36"><div class="footer-logo-text"><strong>无锡精艺达科技有限公司</strong><span>Jingyida Technology</span></div></div><p>以精密制造为核心，聚焦航空航天、半导体零部件及高端装备领域的高新技术企业。</p></div>
+        <div class="footer-col"><h4>快速导航</h4><ul><li><a href="about.html">关于我们</a></li><li><a href="equipment.html">装备展示</a></li><li><a href="products.html">产品中心</a></li><li><a href="quality.html">成果展示</a></li></ul></div>
+        <div class="footer-col"><h4>核心领域</h4><ul><li><a href="#">航空航天</a></li><li><a href="#">半导体零部件</a></li><li><a href="#">高端装备制造</a></li></ul></div>
+        <div class="footer-col"><h4>联系方式</h4><div class="footer-contact-item"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="6" r="2.5" stroke="currentColor" stroke-width="1.2"/><path d="M3 13c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="currentColor" stroke-width="1.2"/></svg><span>江苏省无锡市</span></div><div class="footer-contact-item"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 4l6 5 6-5" stroke="currentColor" stroke-width="1.2"/></svg><span>info@jingyida.com</span></div><div class="footer-contact-item"><svg viewBox="0 0 16 16" fill="none"><path d="M3 2h10a1.5 1.5 0 011.5 1.5v9A1.5 1.5 0 0113 14H3" stroke="currentColor" stroke-width="1.2"/><path d="M1.5 5h4l2 2-2 2h-4" stroke="currentColor" stroke-width="1.2"/></svg><span>0510-85885656</span></div></div>
+      </div>
+      <div class="footer-bottom"><span>&copy; 2025 无锡精艺达科技有限公司. All rights reserved.</span><span>苏ICP备XXXXXXXX号</span></div>
+    </div>
+  </footer>
+  <div id="back-to-top">↑</div>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

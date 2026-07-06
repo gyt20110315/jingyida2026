@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="关于无锡精艺达科技有限公司 — 成立于2009年，以精密制造为核心，聚焦航空航天、半导体零部件及高端装备领域。">
+  <title>关于我们 | 无锡精艺达科技有限公司</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/animations.css">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="无锡精艺达科技有限公司">
+  <meta property="og:locale" content="zh_CN">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <style>
+    /* Story */
+    #story { padding: var(--section-pad) 0; background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 100%); }
+    .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 8vw, 80px); align-items: center; max-width: 1000px; margin: 0 auto; }
+    .story-text p { line-height: 2; font-size: 1.05rem; }
+    .story-stats { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
+    .story-stat { text-align: center; padding: var(--space-xl); background: var(--navy-mid); border: 1px solid rgba(200,164,92,0.06); border-radius: var(--radius-md); transition: all 0.4s; }
+    .story-stat:hover { border-color: rgba(200,164,92,0.2); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .story-stat-num { font-family: var(--font-en); font-size: 1.8rem; font-weight: 700; color: var(--gold); }
+    .story-stat-label { font-size: 0.8rem; color: var(--silver); margin-top: 4px; }
+
+    /* Timeline */
+    #timeline-section { padding: var(--section-pad) 0; background: var(--navy-deep); position: relative; }
+    #timeline-section::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 600px; height: 1px; background: linear-gradient(90deg, transparent, rgba(200,164,92,0.2), transparent); }
+    .timeline-wrap { position: relative; max-width: 800px; margin: 0 auto; padding: var(--space-2xl) 0; }
+    .timeline-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(200,164,92,0.15); transform: translateX(-50%); }
+    .timeline-line-fill { position: absolute; left: 50%; top: 0; width: 1px; background: linear-gradient(180deg, var(--gold-dark), var(--gold), var(--gold-light)); transform: translateX(-50%) scaleY(0); transform-origin: top; transition: transform 0.12s linear; }
+    .timeline-item { position: relative; display: grid; grid-template-columns: 1fr 60px 1fr; align-items: start; margin-bottom: var(--space-3xl); opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
+    .timeline-item.visible { opacity: 1; transform: translateY(0); }
+    .timeline-content { padding: 0 var(--space-lg); }
+    .timeline-item:nth-child(odd) .timeline-content { text-align: right; }
+    .timeline-dot-col { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
+    .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--navy-deep); border: 2px solid var(--gold); transition: all 0.4s; }
+    .timeline-item.visible .timeline-dot { background: var(--gold); box-shadow: 0 0 16px rgba(200,164,92,0.4); }
+    .timeline-year { font-family: var(--font-en); font-size: 1.5rem; font-weight: 700; color: var(--gold); margin-bottom: 4px; }
+    .timeline-title { font-size: 1.05rem; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+    .timeline-desc { font-size: 0.85rem; color: var(--silver); line-height: 1.7; }
+
+    /* Philosophy */
+    #philosophy { padding: var(--section-pad) 0; background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%); }
+    .phil-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xl); }
+    .phil-card { text-align: center; padding: var(--space-2xl); background: var(--navy-mid); border: 1px solid rgba(200,164,92,0.06); border-radius: var(--radius-md); transition: all 0.4s; }
+    .phil-card:hover { transform: translateY(-6px); border-color: rgba(200,164,92,0.2); box-shadow: var(--shadow-lg); }
+    .phil-char { font-size: 3.5rem; font-weight: 900; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; margin-bottom: var(--space-md); }
+    .phil-card h3 { margin-bottom: var(--space-sm); }
+    .phil-card p { font-size: 0.9rem; line-height: 1.85; }
+
+    @media (max-width: 1024px) { .phil-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 768px) {
+      .story-grid, .phil-grid { grid-template-columns: 1fr; }
+      .phil-grid { max-width: 380px; margin: 0 auto; }
+      .story-stats { grid-template-columns: 1fr 1fr; }
+      .timeline-line, .timeline-line-fill { left: 24px; }
+      .timeline-item { grid-template-columns: 40px 1fr; }
+      .timeline-item:nth-child(odd) .timeline-content { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">跳到主要内容</a>
+
+  <header>
+    <nav>
+      <a href="index.html" class="nav-logo"><img loading="lazy" src="assets/logo.svg" alt="精艺达" width="40" height="40"><div class="nav-logo-text"><span class="nav-logo-cn">精艺达</span><span class="nav-logo-en">Jingyida</span></div></a>
+      <ul class="nav-links">
+        <li><a href="index.html">首页</a></li><li><a href="about.html">关于我们</a></li><li><a href="equipment.html">装备展示</a></li><li><a href="products.html">产品中心</a></li><li><a href="quality.html">成果展示</a></li><li><a href="contact.html">联系我们</a></li>
+      </ul>
+      <button class="menu-toggle" aria-label="菜单"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <div id="scroll-progress"></div>
+
+  <main id="main-content">
+    <!-- Page Hero -->
+    <section class="page-hero">
+      <div class="page-hero-bg-grid"></div>
+      <div class="page-hero-content reveal">
+        <div class="accent-line"></div>
+        <h1>关于精艺达</h1>
+        <p>始于2009，以精密制造为核心，从单一加工车间到行业标杆企业</p>
+      </div>
+    </section>
+
+    <!-- Company Story -->
+    <section id="story">
+      <div class="container">
+        <div class="section-header text-center reveal">
+          <span class="section-label centered">企业历程</span>
+          <h2>始于 2009，以技术突破引领品质升级</h2>
+        </div>
+        <div class="story-grid">
+          <div class="story-text reveal-left">
+            <p>无锡精艺达科技有限公司成立于<span style="color:var(--gold);font-weight:600;">2009年</span>，最初是一家专注于精密零部件加工的小型车间。凭借对品质近乎执着的追求，公司创始人带领团队攻克了一个又一个技术难关，逐步在行业内建立起口碑。</p>
+            <p>经过十余年的持续投入与技术积累，我们已从单一的加工服务商，成长为拥有<span style="color:var(--white);font-weight:500;">完整研发、生产、检测体系</span>的行业标杆企业，累计服务超过<span style="color:var(--gold);font-weight:600;">200家</span>国内外知名客户，涵盖航空航天龙头企业、半导体设备核心供应商及高端汽车零部件制造商。</p>
+          </div>
+          <div class="story-stats reveal-right">
+            <div class="story-stat"><div class="story-stat-num">200+</div><div class="story-stat-label">全球客户</div></div>
+            <div class="story-stat"><div class="story-stat-num">16+</div><div class="story-stat-label">年行业深耕</div></div>
+            <div class="story-stat"><div class="story-stat-num">98%</div><div class="story-stat-label">客户满意度</div></div>
+            <div class="story-stat"><div class="story-stat-num">2 项</div><div class="story-stat-label">行业标准制定</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section id="timeline-section">
+      <div class="container container-narrow">
+        <div class="section-header text-center reveal">
+          <span class="section-label centered">发展历程</span>
+          <h2>Milestones</h2>
+        </div>
+        <div class="timeline timeline-wrap">
+          <div class="timeline-line"></div>
+          <div class="timeline-line-fill"></div>
+
+          <div class="timeline-item">
+            <div class="timeline-content"><div class="timeline-year">2009</div><div class="timeline-title">公司成立</div><div class="timeline-desc">无锡精艺达科技有限公司正式成立，以精密零部件加工为起点，迈出创业第一步。</div></div>
+            <div class="timeline-dot-col"><div class="timeline-dot"></div></div>
+            <div></div>
+          </div>
+          <div class="timeline-item">
+            <div></div>
+            <div class="timeline-dot-col"><div class="timeline-dot"></div></div>
+            <div class="timeline-content"><div class="timeline-year">2012</div><div class="timeline-title">设备升级</div><div class="timeline-desc">引进首台马扎克进口数控设备，加工精度与效率实现质的飞跃，正式切入高端制造领域。</div></div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-content"><div class="timeline-year">2015</div><div class="timeline-title">行业标准参与制定</div><div class="timeline-desc">凭借深厚技术积累，受邀参与行业加工标准制定，技术实力获得行业权威认可。</div></div>
+            <div class="timeline-dot-col"><div class="timeline-dot"></div></div>
+            <div></div>
+          </div>
+          <div class="timeline-item">
+            <div></div>
+            <div class="timeline-dot-col"><div class="timeline-dot"></div></div>
+            <div class="timeline-content"><div class="timeline-year">2018</div><div class="timeline-title">校企联合实验室</div><div class="timeline-desc">与高校共建"精密制造联合实验室"，搭建产学研一体化平台，助力行业技术升级。</div></div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-content"><div class="timeline-year">2021</div><div class="timeline-title">智能制造升级</div><div class="timeline-desc">引入五轴加工中心F500，完成从传统精密加工向智能化制造的全面转型布局。</div></div>
+            <div class="timeline-dot-col"><div class="timeline-dot"></div></div>
+            <div></div>
+          </div>
+          <div class="timeline-item">
+            <div></div>
+            <div class="timeline-dot-col"><div class="timeline-dot"></div></div>
+            <div class="timeline-content"><div class="timeline-year">2024</div><div class="timeline-title">新篇章</div><div class="timeline-desc">累计服务客户突破200家，持续拓展航空航天与半导体领域，开启全球化发展新阶段。</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section id="philosophy">
+      <div class="container">
+        <div class="section-header text-center reveal">
+          <span class="section-label centered">企业理念</span>
+          <h2>安全 · 优质 · 快速发展</h2>
+          <p>以"人"为根本，以"质"为生命</p>
+        </div>
+        <div class="phil-grid reveal-stagger">
+          <div class="phil-card"><div class="phil-char">安</div><h3>安全为本</h3><p>将安全生产置于首位，建立全流程安全管理体系，确保每一位员工的人身安全与每一件产品的可靠性。</p></div>
+          <div class="phil-card"><div class="phil-char">质</div><h3>品质为命</h3><p>以近乎苛刻的质量标准贯穿从来料到出货的每个环节，用数据化手段确保品质的一致性与可追溯性。</p></div>
+          <div class="phil-card"><div class="phil-char">速</div><h3>发展为先</h3><p>持续投入技术研发与设备升级，以技术创新驱动企业快速发展，保持在精密制造领域的领先优势。</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><div class="footer-logo"><img loading="lazy" src="assets/logo.svg" alt="精艺达" width="36" height="36"><div class="footer-logo-text"><strong>无锡精艺达科技有限公司</strong><span>Jingyida Technology</span></div></div><p>以精密制造为核心，聚焦航空航天、半导体零部件及高端装备领域的高新技术企业。安全、优质、快速发展。</p></div>
+        <div class="footer-col"><h4>快速导航</h4><ul><li><a href="about.html">关于我们</a></li><li><a href="equipment.html">装备展示</a></li><li><a href="products.html">产品中心</a></li><li><a href="quality.html">成果展示</a></li></ul></div>
+        <div class="footer-col"><h4>核心领域</h4><ul><li><a href="#">航空航天</a></li><li><a href="#">半导体零部件</a></li><li><a href="#">高端装备制造</a></li><li><a href="#">精密加工</a></li></ul></div>
+        <div class="footer-col"><h4>联系方式</h4><div class="footer-contact-item"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="6" r="2.5" stroke="currentColor" stroke-width="1.2"/><path d="M3 13c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="currentColor" stroke-width="1.2"/></svg><span>江苏省无锡市</span></div><div class="footer-contact-item"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 4l6 5 6-5" stroke="currentColor" stroke-width="1.2"/></svg><span>info@jingyida.com</span></div><div class="footer-contact-item"><svg viewBox="0 0 16 16" fill="none"><path d="M3 2h10a1.5 1.5 0 011.5 1.5v9A1.5 1.5 0 0113 14H3" stroke="currentColor" stroke-width="1.2"/><path d="M1.5 5h4l2 2-2 2h-4" stroke="currentColor" stroke-width="1.2"/></svg><span>0510-85885656</span></div></div>
+      </div>
+      <div class="footer-bottom"><span>&copy; 2025 无锡精艺达科技有限公司. All rights reserved.</span><span>苏ICP备XXXXXXXX号</span></div>
+    </div>
+  </footer>
+
+  <div id="back-to-top">↑</div>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

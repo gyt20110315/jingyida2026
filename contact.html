@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="联系无锡精艺达科技有限公司 — 精密制造合作伙伴，期待与您携手共创精密未来。">
+  <title>联系我们 | 无锡精艺达科技有限公司</title>
+
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/animations.css">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="无锡精艺达科技有限公司">
+  <meta property="og:locale" content="zh_CN">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+
+  <style>
+    #contact-main {
+      padding: var(--section-pad) 0;
+      background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 100%);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: clamp(40px, 8vw, 80px);
+      align-items: start;
+    }
+
+    /* Form */
+    .contact-form-wrap {
+      background: var(--navy-mid);
+      border: 1px solid rgba(200, 164, 92, 0.08);
+      border-radius: var(--radius-lg);
+      padding: var(--space-2xl);
+    }
+
+    .contact-form-wrap h3 {
+      margin-bottom: var(--space-sm);
+    }
+
+    .contact-form-wrap > p {
+      font-size: 0.9rem;
+      margin-bottom: var(--space-2xl);
+      color: var(--silver);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
+
+    /* Info Sidebar */
+    .contact-info-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    .contact-info-card {
+      background: var(--navy-mid);
+      border: 1px solid rgba(200, 164, 92, 0.08);
+      border-radius: var(--radius-md);
+      padding: var(--space-xl);
+      display: flex;
+      gap: var(--space-md);
+      transition: all 0.3s var(--ease-smooth);
+    }
+
+    .contact-info-card:hover {
+      border-color: rgba(200, 164, 92, 0.2);
+      box-shadow: var(--shadow-md);
+    }
+
+    .contact-info-icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      border: 1px solid rgba(200, 164, 92, 0.2);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+    }
+
+    .contact-info-card h4 {
+      font-size: 0.95rem;
+      margin-bottom: var(--space-2xs);
+    }
+
+    .contact-info-card p {
+      font-size: 0.85rem;
+      color: var(--silver);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .contact-info-card a {
+      color: var(--gold);
+      font-family: var(--font-en);
+      font-size: 0.85rem;
+    }
+
+    /* Map placeholder */
+    .map-placeholder {
+      aspect-ratio: 16/9;
+      background: var(--navy-mid);
+      border: 1px solid rgba(200, 164, 92, 0.08);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: var(--space-md);
+      color: var(--silver);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .map-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(200,164,92,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,164,92,0.08) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, black 30%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, black 30%, transparent 70%);
+    }
+
+    .map-placeholder svg {
+      position: relative;
+      z-index: 1;
+      opacity: 0.5;
+      animation: floatVertical 4s var(--ease-in-out) infinite;
+    }
+
+    .map-placeholder span {
+      position: relative;
+      z-index: 1;
+      font-size: 0.85rem;
+      color: var(--silver);
+    }
+
+    /* CTA Section */
+    #contact-cta {
+      padding: var(--section-4xl) 0;
+      background: var(--navy-deep);
+      text-align: center;
+      position: relative;
+    }
+
+    #contact-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(200,164,92,0.2), transparent);
+    }
+
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">跳到主要内容</a>
+
+  <div id="loader">
+    <div class="loader-container">
+      <div class="loader-glass">
+        <svg class="loader-ring" viewBox="0 0 140 140">
+          <defs>
+            <linearGradient id="loaderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#4da8f0"/>
+              <stop offset="50%" stop-color="#2d6fbf"/>
+              <stop offset="100%" stop-color="#1a4d8f"/>
+            </linearGradient>
+          </defs>
+          <circle class="loader-ring-bg" cx="70" cy="70" r="65"/>
+          <circle class="loader-ring-fill" cx="70" cy="70" r="65"/>
+        </svg>
+        <div class="loader-percent">0<sup>%</sup></div>
+      </div>
+      <div class="loader-label">加载中</div>
+      <div class="loader-brand">JINGYIDA TECHNOLOGY</div>
+    </div>
+  </div>
+  <div id="scroll-progress"></div>
+
+  <header>
+    <nav>
+      <a href="index.html" class="nav-logo"><img loading="lazy" src="assets/logo.svg" alt="精艺达" width="40" height="40"><div class="nav-logo-text"><span class="nav-logo-cn">精艺达</span><span class="nav-logo-en">Jingyida</span></div></a>
+      <ul class="nav-links">
+        <li><a href="index.html">首页</a></li><li><a href="about.html">关于我们</a></li><li><a href="equipment.html">装备展示</a></li><li><a href="products.html">产品中心</a></li><li><a href="quality.html">成果展示</a></li><li><a href="contact.html">联系我们</a></li>
+      </ul>
+      <button class="menu-toggle" aria-label="菜单"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="page-hero">
+      <div class="page-hero-bg-grid"></div>
+      <div class="page-hero-content reveal">
+        <div class="accent-line"></div>
+        <h1>联系我们</h1>
+        <p>期待与您携手，共创精密制造新未来</p>
+      </div>
+    </section>
+
+    <!-- Contact Main -->
+    <section id="contact-main">
+      <div class="container">
+        <div class="contact-grid">
+          <!-- Form -->
+          <div class="contact-form-wrap reveal-left">
+            <h3>发送留言</h3>
+            <p>我们将在24小时内回复您的咨询</p>
+
+            <form id="contact-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="name">姓名 <span class="required">*</span></label>
+                  <input type="text" id="name" class="form-input" placeholder="您的姓名" required>
+                  <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="company">公司名称</label>
+                  <input type="text" id="company" class="form-input" placeholder="您的公司（选填）">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="email">邮箱 <span class="required">*</span></label>
+                  <input type="email" id="email" class="form-input" placeholder="your@email.com" required>
+                  <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="phone">电话 <span class="required">*</span></label>
+                  <input type="tel" id="phone" class="form-input" placeholder="您的联系电话" required>
+                  <span class="form-error"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="message">留言内容 <span class="required">*</span></label>
+                <textarea id="message" class="form-textarea" placeholder="请描述您的需求，包括产品类型、数量、精度要求等信息..." required></textarea>
+                <span class="form-error"></span>
+              </div>
+              <button type="submit" class="btn btn-gold btn-lg" style="width:100%;">
+                提交留言
+              </button>
+            </form>
+          </div>
+
+          <!-- Info Sidebar -->
+          <div class="contact-info-sidebar reveal-right">
+            <div class="contact-info-card">
+              <div class="contact-info-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M4 17c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.5"/></svg>
+              </div>
+              <div>
+                <h4>公司地址</h4>
+                <p>江苏省无锡市<br>新吴区高新技术产业开发区</p>
+              </div>
+            </div>
+
+            <div class="contact-info-card">
+              <div class="contact-info-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 4h14a1.5 1.5 0 011.5 1.5v9A1.5 1.5 0 0117 16H3a1.5 1.5 0 01-1.5-1.5v-9A1.5 1.5 0 013 4z" stroke="currentColor" stroke-width="1.5"/><path d="M3 5l7 6 7-6" stroke="currentColor" stroke-width="1.5"/></svg>
+              </div>
+              <div>
+                <h4>电子邮箱</h4>
+                <a href="mailto:info@jingyida.com">info@jingyida.com</a>
+                <p>商务合作 / 技术咨询</p>
+              </div>
+            </div>
+
+            <div class="contact-info-card">
+              <div class="contact-info-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3h10a2 2 0 012 2v10a2 2 0 01-2 2H5" stroke="currentColor" stroke-width="1.5"/><path d="M2 7h5l2 2-2 2H2" stroke="currentColor" stroke-width="1.5"/></svg>
+              </div>
+              <div>
+                <h4>联系电话</h4>
+                <p>0510-85885656</p>
+                <p style="font-size:0.8rem;">周一至周五 8:30 - 17:30</p>
+              </div>
+            </div>
+
+            <!-- Map -->
+            <div class="map-placeholder">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <path d="M24 6C16.3 6 10 12.3 10 20c0 10.5 14 22 14 22s14-11.5 14-22c0-7.7-6.3-14-14-14z" stroke="#C8A45C" stroke-width="1.5"/>
+                <circle cx="24" cy="20" r="5" stroke="#C8A45C" stroke-width="1.5"/>
+                <circle cx="24" cy="20" r="1.5" fill="#C8A45C"/>
+              </svg>
+              <span>江苏省无锡市</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contact-cta">
+      <div class="container">
+        <div class="reveal">
+          <span class="section-label centered">合作共赢</span>
+          <h2 style="margin-bottom:var(--space-md);">从<span style="color:var(--gold);">精密</span>到<span style="color:var(--gold);">智造</span>，不止于加工</h2>
+          <p style="color:var(--silver);max-width:500px;margin:0 auto var(--space-2xl);">
+            无论您需要小批量定制还是大批量稳定交付，精艺达团队随时准备为您提供专业解决方案。
+          </p>
+          <a href="mailto:info@jingyida.com" class="btn btn-outline btn-lg btn-arrow">直接发送邮件</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><div class="footer-logo"><img loading="lazy" src="assets/logo.svg" alt="精艺达" width="36" height="36"><div class="footer-logo-text"><strong>无锡精艺达科技有限公司</strong><span>Jingyida Technology</span></div></div><p>以精密制造为核心，聚焦航空航天、半导体零部件及高端装备领域的高新技术企业。安全、优质、快速发展。</p></div>
+        <div class="footer-col"><h4>快速导航</h4><ul><li><a href="about.html">关于我们</a></li><li><a href="equipment.html">装备展示</a></li><li><a href="products.html">产品中心</a></li><li><a href="quality.html">成果展示</a></li></ul></div>
+        <div class="footer-col"><h4>核心领域</h4><ul><li><a href="#">航空航天</a></li><li><a href="#">半导体零部件</a></li><li><a href="#">高端装备制造</a></li><li><a href="#">精密加工</a></li></ul></div>
+        <div class="footer-col"><h4>联系方式</h4><div class="footer-contact-item"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="6" r="2.5" stroke="currentColor" stroke-width="1.2"/><path d="M3 13c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="currentColor" stroke-width="1.2"/></svg><span>江苏省无锡市</span></div><div class="footer-contact-item"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 4l6 5 6-5" stroke="currentColor" stroke-width="1.2"/></svg><span>info@jingyida.com</span></div><div class="footer-contact-item"><svg viewBox="0 0 16 16" fill="none"><path d="M3 2h10a1.5 1.5 0 011.5 1.5v9A1.5 1.5 0 0113 14H3" stroke="currentColor" stroke-width="1.2"/><path d="M1.5 5h4l2 2-2 2h-4" stroke="currentColor" stroke-width="1.2"/></svg><span>0510-85885656</span></div></div>
+      </div>
+      <div class="footer-bottom"><span>&copy; 2025 无锡精艺达科技有限公司. All rights reserved.</span><span>苏ICP备XXXXXXXX号</span></div>
+    </div>
+  </footer>
+
+  <div id="back-to-top">↑</div>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
