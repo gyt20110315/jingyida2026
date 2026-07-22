@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="精艺达客诉反馈 — 您的每一次反馈都是我们前进的动力。">
+  <title>客诉反馈 | 无锡精艺达科技有限公司</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="无锡精艺达科技有限公司">
+  <meta property="og:locale" content="zh_CN">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <style>
+    #service-form { padding: var(--section-pad) 0; background: linear-gradient(180deg,var(--navy-deep) 0%,var(--navy) 100%); position: relative; z-index: 1; }
+    .service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px,8vw,80px); align-items: start; }
+    .service-form-wrap { background: rgba(13,30,56,0.55); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(200,164,92,0.25); border-radius: var(--radius-xl); padding: var(--space-2xl); }
+    .service-form-wrap h3 { margin-bottom: var(--space-xs); }
+    .service-form-wrap > p { font-size: 0.88rem; margin-bottom: var(--space-2xl); color: var(--silver); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md); }
+    .form-group { margin-bottom: var(--space-lg); }
+    .form-label { display: block; font-size: 0.78rem; font-weight: 500; color: var(--silver-light); margin-bottom: 6px; }
+    .form-label .required { color: var(--gold); }
+    .form-input, .form-textarea, .form-select { width: 100%; padding: 12px 16px; background: rgba(10,22,40,0.5); border: 1px solid rgba(200,164,92,0.25); border-radius: var(--radius-md); color: var(--white); font-family: var(--font-cn); font-size: 0.9rem; transition: all 0.3s; }
+    .form-input:focus, .form-textarea:focus, .form-select:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold-glow); }
+    .form-textarea { min-height: 140px; resize: vertical; }
+    .form-select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 8L1 3h10z' fill='%23C8A45C'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+    .form-select option { background: var(--navy-mid); color: var(--white); }
+    .form-group.has-error .form-input, .form-group.has-error .form-textarea { border-color: #e74c3c; }
+    .form-error { font-size: 0.72rem; color: #e74c3c; margin-top: 4px; display: none; }
+    .form-group.has-error .form-error { display: block; }
+    .service-info { display: flex; flex-direction: column; gap: var(--space-lg); }
+    .service-info-card { background: rgba(13,30,56,0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(200,164,92,0.25); border-radius: var(--radius-xl); padding: var(--space-xl); display: flex; gap: var(--space-md); transition: all 0.3s; }
+    .service-info-card:hover { border-color: rgba(200,164,92,0.25); }
+    .service-info-icon { width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px; background: rgba(200,164,92,0.25); display: flex; align-items: center; justify-content: center; color: var(--gold); }
+    .service-info-card h4 { font-size: 0.95rem; margin-bottom: 4px; }
+    .service-info-card p { font-size: 0.82rem; color: var(--silver); line-height: 1.7; margin: 0; }
+    @media (max-width: 768px) { .service-grid, .form-row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">跳到主要内容</a>
+  <header>
+    <nav>
+      <a href="index.html" class="nav-logo"><img loading="lazy" src="assets/logo.svg" alt="精艺达" width="40" height="40"><div class="nav-logo-text"><span class="nav-logo-cn">精艺达</span><span class="nav-logo-en">Jingyida</span></div></a>
+      <ul class="nav-links">
+        <li><a href="index.html">首页</a></li><li><a href="about.html">关于我们</a></li><li><a href="equipment.html">装备展示</a></li><li><a href="products.html">产品中心</a></li><li><a href="quality.html">成果展示</a></li><li><a href="service.html">客诉反馈</a></li>
+        <li><a href="contact.html">联系我们</a></li>
+      </ul>
+      <button class="menu-toggle" aria-label="菜单"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+  <div id="scroll-progress"></div>
+
+  <main id="main-content">
+    <section class="page-hero">
+      <div class="page-hero-bg-grid"></div>
+      <div class="page-hero-content reveal">
+        <div class="accent-line"></div>
+        <h1>客诉反馈</h1>
+        <p>您的每一次反馈都是我们前进的动力，我们承诺 24 小时内响应</p>
+      </div>
+    </section>
+
+    <section id="service-form">
+      <div class="container">
+        <div class="service-grid">
+          <div class="service-form-wrap reveal-left">
+            <h3>提交反馈或诉求</h3>
+            <p>请详细描述您的问题，我们将尽快处理</p>
+            <form id="complaint-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="customer">公司/客户名称 <span class="required">*</span></label>
+                  <input type="text" id="customer" name="customer" class="form-input" placeholder="请填写您的公司或客户名称" required>
+                  <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="contact-person">联系人</label>
+                  <input type="text" id="contact-person" name="contactPerson" class="form-input" placeholder="您的姓名">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="phone2">联系电话 <span class="required">*</span></label>
+                  <input type="tel" id="phone2" name="phone" class="form-input" placeholder="您的联系电话" required>
+                  <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="order-ref">订单/产品编号</label>
+                  <input type="text" id="order-ref" name="orderRef" class="form-input" placeholder="相关订单号或产品型号（选填）">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="category">问题类型 <span class="required">*</span></label>
+                  <select id="category" name="category" class="form-select" required>
+                    <option value="">请选择问题类型</option>
+                    <option value="quality">产品质量问题</option>
+                    <option value="delivery">交付延迟</option>
+                    <option value="spec">规格不符</option>
+                    <option value="damage">运输损坏</option>
+                    <option value="service">服务建议</option>
+                    <option value="other">其他问题</option>
+                  </select>
+                  <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="urgency">紧急程度 <span class="required">*</span></label>
+                  <select id="urgency" name="urgency" class="form-select" required>
+                    <option value="">请选择紧急程度</option>
+                    <option value="low">一般 — 3个工作日内处理</option>
+                    <option value="medium">紧急 — 24小时内处理</option>
+                    <option value="high">非常紧急 — 4小时内响应</option>
+                  </select>
+                  <span class="form-error"></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="description">问题描述 <span class="required">*</span></label>
+                <textarea id="description" name="description" class="form-textarea" placeholder="请详细描述您遇到的问题，包括发生时间、涉及数量、影响程度等信息，您的详细描述将帮助我们更快定位和解决问题..." required></textarea>
+                <span class="form-error"></span>
+              </div>
+              <button type="submit" class="btn btn-gold btn-lg" style="width:100%;">提交反馈</button>
+              <p class="form-status" style="text-align:center;margin-top:12px;font-size:0.8rem;display:none;"></p>
+            </form>
+          </div>
+
+          <div class="service-info reveal-right">
+            <div class="service-info-card">
+              <div class="service-info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.5"/></svg></div>
+              <div><h4>响应时效承诺</h4><p>非常紧急 — 4 小时<br>紧急 — 24 小时<br>一般 — 3 个工作日</p></div>
+            </div>
+            <div class="service-info-card">
+              <div class="service-info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 8l7.9 5.3a1 1 0 001.2 0L20 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="currentColor" stroke-width="1.5"/></svg></div>
+              <div><h4>处理流程</h4><p>提交 → 自动分类 → 专人跟进 → 方案确认 → 闭环回访</p></div>
+            </div>
+            <div class="service-info-card">
+              <div class="service-info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" stroke-width="1.5"/></svg></div>
+              <div><h4>专人对接</h4><p>每项客诉分配专属质量工程师全程跟进，确保问题闭环解决。</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand"><div class="footer-logo"><img loading="lazy" src="assets/logo.svg" alt="精艺达" width="36" height="36"><div class="footer-logo-text"><strong>无锡精艺达科技有限公司</strong><span>Jingyida Technology</span></div></div><p>以精密制造为核心，聚焦航空航天、半导体零部件及高端装备领域的高新技术企业。</p></div>
+        <div class="footer-col"><h4>快速导航</h4><ul><li><a href="about.html">关于我们</a></li><li><a href="equipment.html">装备展示</a></li><li><a href="products.html">产品中心</a></li><li><a href="quality.html">成果展示</a></li></ul></div>
+        <div class="footer-col"><h4>核心领域</h4><ul><li><a href="#">航空航天</a></li><li><a href="#">半导体零部件</a></li><li><a href="#">高端装备制造</a></li></ul></div>
+        <div class="footer-col"><h4>联系方式</h4><div class="footer-contact-item"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="6" r="2.5" stroke="currentColor" stroke-width="1.2"/><path d="M3 13c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="currentColor" stroke-width="1.2"/></svg><span>江苏省无锡市</span></div><div class="footer-contact-item"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 4l6 5 6-5" stroke="currentColor" stroke-width="1.2"/></svg><span>info@jingyida.com</span></div><div class="footer-contact-item"><svg viewBox="0 0 16 16" fill="none"><path d="M3 2h10a1.5 1.5 0 011.5 1.5v9A1.5 1.5 0 0113 14H3" stroke="currentColor" stroke-width="1.2"/><path d="M1.5 5h4l2 2-2 2h-4" stroke="currentColor" stroke-width="1.2"/></svg><span>0510-85885656</span></div></div>
+      </div>
+      <div class="footer-bottom"><span>&copy; 2025 无锡精艺达科技有限公司. All rights reserved.</span><span>苏ICP备XXXXXXXX号</span></div>
+    </div>
+  </footer>
+  <div id="back-to-top">↑</div>
+  <script src="js/main.js" defer></script>
+
+
+</body>
+</html>

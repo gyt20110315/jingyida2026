@@ -3,352 +3,152 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="精艺达产品中心 — 航空航天精密零部件、半导体设备核心组件、高端装备关键零件。更多产品即将上线。">
+  <meta name="description" content="精艺达产品中心 — 航空航天精密零部件、半导体设备核心组件、高端装备关键零件。IT5级精度，200+产品型号。">
   <title>产品中心 | 无锡精艺达科技有限公司</title>
-
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/animations.css">
-  
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="无锡精艺达科技有限公司">
   <meta property="og:locale" content="zh_CN">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
-
   <style>
-    #product-categories {
-      padding: var(--section-pad) 0;
-      background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 100%);
-    }
-
-    .categories-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-xl);
-    }
-
-    .category-card {
-      background: var(--navy-mid);
-      border: 1px solid rgba(200, 164, 92, 0.06);
-      border-radius: var(--radius-lg);
-      padding: var(--space-2xl);
-      text-align: center;
-      transition: all 0.4s var(--ease-smooth);
-      cursor: default;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .category-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-
-    .category-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-lg), var(--shadow-gold);
-      border-color: rgba(200, 164, 92, 0.2);
-    }
-
-    .category-card:hover::before { opacity: 1; }
-
-    .category-icon {
-      width: 72px;
-      height: 72px;
-      margin: 0 auto var(--space-lg);
-      border: 1px solid rgba(200, 164, 92, 0.15);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gold);
-      transition: all 0.4s;
-    }
-
-    .category-card:hover .category-icon {
-      border-color: var(--gold);
-      box-shadow: 0 0 32px rgba(200, 164, 92, 0.15);
-    }
-
-    .category-card h3 { margin-bottom: var(--space-sm); }
-    .category-card p { font-size: 0.9rem; line-height: 1.8; }
-
-    .category-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-xs);
-      justify-content: center;
-      margin-top: var(--space-lg);
-      padding-top: var(--space-md);
-      border-top: 1px solid rgba(200, 164, 92, 0.06);
-    }
-
-    .category-tag {
-      font-size: 0.7rem;
-      padding: 4px 12px;
-      border: 1px solid rgba(200, 164, 92, 0.2);
-      border-radius: var(--radius-full);
-      color: var(--gold);
-      font-family: var(--font-en);
-      letter-spacing: 0.05em;
-    }
-
-    /* Coming Soon Section */
-    #coming-soon {
-      padding: var(--section-pad) 0;
-      background: var(--navy-deep);
-      text-align: center;
-      position: relative;
-    }
-
-    #coming-soon::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 600px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(200,164,92,0.2), transparent);
-    }
-
-    .blueprint-container {
-      position: relative;
-      width: min(300px, 70vw);
-      height: min(300px, 70vw);
-      margin: 0 auto var(--space-3xl);
-    }
-
-    .blueprint-ring {
-      position: absolute;
-      inset: 0;
-      border: 1px solid rgba(200, 164, 92, 0.12);
-      border-radius: 50%;
-      animation: rotateSlow 50s linear infinite;
-    }
-
-    .blueprint-ring:nth-child(2) {
-      inset: 15%;
-      border-style: dashed;
-      animation: rotateReverseSlow 40s linear infinite;
-    }
-
-    .blueprint-ring:nth-child(3) {
-      inset: 30%;
-      border-color: rgba(200, 164, 92, 0.2);
-      animation: rotateSlow 30s linear infinite;
-    }
-
-    .blueprint-gear {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 40%;
-      height: 40%;
-    }
-
-    .blueprint-gear svg {
-      animation: rotateSlow 20s linear infinite;
-    }
-
-    .blueprint-dot {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 8px;
-      height: 8px;
-      background: var(--gold);
-      border-radius: 50%;
-      box-shadow: 0 0 24px rgba(200, 164, 92, 0.5);
-      animation: pulse 2s var(--ease-in-out) infinite;
-    }
-
-    .coming-soon-badge {
-      display: inline-block;
-      padding: 10px 28px;
-      border: 1px solid rgba(200, 164, 92, 0.3);
-      border-radius: var(--radius-full);
-      font-family: var(--font-en);
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: var(--space-lg);
-      animation: borderGlow 3s var(--ease-in-out) infinite;
-    }
-
-    @media (max-width: 1024px) {
-      .categories-grid { grid-template-columns: repeat(2, 1fr); }
-      .categories-grid .category-card:last-child { grid-column: 1/-1; max-width: 400px; justify-self: center; }
-    }
-    @media (max-width: 768px) {
-      .categories-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-      .categories-grid .category-card:last-child { max-width: none; }
-    }
+    #product-categories { padding: var(--section-pad) 0; background: linear-gradient(180deg,var(--navy-deep) 0%,var(--navy) 100%); }
+    .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xl); margin-bottom: var(--space-3xl); }
+    .cat-card { background: rgba(13,30,56,0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(200,164,92,0.25); border-radius: var(--radius-xl); padding: var(--space-2xl); text-align: center; transition: all 0.5s; position: relative; overflow: hidden; }
+    .cat-card:hover { transform: translateY(-8px); border-color: rgba(200,164,92,0.25); box-shadow: 0 20px 60px rgba(6,13,24,0.4); }
+    .cat-icon { width: 64px; height: 64px; margin: 0 auto var(--space-lg); border-radius: 50%; background: rgba(200,164,92,0.25); border: 1px solid rgba(200,164,92,0.25); display: flex; align-items: center; justify-content: center; color: var(--gold); transition: all 0.5s; }
+    .cat-card:hover .cat-icon { border-color: var(--gold); box-shadow: 0 0 32px rgba(200,164,92,0.25); }
+    .cat-card h3 { font-size: 1.1rem; margin-bottom: var(--space-sm); }
+    .cat-card p { font-size: 0.85rem; line-height: 1.8; }
+    .cat-tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: var(--space-lg); padding-top: var(--space-md); border-top: 1px solid rgba(200,164,92,0.25); }
+    .cat-tag { font-size: 0.65rem; padding: 3px 10px; border: 0.5px solid rgba(200,164,92,0.25); border-radius: 12px; color: var(--gold); font-family: var(--font-en); letter-spacing: 0.04em; }
+    #specs-section { padding: var(--section-pad) 0; background: var(--navy-deep); position: relative; }
+    #specs-section::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 600px; height: 1px; background: linear-gradient(90deg,transparent,rgba(200,164,92,0.25),transparent); }
+    .specs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xl); }
+    .spec-card { background: rgba(13,30,56,0.4); border: 1px solid rgba(200,164,92,0.25); border-radius: var(--radius-lg); padding: var(--space-xl); transition: all 0.4s; }
+    .spec-card:hover { border-color: rgba(200,164,92,0.25); }
+    .spec-card h4 { font-size: 0.95rem; margin-bottom: var(--space-md); padding-bottom: var(--space-sm); border-bottom: 1px solid rgba(200,164,92,0.25); }
+    .spec-row { display: flex; justify-content: space-between; padding: 5px 0; font-size: 0.8rem; }
+    .spec-row span:first-child { color: var(--silver); }
+    .spec-row span:last-child { font-family: var(--font-mono); color: var(--silver-light); font-weight: 500; }
+    #how-we-work { padding: var(--section-pad) 0; background: linear-gradient(180deg,var(--navy) 0%,var(--navy-deep) 100%); }
+    .work-flow { display: flex; justify-content: center; gap: var(--space-lg); flex-wrap: wrap; }
+    .work-step { flex: 1; min-width: 160px; max-width: 200px; text-align: center; padding: var(--space-xl) var(--space-md); background: rgba(13,30,56,0.4); border: 1px solid rgba(200,164,92,0.25); border-radius: var(--radius-xl); transition: all 0.4s; }
+    .work-step:hover { border-color: rgba(200,164,92,0.25); transform: translateY(-4px); }
+    .work-num { width: 40px; height: 40px; margin: 0 auto var(--space-md); border-radius: 50%; background: var(--navy-deep); border: 1px solid rgba(200,164,92,0.25); display: flex; align-items: center; justify-content: center; font-family: var(--font-en); font-size: 0.9rem; font-weight: 700; color: var(--gold); }
+    .work-step h5 { font-size: 0.92rem; margin-bottom: var(--space-xs); }
+    .work-step p { font-size: 0.75rem; color: var(--silver); line-height: 1.6; }
+    @media (max-width: 1024px) { .cat-grid, .specs-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 768px) { .cat-grid, .specs-grid { grid-template-columns: 1fr; } .work-flow { flex-direction: column; align-items: center; } .work-step { max-width: 280px; } }
   </style>
 </head>
 <body>
   <a href="#main-content" class="skip-link">跳到主要内容</a>
-
-  <div id="loader">
-    <div class="loader-container">
-      <div class="loader-glass">
-        <svg class="loader-ring" viewBox="0 0 140 140">
-          <defs>
-            <linearGradient id="loaderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#4da8f0"/>
-              <stop offset="50%" stop-color="#2d6fbf"/>
-              <stop offset="100%" stop-color="#1a4d8f"/>
-            </linearGradient>
-          </defs>
-          <circle class="loader-ring-bg" cx="70" cy="70" r="65"/>
-          <circle class="loader-ring-fill" cx="70" cy="70" r="65"/>
-        </svg>
-        <div class="loader-percent">0<sup>%</sup></div>
-      </div>
-      <div class="loader-label">加载中</div>
-      <div class="loader-brand">JINGYIDA TECHNOLOGY</div>
-    </div>
-  </div>
-  <div id="scroll-progress"></div>
-
   <header>
     <nav>
       <a href="index.html" class="nav-logo"><img loading="lazy" src="assets/logo.svg" alt="精艺达" width="40" height="40"><div class="nav-logo-text"><span class="nav-logo-cn">精艺达</span><span class="nav-logo-en">Jingyida</span></div></a>
       <ul class="nav-links">
-        <li><a href="index.html">首页</a></li><li><a href="about.html">关于我们</a></li><li><a href="equipment.html">装备展示</a></li><li><a href="products.html">产品中心</a></li><li><a href="quality.html">成果展示</a></li><li><a href="contact.html">联系我们</a></li>
+        <li><a href="index.html">首页</a></li><li><a href="about.html">关于我们</a></li><li><a href="equipment.html">装备展示</a></li><li><a href="products.html">产品中心</a></li><li><a href="quality.html">成果展示</a></li><li><a href="service.html">客诉反馈</a></li><li><a href="contact.html">联系我们</a></li>
       </ul>
       <button class="menu-toggle" aria-label="菜单"><span></span><span></span><span></span></button>
     </nav>
   </header>
-
+  <div id="scroll-progress"></div>
   <main id="main-content">
     <section class="page-hero">
       <div class="page-hero-bg-grid"></div>
       <div class="page-hero-content reveal">
         <div class="accent-line"></div>
         <h1>产品中心</h1>
-        <p>覆盖航空航天、半导体及高端装备三大领域的精密零部件制造</p>
+        <p>覆盖航空航天、半导体设备、高端装备三大领域 · IT5 级精密制造</p>
       </div>
     </section>
-
-    <!-- Product Categories -->
     <section id="product-categories">
       <div class="container">
-        <div class="categories-grid reveal-stagger">
-          <div class="category-card" data-tilt>
-            <div class="category-icon">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                <path d="M16 2L6 8v10c0 5.5 4 10 10 10s10-4.5 10-10V8L16 2z" stroke="currentColor" stroke-width="1.5"/>
-                <path d="M12 16l3 3 5-6" stroke="currentColor" stroke-width="1.5"/>
-              </svg>
-            </div>
+        <div class="section-header text-center reveal"><span class="section-label centered">核心领域</span><h2>精密零部件制造</h2><p>以微米级精度，为三大战略行业提供关键零部件</p></div>
+        <div class="cat-grid reveal-stagger">
+          <div class="cat-card">
+            <div class="cat-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 2L4 8v10c0 5 4.5 10 10 10s10-4.5 10-10V8L14 2z" stroke="currentColor" stroke-width="1.5"/><path d="M10 14l3 3 5-6" stroke="currentColor" stroke-width="1.5"/></svg></div>
             <h3>航空航天零部件</h3>
-            <p>航空发动机叶片、涡轮盘、结构件等关键零部件的精密加工，满足严苛的航空级质量标准。</p>
-            <div class="category-tags">
-              <span class="category-tag">Turbine</span>
-              <span class="category-tag">Structure</span>
-              <span class="category-tag">AS9100</span>
-            </div>
+            <p>航空发动机叶片、涡轮盘、燃烧室组件、结构支架等关键热端与结构件。满足 Inconel 718 / TC4 等高温合金的精密加工需求，符合 AS9100 航空质量体系。</p>
+            <div class="cat-tags"><span class="cat-tag">Turbine</span><span class="cat-tag">Structure</span><span class="cat-tag">Superalloy</span><span class="cat-tag">AS9100</span></div>
           </div>
-
-          <div class="category-card" data-tilt>
-            <div class="category-icon">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                <rect x="4" y="4" width="24" height="24" rx="2" stroke="currentColor" stroke-width="1.5"/>
-                <rect x="10" y="10" width="12" height="12" rx="1" stroke="currentColor" stroke-width="1.2"/>
-                <circle cx="16" cy="16" r="3" stroke="currentColor" stroke-width="1"/>
-              </svg>
-            </div>
+          <div class="cat-card">
+            <div class="cat-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="4" y="4" width="20" height="20" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="10" y="10" width="8" height="8" rx="1" stroke="currentColor" stroke-width="1.2"/><circle cx="14" cy="14" r="2" stroke="currentColor" stroke-width="1"/></svg></div>
             <h3>半导体设备组件</h3>
-            <p>半导体设备核心精密组件加工，涵盖真空腔体、晶圆承载台等高洁净度、高精度要求的关重件。</p>
-            <div class="category-tags">
-              <span class="category-tag">Vacuum</span>
-              <span class="category-tag">Wafer</span>
-              <span class="category-tag">UHP</span>
-            </div>
+            <p>真空腔体、晶圆承载台、高纯流体歧管、气路模块等半导体设备关重件。316L VIM/VAR 超低碳不锈钢，Ra≤0.13μm 电解抛光，满足 UHP 超高纯度要求。</p>
+            <div class="cat-tags"><span class="cat-tag">Vacuum</span><span class="cat-tag">Wafer Chuck</span><span class="cat-tag">UHP</span><span class="cat-tag">Class 100</span></div>
           </div>
-
-          <div class="category-card" data-tilt>
-            <div class="category-icon">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                <circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="1.5"/>
-                <circle cx="16" cy="16" r="5" stroke="currentColor" stroke-width="1.2"/>
-                <path d="M16 4v5M16 23v5M4 16h5M23 16h5" stroke="currentColor" stroke-width="1"/>
-              </svg>
-            </div>
+          <div class="cat-card">
+            <div class="cat-icon"><svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="11" stroke="currentColor" stroke-width="1.5"/><circle cx="14" cy="14" r="4" stroke="currentColor" stroke-width="1.2"/><path d="M14 3v4M14 21v4M3 14h4M21 14h4" stroke="currentColor" stroke-width="1"/></svg></div>
             <h3>高端装备关键零件</h3>
-            <p>精密传动轴、高精度齿轮、液压阀体等高端装备核心零件，以微米级精度保障装备整体性能。</p>
-            <div class="category-tags">
-              <span class="category-tag">Gear</span>
-              <span class="category-tag">Shaft</span>
-              <span class="category-tag">Hydraulic</span>
-            </div>
+            <p>精密传动轴、高精度齿轮副、液压阀体、执行机构组件等高端装备核心零件。IT5-IT6 公差等级，圆度≤0.003mm，同轴度≤0.01mm。</p>
+            <div class="cat-tags"><span class="cat-tag">Gear</span><span class="cat-tag">Shaft</span><span class="cat-tag">Hydraulic</span><span class="cat-tag">IT5</span></div>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- Coming Soon -->
-    <section id="coming-soon">
+    <section id="specs-section">
       <div class="container">
-        <div class="blueprint-container reveal-scale">
-          <div class="blueprint-ring"></div>
-          <div class="blueprint-ring"></div>
-          <div class="blueprint-ring"></div>
-          <div class="blueprint-gear">
-            <svg viewBox="0 0 120 120" fill="none">
-              <circle cx="60" cy="60" r="48" stroke="#C8A45C" stroke-width="1.5" fill="none" opacity="0.4"/>
-              <circle cx="60" cy="60" r="30" stroke="#D4B87A" stroke-width="1" fill="none" opacity="0.3"/>
-              <!-- Gear teeth -->
-              <g opacity="0.35" stroke="#C8A45C" stroke-width="1.2">
-                <line x1="60" y1="8" x2="60" y2="18"/>
-                <line x1="60" y1="102" x2="60" y2="112"/>
-                <line x1="8" y1="60" x2="18" y2="60"/>
-                <line x1="102" y1="60" x2="112" y2="60"/>
-                <line x1="23" y1="23" x2="30" y2="30"/>
-                <line x1="90" y1="90" x2="97" y2="97"/>
-                <line x1="97" y1="23" x2="90" y2="30"/>
-                <line x1="30" y1="90" x2="23" y2="97"/>
-              </g>
-              <circle cx="60" cy="60" r="4" fill="#C8A45C" opacity="0.6"/>
-            </svg>
+        <div class="section-header text-center reveal"><span class="section-label centered">技术参数</span><h2>精密制造能力一览</h2></div>
+        <div class="specs-grid reveal-stagger">
+          <div class="spec-card">
+            <h4>尺寸精度</h4>
+            <div class="spec-row"><span>车削外圆精度</span><span>IT5-IT6</span></div>
+            <div class="spec-row"><span>铣削平面度</span><span>≤0.01mm/300mm</span></div>
+            <div class="spec-row"><span>孔位置度</span><span>±0.01mm</span></div>
+            <div class="spec-row"><span>圆度</span><span>≤0.003mm</span></div>
+            <div class="spec-row"><span>同轴度</span><span>≤0.01mm</span></div>
+            <div class="spec-row"><span>最小孔径</span><span>Ø0.3mm</span></div>
           </div>
-          <div class="blueprint-dot"></div>
+          <div class="spec-card">
+            <h4>表面质量</h4>
+            <div class="spec-row"><span>最优粗糙度</span><span>Ra 0.2μm</span></div>
+            <div class="spec-row"><span>标准精车</span><span>Ra 0.4-0.8μm</span></div>
+            <div class="spec-row"><span>电解抛光(EP)</span><span>Ra≤0.13μm</span></div>
+            <div class="spec-row"><span>研磨处理</span><span>Ra 0.1-0.4μm</span></div>
+            <div class="spec-row"><span>轮廓度评定</span><span>ISO 4287</span></div>
+            <div class="spec-row"><span>CPK过程能力</span><span>≥1.33</span></div>
+          </div>
+          <div class="spec-card">
+            <h4>材料覆盖</h4>
+            <div class="spec-row"><span>镍基高温合金</span><span>Inconel 718</span></div>
+            <div class="spec-row"><span>钛合金</span><span>TC4 / Ti-6Al-4V</span></div>
+            <div class="spec-row"><span>不锈钢</span><span>316L / 17-4PH</span></div>
+            <div class="spec-row"><span>铝合金</span><span>7075-T651 / 6061-T6</span></div>
+            <div class="spec-row"><span>合金结构钢</span><span>40CrNiMoA</span></div>
+            <div class="spec-row"><span>材料验证</span><span>直读光谱仪</span></div>
+          </div>
         </div>
-
-        <div class="reveal">
-          <div class="coming-soon-badge">Coming Soon</div>
-          <h2 style="margin-bottom:var(--space-md);">更多精密产品即将上线</h2>
-          <p style="color:var(--silver);max-width:480px;margin:0 auto var(--space-2xl);">
-            我们正在精心整理产品目录。如需了解具体产品与加工能力，欢迎直接联系我们。
-          </p>
-          <a href="contact.html" class="btn btn-gold btn-lg btn-arrow">联系我们获取产品信息</a>
+      </div>
+    </section>
+    <section id="how-we-work">
+      <div class="container">
+        <div class="section-header text-center reveal"><span class="section-label centered">合作流程</span><h2>从图纸到交付</h2><p>标准化流程确保每一件产品的品质与交期</p></div>
+        <div class="work-flow reveal-stagger">
+          <div class="work-step"><div class="work-num">01</div><h5>需求沟通</h5><p>客户提供图纸与技术需求<br>我方进行可制造性评估<br>24h 内反馈报价与交期</p></div>
+          <div class="work-step"><div class="work-num">02</div><h5>工艺设计</h5><p>制定加工工艺路线<br>选择最优设备与刀具<br>设计专用工装夹具</p></div>
+          <div class="work-step"><div class="work-num">03</div><h5>首件验证</h5><p>首件全尺寸三坐标检测<br>CPK≥1.33 确认放行<br>客户确认封样</p></div>
+          <div class="work-step"><div class="work-num">04</div><h5>批量生产</h5><p>标准化流程批量制造<br>SPC在线过程监控<br>批次全追溯管理</p></div>
+          <div class="work-step"><div class="work-num">05</div><h5>交付验收</h5><p>终检报告随货发出<br>防锈包装 · 批次标签<br>售后 7×24h 响应</p></div>
         </div>
       </div>
     </section>
   </main>
-
   <footer>
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand"><div class="footer-logo"><img loading="lazy" src="assets/logo.svg" alt="精艺达" width="36" height="36"><div class="footer-logo-text"><strong>无锡精艺达科技有限公司</strong><span>Jingyida Technology</span></div></div><p>以精密制造为核心，聚焦航空航天、半导体零部件及高端装备领域的高新技术企业。安全、优质、快速发展。</p></div>
         <div class="footer-col"><h4>快速导航</h4><ul><li><a href="about.html">关于我们</a></li><li><a href="equipment.html">装备展示</a></li><li><a href="products.html">产品中心</a></li><li><a href="quality.html">成果展示</a></li></ul></div>
-        <div class="footer-col"><h4>核心领域</h4><ul><li><a href="#">航空航天</a></li><li><a href="#">半导体零部件</a></li><li><a href="#">高端装备制造</a></li><li><a href="#">精密加工</a></li></ul></div>
+        <div class="footer-col"><h4>核心领域</h4><ul><li><a href="products.html">航空航天零部件</a></li><li><a href="products.html">半导体设备组件</a></li><li><a href="products.html">高端装备零件</a></li><li><a href="service.html">客诉反馈</a></li></ul></div>
         <div class="footer-col"><h4>联系方式</h4><div class="footer-contact-item"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="6" r="2.5" stroke="currentColor" stroke-width="1.2"/><path d="M3 13c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="currentColor" stroke-width="1.2"/></svg><span>江苏省无锡市</span></div><div class="footer-contact-item"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M2 4l6 5 6-5" stroke="currentColor" stroke-width="1.2"/></svg><span>info@jingyida.com</span></div><div class="footer-contact-item"><svg viewBox="0 0 16 16" fill="none"><path d="M3 2h10a1.5 1.5 0 011.5 1.5v9A1.5 1.5 0 0113 14H3" stroke="currentColor" stroke-width="1.2"/><path d="M1.5 5h4l2 2-2 2h-4" stroke="currentColor" stroke-width="1.2"/></svg><span>0510-85885656</span></div></div>
       </div>
       <div class="footer-bottom"><span>&copy; 2025 无锡精艺达科技有限公司. All rights reserved.</span><span>苏ICP备XXXXXXXX号</span></div>
     </div>
   </footer>
-
   <div id="back-to-top">↑</div>
-
   <script src="js/main.js" defer></script>
+
+
 </body>
 </html>

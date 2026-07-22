@@ -14,24 +14,24 @@
   <style>
     #equip-showcase { padding: var(--section-pad) 0; background: linear-gradient(180deg,var(--navy-deep) 0%,var(--navy) 100%); }
     .equip-cat { margin-bottom: var(--space-4xl); }
-    .equip-cat-head { display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-2xl); padding-bottom: var(--space-md); border-bottom: 1px solid rgba(200,164,92,0.08); }
+    .equip-cat-head { display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-2xl); padding-bottom: var(--space-md); border-bottom: 1px solid rgba(200,164,92,0.25); }
     .equip-cat-head h3 { font-size: 1.15rem; margin: 0; }
     .equip-cat-head span { font-family: var(--font-en); font-size: 0.65rem; letter-spacing: 0.1em; color: var(--silver); margin-left: auto; }
     .equip-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); }
 
-    .e-card { background: rgba(13,30,56,0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(200,164,92,0.06); border-radius: var(--radius-lg); overflow: hidden; transition: all 0.45s cubic-bezier(0.25,0.46,0.45,0.94); }
-    .e-toggle { position: absolute; bottom: 14px; right: 14px; width: 34px; height: 34px; border-radius: 50%; background: rgba(200,164,92,0.1); border: 0.5px solid rgba(200,164,92,0.25); color: var(--gold); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); z-index: 2; }
-    .e-toggle:hover { background: rgba(200,164,92,0.2); border-color: var(--gold); box-shadow: 0 0 16px rgba(200,164,92,0.2); transform: scale(1.1); }
-    .e-card.active .e-toggle { background: rgba(200,164,92,0.2); border-color: var(--gold); transform: rotate(180deg); }
+    .e-card { background: rgba(13,30,56,0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(200,164,92,0.25); border-radius: var(--radius-lg); overflow: hidden; transition: all 0.45s cubic-bezier(0.25,0.46,0.45,0.94); }
+    .e-toggle { position: absolute; bottom: 14px; right: 14px; width: 34px; height: 34px; border-radius: 50%; background: rgba(200,164,92,0.25); border: 0.5px solid rgba(200,164,92,0.25); color: var(--gold); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); z-index: 2; }
+    .e-toggle:hover { background: rgba(200,164,92,0.25); border-color: var(--gold); box-shadow: 0 0 16px rgba(200,164,92,0.25); transform: scale(1.1); }
+    .e-card.active .e-toggle { background: rgba(200,164,92,0.25); border-color: var(--gold); transform: rotate(180deg); }
     .e-card.active .e-toggle:hover { transform: rotate(180deg) scale(1.1); }
 
-    .e-card:hover { transform: translateY(-6px); border-color: rgba(200,164,92,0.2); box-shadow: 0 16px 48px rgba(6,13,24,0.4); }
-    .e-card.active { border-color: rgba(200,164,92,0.35); box-shadow: 0 0 0 2px rgba(200,164,92,0.12), 0 16px 48px rgba(6,13,24,0.4); }
+    .e-card:hover { transform: translateY(-6px); border-color: rgba(200,164,92,0.25); box-shadow: 0 16px 48px rgba(6,13,24,0.4); }
+    .e-card.active { border-color: rgba(200,164,92,0.25); box-shadow: 0 0 0 2px rgba(200,164,92,0.25), 0 16px 48px rgba(6,13,24,0.4); }
     .e-card-img { aspect-ratio: 16/10; background: var(--navy-light); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
     .e-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
-    .e-toggle { position: absolute; bottom: 14px; right: 14px; width: 34px; height: 34px; border-radius: 50%; background: rgba(200,164,92,0.1); border: 0.5px solid rgba(200,164,92,0.25); color: var(--gold); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); z-index: 2; }
-    .e-toggle:hover { background: rgba(200,164,92,0.2); border-color: var(--gold); box-shadow: 0 0 16px rgba(200,164,92,0.2); transform: scale(1.1); }
-    .e-card.active .e-toggle { background: rgba(200,164,92,0.2); border-color: var(--gold); transform: rotate(180deg); }
+    .e-toggle { position: absolute; bottom: 14px; right: 14px; width: 34px; height: 34px; border-radius: 50%; background: rgba(200,164,92,0.25); border: 0.5px solid rgba(200,164,92,0.25); color: var(--gold); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); z-index: 2; }
+    .e-toggle:hover { background: rgba(200,164,92,0.25); border-color: var(--gold); box-shadow: 0 0 16px rgba(200,164,92,0.25); transform: scale(1.1); }
+    .e-card.active .e-toggle { background: rgba(200,164,92,0.25); border-color: var(--gold); transform: rotate(180deg); }
     .e-card.active .e-toggle:hover { transform: rotate(180deg) scale(1.1); }
 
     .e-card:hover .e-card-img img { transform: scale(1.06); }
@@ -48,17 +48,17 @@
     .e-detail-inner { padding: 0 var(--space-lg) var(--space-lg); }
     .e-detail-inner h5 { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: var(--space-sm); font-family: var(--font-en); }
     .e-detail-table { width: 100%; border-collapse: collapse; margin-bottom: var(--space-md); }
-    .e-detail-table td { padding: 6px 10px; font-size: 0.82rem; border-bottom: 1px solid rgba(200,164,92,0.04); }
+    .e-detail-table td { padding: 6px 10px; font-size: 0.82rem; border-bottom: 1px solid rgba(200,164,92,0.25); }
     .e-detail-table td:first-child { color: var(--silver); width: 38%; }
     .e-detail-table td:last-child { font-family: var(--font-mono); color: var(--white); font-weight: 500; }
     .e-detail-inner p { font-size: 0.85rem; line-height: 1.85; color: var(--silver); }
 
     #equip-capabilities { padding: var(--section-pad) 0; background: var(--navy-deep); position: relative; }
-    #equip-capabilities::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 600px; height: 1px; background: linear-gradient(90deg,transparent,rgba(200,164,92,0.2),transparent); }
+    #equip-capabilities::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 600px; height: 1px; background: linear-gradient(90deg,transparent,rgba(200,164,92,0.25),transparent); }
     .cap-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-md); }
-    .cap-item { text-align: center; padding: var(--space-xl) var(--space-md); background: rgba(13,30,56,0.4); border: 1px solid rgba(200,164,92,0.04); border-radius: var(--radius-lg); transition: all 0.35s; }
-    .cap-item:hover { border-color: rgba(200,164,92,0.15); transform: translateY(-3px); }
-    .cap-val { font-family: var(--font-en); font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .cap-item { text-align: center; padding: var(--space-xl) var(--space-md); background: rgba(13,30,56,0.4); border: 1px solid rgba(200,164,92,0.25); border-radius: var(--radius-lg); transition: all 0.35s; }
+    .cap-item:hover { border-color: rgba(200,164,92,0.25); transform: translateY(-3px); }
+    .cap-val { font-family: var(--font-serif); font-size: 2rem; font-weight: 900; background: var(--num-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px; }
     .cap-label { font-size: 0.8rem; color: var(--silver); }
 
     @media (max-width: 1200px) { .equip-grid { grid-template-columns: repeat(2,1fr); } .cap-grid { grid-template-columns: repeat(3,1fr); } }
@@ -71,7 +71,8 @@
     <nav>
       <a href="index.html" class="nav-logo"><img loading="lazy" src="assets/logo.svg" alt="精艺达" width="40" height="40"><div class="nav-logo-text"><span class="nav-logo-cn">精艺达</span><span class="nav-logo-en">Jingyida</span></div></a>
       <ul class="nav-links">
-        <li><a href="index.html">首页</a></li><li><a href="about.html">关于我们</a></li><li><a href="equipment.html">装备展示</a></li><li><a href="products.html">产品中心</a></li><li><a href="quality.html">成果展示</a></li><li><a href="contact.html">联系我们</a></li>
+        <li><a href="index.html">首页</a></li><li><a href="about.html">关于我们</a></li><li><a href="equipment.html">装备展示</a></li><li><a href="products.html">产品中心</a></li><li><a href="quality.html">成果展示</a></li><li><a href="service.html">客诉反馈</a></li>
+        <li><a href="contact.html">联系我们</a></li>
       </ul>
       <button class="menu-toggle" aria-label="菜单"><span></span><span></span><span></span></button>
     </nav>
@@ -335,11 +336,11 @@
       <div class="container">
         <div class="section-header text-center reveal"><span class="section-label centered">加工能力总览</span><h2>Manufacturing Capabilities</h2></div>
         <div class="cap-grid reveal-stagger">
-          <div class="cap-item"><div class="cap-val">18+</div><div class="cap-label">精密加工与检测设备</div></div>
+          <div class="cap-item"><div class="cap-val stat-number" data-target="18" data-suffix="+">0</div><div class="cap-label">精密加工与检测设备</div></div>
           <div class="cap-item"><div class="cap-val">5-Axis</div><div class="cap-label">五轴联动加工</div></div>
           <div class="cap-item"><div class="cap-val">±1.5μm</div><div class="cap-label">最高重复定位精度</div></div>
           <div class="cap-item"><div class="cap-val">Ø0.3mm</div><div class="cap-label">最小可加工孔径</div></div>
-          <div class="cap-item"><div class="cap-val">6 大</div><div class="cap-label">国际顶尖品牌</div></div>
+          <div class="cap-item"><div class="cap-val stat-number" data-target="6" data-suffix=" 大">0</div><div class="cap-label">国际顶尖品牌</div></div>
         </div>
       </div>
     </section>
@@ -357,5 +358,31 @@
   </footer>
   <div id="back-to-top">↑</div>
   <script src="js/main.js" defer></script>
+
+
+
+  <script>
+    (function(){
+      var items=document.querySelectorAll(".cap-val[data-target]");
+      if(!items.length)return;
+      var done={};
+      var obs=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting&&!done[e.target.dataset.target]){
+            done[e.target.dataset.target]=true;
+            var el=e.target,target=parseFloat(el.dataset.target),suffix=el.dataset.suffix||"",start=performance.now(),dur=2500;
+            function tick(now){
+              var p=Math.min(1,(now-start)/dur),val=Math.round(target*(1-Math.pow(1-p,3)));
+              el.textContent=val+suffix;el.style.transform="scale("+(1+0.2*(1-p))+")";
+              if(p<1)requestAnimationFrame(tick);else{el.textContent=target+suffix;el.style.transform="scale(1)";}
+            }
+            requestAnimationFrame(tick);
+          }
+        });
+      },{threshold:0.4});
+      items.forEach(function(i){obs.observe(i)});
+    })();
+  </script>
+
 </body>
 </html>

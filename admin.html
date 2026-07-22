@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>管理后台 | 无锡精艺达科技有限公司</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="无锡精艺达科技有限公司">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <style>
+    .login-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(ellipse 60% 50% at 50% 50%, #0d1e38 0%, #050C16 100%); position: relative; }
+    .login-page::before { content: ''; position: fixed; inset: 0; background: radial-gradient(ellipse 40% 30% at 60% 30%, rgba(45,95,165,0.06) 0%, transparent 60%), radial-gradient(ellipse 30% 40% at 30% 70%, rgba(200,164,92,0.04) 0%, transparent 60%); pointer-events: none; }
+    .login-card { background: rgba(13,30,56,0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(200,164,92,0.1); border-radius: var(--radius-xl); padding: var(--space-3xl) var(--space-2xl); width: 100%; max-width: 420px; position: relative; z-index: 1; }
+    .login-card .login-icon { width: 56px; height: 56px; margin: 0 auto var(--space-xl); border-radius: 50%; background: rgba(200,164,92,0.08); border: 1px solid rgba(200,164,92,0.2); display: flex; align-items: center; justify-content: center; color: var(--gold); }
+    .login-card h2 { text-align: center; margin-bottom: var(--space-xs); }
+    .login-card .login-sub { text-align: center; font-size: 0.85rem; color: var(--silver); margin-bottom: var(--space-2xl); }
+    .login-error { text-align: center; font-size: 0.8rem; color: #e74c3c; margin-top: var(--space-md); display: none; }
+  </style>
+</head>
+<body>
+  <div class="login-page">
+    <div class="login-card reveal-scale">
+      <div class="login-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="16" r="1.5" fill="currentColor"/></svg></div>
+      <h2>内部管理系统</h2>
+      <p class="login-sub">请输入管理密码以访问客诉数据</p>
+      <form id="login-form" onsubmit="return false;">
+        <div class="form-group">
+          <label class="form-label" for="password">管理密码</label>
+          <input type="password" id="password" class="form-input" placeholder="请输入管理密码" autocomplete="current-password">
+        </div>
+        <button type="button" class="btn btn-gold btn-lg" style="width:100%;" onclick="handleLogin()">登 录</button>
+        <p class="login-error" id="login-error">密码错误，请重试</p>
+      </form>
+      <p style="text-align:center;margin-top:var(--space-lg);font-size:0.75rem;color:var(--silver);"><a href="index.html" style="color:var(--gold);">← 返回首页</a></p>
+    </div>
+  </div>
+
+  <script>
+    // Default password — change this to your own
+    var ADMIN_PASSWORD = 'jingyida2026';
+
+    function handleLogin() {
+      var pw = document.getElementById('password').value;
+      var err = document.getElementById('login-error');
+      if (pw === ADMIN_PASSWORD) {
+        // Store auth token in sessionStorage (cleared on tab close)
+        sessionStorage.setItem('jy_admin_auth', 'true');
+        window.location.href = 'admin-dashboard.html';
+      } else {
+        err.style.display = 'block';
+        document.getElementById('password').value = '';
+      }
+    }
+
+    // Allow Enter key to submit
+    document.getElementById('password').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') handleLogin();
+    });
+
+    // Redirect if already logged in
+    if (sessionStorage.getItem('jy_admin_auth') === 'true') {
+      window.location.href = 'admin-dashboard.html';
+    }
+  </script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

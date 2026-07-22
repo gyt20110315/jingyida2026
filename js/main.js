@@ -44,9 +44,13 @@ const JYD = {
     if (document.getElementById('contact-form')) {
       JYD.ContactForm.init();
     }
+    if (document.getElementById('complaint-form')) {
+      JYD.ComplaintForm.init();
+    }
 
     JYD.SectionHints.init();
     JYD.PageJump.init();
+    JYD.AmbientParticles.init();
     JYD.Utils.attachScrollListeners();
   },
 
@@ -913,28 +917,34 @@ const JYD = {
   // ================================================================
   ContactForm: {
     init() {
+      var self = this;
       this.form = document.getElementById('contact-form');
       if (!this.form) return;
 
-      this.form.addEventListener('submit', (e) => {
+      this.statusEl = this.form.querySelector('.form-status');
+      this.btn = this.form.querySelector('button[type="submit"]');
+      this.btnOriginalHTML = this.btn ? this.btn.innerHTML : '';
+
+      this.form.addEventListener('submit', function(e) {
         e.preventDefault();
-        if (this.validate()) {
-          this.submit();
+        if (self.validate()) {
+          self.submit();
         }
       });
 
-      this.form.querySelectorAll('.form-input, .form-textarea').forEach(field => {
-        field.addEventListener('blur', () => this.validateField(field));
-        field.addEventListener('input', () => this.clearError(field));
+      var fields = this.form.querySelectorAll('.form-input, .form-textarea');
+      fields.forEach(function(field) {
+        field.addEventListener('blur', function() { self.validateField(field); });
+        field.addEventListener('input', function() { self.clearError(field); });
       });
     },
 
     validateField(field) {
-      const value = field.value.trim();
-      const group = field.closest('.form-group');
-      const errorEl = group?.querySelector('.form-error');
-      let valid = true;
-      let message = '';
+      var value = field.value.trim();
+      var group = field.closest('.form-group');
+      var errorEl = group ? group.querySelector('.form-error') : null;
+      var valid = true;
+      var message = '';
 
       if (field.required && !value) {
         valid = false;
@@ -947,87 +957,154 @@ const JYD = {
         message = '请输入有效的电话号码';
       }
 
-      group?.classList.toggle('has-error', !valid);
+      if (group) group.classList.toggle('has-error', !valid);
       if (errorEl) errorEl.textContent = message;
       return valid;
     },
 
     clearError(field) {
-      field.closest('.form-group')?.classList.remove('has-error');
+      var group = field.closest('.form-group');
+      if (group) group.classList.remove('has-error');
     },
 
     validate() {
-      let allValid = true;
-      this.form.querySelectorAll('.form-input, .form-textarea').forEach(field => {
-        if (!this.validateField(field)) allValid = false;
+      var allValid = true;
+      var self = this;
+      this.form.querySelectorAll('.form-input, .form-textarea').forEach(function(field) {
+        if (!self.validateField(field)) allValid = false;
       });
       return allValid;
     },
 
     submit() {
-      const btn = this.form.querySelector('button[type="submit"]');
-      const originalHTML = btn.innerHTML;
-      btn.innerHTML = '<span style="display:flex;align-items:center;gap:8px;"><span class="loader-gear-ring" style="width:16px;height:16px;border-width:1.5px;"></span> 发送中...</span>';
-      btn.disabled = true;
+      var self = this;
+      if (!this.btn) return;
 
-      setTimeout(() => {
-        this.form.innerHTML = `
-          <div class="form-success" style="text-align:center;padding:clamp(40px,8vw,80px) 20px;">
-            <div style="width:64px;height:64px;margin:0 auto var(--space-lg);position:relative;">
-              <svg viewBox="0 0 64 64" fill="none" style="width:100%;height:100%;">
-                <circle cx="32" cy="32" r="30" stroke="var(--gold)" stroke-width="2" fill="none" stroke-dasharray="188" stroke-dashoffset="188" style="animation:drawPath 0.6s var(--ease-out-expo) 0.3s forwards;"/>
-                <path d="M20 32 L28 40 L44 24" stroke="var(--gold)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="40" stroke-dashoffset="40" style="animation:drawPath 0.4s var(--ease-out-expo) 0.8s forwards;"/>
-              </svg>
-            </div>
-            <h3 style="color:var(--white);margin-bottom:var(--space-sm);">感谢您的留言</h3>
-            <p style="color:var(--silver);max-width:400px;margin:0 auto;">我们将在 24 小时内与您联系。如需紧急咨询，请致电我们的服务热线。</p>
-          </div>
-        `;
-      }, 1500);
+      // Check if endpoint is configured
+      var action = this.form.getAttribute('action');
+      if (!action || action.indexOf('YOUR_FORM_ID') > -1) {
+        this.showStatus('未配置', '请先配置邮件接收地址后再使用。');
+        return;
+      }
+
+      this.btn.innerHTML = '发送中...';
+      this.btn.disabled = true;
+
+      // Set _next redirect
+      var nextField = this.form.querySelector('input[name="_next"]');
+      if (nextField) nextField.value = window.location.href + '?sent=1';
+
+      var formData = new FormData(this.form);
+      fetch(action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } })
+        .then(function(response) {
+          if (response.ok) {
+            self.showSuccess();
+          } else {
+            return response.json().then(function(data) {
+              throw new Error(data.error || '提交失败');
+            });
+          }
+        })
+        .catch(function(error) {
+          self.showStatus('发送失败', '发送失败，请稍后重试或直接拨打电话 0510-85885656。');
+          self.btn.innerHTML = self.btnOriginalHTML;
+          self.btn.disabled = false;
+        });
+    },
+
+    showSuccess() {
+      this.form.innerHTML =
+        '<div style="text-align:center;padding:60px 20px;">' +
+          '<div style="width:64px;height:64px;margin:0 auto 24px;">' +
+            '<svg viewBox="0 0 64 64" fill="none" style="width:100%;height:100%;">' +
+              '<circle cx="32" cy="32" r="30" stroke="#C8A45C" stroke-width="2" fill="none"/>' +
+              '<path d="M20 32 L28 40 L44 24" stroke="#C8A45C" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' +
+            '</svg>' +
+          '</div>' +
+          '<h3 style="color:#fff;margin-bottom:8px;">感谢您的留言</h3>' +
+          '<p style="color:#8B9CB8;max-width:400px;margin:0 auto;">我们将在 24 小时内与您联系。<br>如需紧急咨询，请致电 <strong style="color:#C8A45C;">0510-85885656</strong></p>' +
+        '</div>';
+    },
+
+    showStatus(title, message) {
+      if (!this.statusEl) return;
+      this.statusEl.style.display = 'block';
+      this.statusEl.textContent = message;
+      this.statusEl.style.color = '#e74c3c';
     },
   },
 
   // ================================================================
-  // ---- Section Scroll Hints ----
+
   // ================================================================
-  SectionHints: {
+  // ---- Complaint Form Data Layer ----
+  // ================================================================
+  ComplaintForm: {
     init() {
       var self = this;
-      // Find all major <section> elements inside <main>
-      var sections = document.querySelectorAll('main > section, main > .h-carousel > .h-slide > section');
-      if (sections.length < 2) return;
-
-      sections.forEach(function(sec, idx) {
-        // Skip the last section
-        if (idx >= sections.length - 1) return;
-        // Only show hint on every other section (odd indices: 1,3,5...)
-        if (idx % 2 === 0) return;
-        // Skip if already has a hint
-        if (sec.querySelector('.section-hint')) return;
-
-        // Create hint element (appended at end of section, flows naturally)
-        var hint = document.createElement('div');
-        hint.className = 'section-hint';
-        var nextSection = sections[idx + 1];
-        var nextId = nextSection.id || '';
-        if (!nextId) {
-          nextId = 'section-' + (idx + 1);
-          nextSection.id = nextId;
-        }
-        hint.innerHTML = '<div class="section-hint-inner"><div class="section-hint-line"></div><div class="section-hint-dot"></div><div class="section-hint-text">继续向下探索</div></div>';
-        sec.appendChild(hint);
-
-        // Observe when hint enters viewport
-        var observer = new IntersectionObserver(function(entries) {
-          if (entries[0].isIntersecting) {
-            hint.classList.add('visible');
-          } else {
-            hint.classList.remove('visible');
-          }
-        }, { threshold: 0.5, rootMargin: '0px 0px -60px 0px' });
-
-        observer.observe(hint);
+      this.form = document.getElementById('complaint-form');
+      if (!this.form) return;
+      this.statusEl = this.form.querySelector('.form-status');
+      this.btn = this.form.querySelector('button[type="submit"]');
+      this.btnOriginalHTML = this.btn ? this.btn.innerHTML : '';
+      this.form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (self.validate()) { self.submit(); }
       });
+      var fields = this.form.querySelectorAll('.form-input, .form-textarea, .form-select');
+      fields.forEach(function(field) {
+        field.addEventListener('blur', function() { self.validateField(field); });
+        field.addEventListener('input', function() { self.clearError(field); });
+      });
+    },
+    validateField(field) {
+      var value = field.value.trim();
+      var group = field.closest('.form-group');
+      var valid = true;
+      if (field.required && !value) { valid = false; }
+      if (group) group.classList.toggle('has-error', !valid);
+      return valid;
+    },
+    clearError(field) {
+      var group = field.closest('.form-group');
+      if (group) group.classList.remove('has-error');
+    },
+    validate() {
+      var allValid = true;
+      var self = this;
+      this.form.querySelectorAll('.form-input, .form-textarea, .form-select').forEach(function(field) {
+        if (!self.validateField(field)) allValid = false;
+      });
+      return allValid;
+    },
+    submit() {
+      var self = this;
+      if (!this.btn) return;
+      var complaint = {
+        customer: this.form.querySelector('#customer').value.trim(),
+        contactPerson: this.form.querySelector('#contact-person').value.trim(),
+        phone: this.form.querySelector('#phone2').value.trim(),
+        orderRef: this.form.querySelector('#order-ref').value.trim(),
+        category: this.form.querySelector('#category').value,
+        urgency: this.form.querySelector('#urgency').value,
+        description: this.form.querySelector('#description').value.trim(),
+        timestamp: new Date().toISOString(),
+        id: Date.now().toString(36)
+      };
+      try {
+        var complaints = JSON.parse(localStorage.getItem('jy_complaints') || '[]');
+        complaints.unshift(complaint);
+        localStorage.setItem('jy_complaints', JSON.stringify(complaints));
+        self.showSuccess();
+      } catch(e) {
+        self.showStatus('保存失败，请检查浏览器存储空间。');
+      }
+    },
+    showSuccess() {
+      this.form.innerHTML = '<div style="text-align:center;padding:60px 20px;"><div style="width:64px;height:64px;margin:0 auto 24px;"><svg viewBox="0 0 64 64" fill="none" style="width:100%;height:100%;"><circle cx="32" cy="32" r="30" stroke="#C8A45C" stroke-width="2" fill="none"/><path d="M20 32 L28 40 L44 24" stroke="#C8A45C" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3 style="color:#fff;margin-bottom:8px;">感谢您的反馈</h3><p style="color:#8B9CB8;max-width:400px;margin:0 auto;">我们已收到您的诉求。<br>如需紧急咨询，请致电 <strong style="color:#C8A45C;">0510-85885656</strong></p><a href="index.html" class="btn btn-outline btn-lg" style="margin-top:24px;">返回首页</a></div>';
+    },
+    showStatus(message) {
+      if (this.statusEl) { this.statusEl.style.display = 'block'; this.statusEl.textContent = message; this.statusEl.style.color = '#e74c3c'; }
     },
   },
 
@@ -1043,31 +1120,82 @@ const JYD = {
       { file: 'quality.html', label: '联系我们' },
       { file: 'contact.html', label: '返回首页' },
     ],
-
     init() {
       var current = window.location.pathname.split('/').pop() || 'index.html';
       var next = null;
       for (var i = 0; i < this.pages.length; i++) {
-        if (this.pages[i].file === current) {
-          next = this.pages[i];
-          break;
-        }
+        if (this.pages[i].file === current) { next = this.pages[i]; break; }
       }
       if (!next) return;
-
       var target = this.pages[(this.pages.indexOf(next) + 1) % this.pages.length];
-      if (current === 'contact.html') {
-        target = this.pages[0]; // back to home
-      }
-
-      // Insert before footer
       var footer = document.querySelector('footer');
       if (!footer) return;
-
       var jump = document.createElement('div');
       jump.className = 'page-jump';
       jump.innerHTML = '<div class="page-jump-inner"><div class="page-jump-label">' + next.label + '</div><a class="page-jump-btn" href="' + target.file + '">→</a></div>';
       footer.parentNode.insertBefore(jump, footer);
+    },
+  },
+
+  // ---- Utilities ----  // ================================================================
+  // ---- Ambient Background Particles ----
+  // ================================================================
+  AmbientParticles: {
+    init() {
+      var canvas = document.createElement('canvas');
+      canvas.id = 'ambient-canvas';
+      canvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;';
+      document.body.insertBefore(canvas, document.body.firstChild);
+
+      var ctx = canvas.getContext('2d');
+      var W = window.innerWidth, H = window.innerHeight;
+      var particles = [];
+      var COUNT = 60;
+
+      function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+      resize();
+      window.addEventListener('resize', resize);
+
+      for (var i = 0; i < COUNT; i++) {
+        particles.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          size: 1.2 + Math.random() * 3.0,
+          speedY: 0.1 + Math.random() * 0.2,
+          speedX: (Math.random() - 0.5) * 0.06,
+          opacity: 0.35 + Math.random() * 0.40,
+          color: Math.random() > 0.25 ? '200,164,92' : '180,210,240'
+        });
+      }
+
+      function isInContentZone(px, py) {
+        var cx = W / 2, cy = H / 2;
+        var dx = Math.abs(px - cx) / (W * 0.28);
+        var dy = Math.abs(py - cy) / (H * 0.30);
+        return (dx * dx + dy * dy) < 1;
+      }
+
+      function draw() {
+        requestAnimationFrame(draw);
+        ctx.clearRect(0, 0, W, H);
+
+        for (var i = 0; i < particles.length; i++) {
+          var p = particles[i];
+          p.y -= p.speedY;
+          p.x += p.speedX;
+          if (p.y < -20) { p.y = H + 20; p.x = Math.random() * W; }
+          if (p.x < -20) p.x = W + 20;
+          if (p.x > W + 20) p.x = -20;
+
+          if (isInContentZone(p.x, p.y)) continue;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(' + p.color + ',' + p.opacity + ')';
+          ctx.fill();
+        }
+      }
+      draw();
     },
   },
 

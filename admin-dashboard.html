@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>客诉管理仪表盘 | 无锡精艺达科技有限公司</title>
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="无锡精艺达科技有限公司">
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+  <style>
+    #dashboard { padding: var(--section-pad) 0; background: linear-gradient(180deg,var(--navy-deep) 0%,var(--navy) 100%); min-height: 80vh; }
+    .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-2xl); flex-wrap: wrap; gap: var(--space-md); }
+    .dash-header h2 { margin: 0; }
+    .dash-actions { display: flex; gap: var(--space-sm); flex-wrap: wrap; }
+    .dash-btn { padding: 8px 18px; border-radius: 20px; background: rgba(200,164,92,0.08); border: 1px solid rgba(200,164,92,0.2); color: var(--gold); cursor: pointer; font-size: 0.82rem; font-family: var(--font-cn); transition: all 0.3s; }
+    .dash-btn:hover { background: rgba(200,164,92,0.18); border-color: var(--gold); }
+    .dash-btn.active { background: rgba(200,164,92,0.2); border-color: var(--gold); color: var(--white); }
+    .dash-btn.danger { border-color: rgba(231,76,60,0.3); color: #e74c3c; }
+    .dash-btn.danger:hover { background: rgba(231,76,60,0.1); }
+
+    /* Stats row */
+    .dash-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-md); margin-bottom: var(--space-2xl); }
+    .dash-stat { text-align: center; padding: var(--space-lg); background: rgba(13,30,56,0.5); backdrop-filter: blur(10px); border: 1px solid rgba(200,164,92,0.06); border-radius: var(--radius-lg); }
+    .dash-stat-num { font-family: var(--font-serif); font-size: 2rem; font-weight: 900; color: var(--gold); }
+    .dash-stat-label { font-size: 0.78rem; color: var(--silver); margin-top: 4px; }
+
+    /* Complaint cards */
+    .complaint-list { display: flex; flex-direction: column; gap: var(--space-md); }
+    .complaint-group { margin-bottom: var(--space-xl); }
+    .complaint-group-header { font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: var(--space-md); padding-bottom: var(--space-sm); border-bottom: 1px solid rgba(200,164,92,0.1); display: flex; justify-content: space-between; align-items: center; }
+    .complaint-group-count { font-size: 0.75rem; color: var(--silver); font-weight: 400; }
+    .complaint-card { background: rgba(13,30,56,0.5); backdrop-filter: blur(10px); border: 1px solid rgba(200,164,92,0.06); border-radius: var(--radius-lg); padding: var(--space-lg); transition: all 0.3s; }
+    .complaint-card:hover { border-color: rgba(200,164,92,0.15); }
+    .complaint-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-sm); flex-wrap: wrap; gap: var(--space-sm); }
+    .complaint-card-header h4 { font-size: 1rem; margin: 0; }
+    .complaint-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+    .complaint-badge { padding: 3px 10px; border-radius: 12px; font-size: 0.65rem; letter-spacing: 0.05em; font-family: var(--font-en); text-transform: uppercase; }
+    .badge-high { background: rgba(231,76,60,0.15); color: #e74c3c; border: 0.5px solid rgba(231,76,60,0.3); }
+    .badge-medium { background: rgba(243,156,18,0.15); color: #f39c12; border: 0.5px solid rgba(243,156,18,0.3); }
+    .badge-low { background: rgba(46,204,113,0.15); color: #2ecc71; border: 0.5px solid rgba(46,204,113,0.3); }
+    .badge-quality { background: rgba(200,164,92,0.12); color: var(--gold); border: 0.5px solid rgba(200,164,92,0.3); }
+    .complaint-meta { font-size: 0.75rem; color: var(--silver); margin-bottom: var(--space-sm); display: flex; gap: var(--space-lg); flex-wrap: wrap; }
+    .complaint-meta span { display: flex; align-items: center; gap: 4px; }
+    .complaint-desc { font-size: 0.85rem; color: var(--silver); line-height: 1.7; }
+    .complaint-desc strong { color: var(--white); }
+
+    .empty-state { text-align: center; padding: var(--space-4xl) var(--space-xl); }
+    .empty-state svg { opacity: 0.3; margin-bottom: var(--space-lg); }
+    .empty-state h3 { margin-bottom: var(--space-sm); }
+    .empty-state p { color: var(--silver); font-size: 0.9rem; }
+
+    @media (max-width: 1024px) { .dash-stats { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 768px) { .dash-stats { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="nav-logo"><img loading="lazy" src="assets/logo.svg" alt="精艺达" width="40" height="40"><div class="nav-logo-text"><span class="nav-logo-cn">精艺达</span><span class="nav-logo-en">Jingyida</span></div></a>
+      <ul class="nav-links">
+        <li><a href="index.html">首页</a></li><li><a href="about.html">关于我们</a></li><li><a href="equipment.html">装备展示</a></li><li><a href="admin-dashboard.html" class="active">客诉管理</a></li>
+      </ul>
+      <button class="menu-toggle" aria-label="菜单"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+  <div id="scroll-progress"></div>
+
+  <main id="main-content">
+    <section class="page-hero" style="min-height:35vh;">
+      <div class="page-hero-bg-grid"></div>
+      <div class="page-hero-content reveal">
+        <div class="accent-line"></div>
+        <h1>客诉管理仪表盘</h1>
+        <p>按客户分类查看所有客诉反馈，实时追踪处理进度</p>
+      </div>
+    </section>
+
+    <section id="dashboard">
+      <div class="container">
+        <div class="dash-header">
+          <h2>客诉记录</h2>
+          <div class="dash-actions">
+            <button class="dash-btn active" onclick="filterComplaints('all')">全部</button>
+            <button class="dash-btn" onclick="filterComplaints('high')">非常紧急</button>
+            <button class="dash-btn" onclick="filterComplaints('medium')">紧急</button>
+            <button class="dash-btn" onclick="filterComplaints('low')">一般</button>
+            <button class="dash-btn danger" onclick="clearAll()">清空数据</button>
+            <a href="admin.html" class="dash-btn" style="text-decoration:none;" onclick="sessionStorage.removeItem('jy_admin_auth')">退出登录</a>
+          </div>
+        </div>
+
+        <div class="dash-stats" id="dash-stats">
+          <div class="dash-stat"><div class="dash-stat-num" id="stat-total">0</div><div class="dash-stat-label">总客诉数</div></div>
+          <div class="dash-stat"><div class="dash-stat-num" id="stat-high">0</div><div class="dash-stat-label">非常紧急</div></div>
+          <div class="dash-stat"><div class="dash-stat-num" id="stat-customers">0</div><div class="dash-stat-label">涉及客户数</div></div>
+          <div class="dash-stat"><div class="dash-stat-num" id="stat-today">0</div><div class="dash-stat-label">今日新增</div></div>
+        </div>
+
+        <div id="complaint-container">
+          <div class="empty-state" id="empty-state">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="30" stroke="#C8A45C" stroke-width="1"/><path d="M22 22h20v20H22z" stroke="#C8A45C" stroke-width="1"/><line x1="28" y1="28" x2="36" y2="36" stroke="#C8A45C" stroke-width="0.8"/><line x1="36" y1="28" x2="28" y2="36" stroke="#C8A45C" stroke-width="0.8"/></svg>
+            <h3>暂无客诉记录</h3>
+            <p>客户通过客诉反馈页面提交的内容将显示在这里</p>
+          </div>
+          <div class="complaint-list" id="complaint-list" style="display:none;"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Auth check
+    if (!sessionStorage.getItem('jy_admin_auth')) {
+      window.location.href = 'admin.html';
+    }
+
+    // Complaint data store
+    var STORAGE_KEY = 'jy_complaints';
+
+    function getComplaints() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      } catch(e) { return []; }
+    }
+
+    function saveComplaints(data) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    }
+
+    // Category labels
+    var catLabels = {
+      quality: '产品质量', delivery: '交付延迟', spec: '规格不符',
+      damage: '运输损坏', service: '服务建议', other: '其他'
+    };
+
+    var urgencyLabels = { high: '非常紧急', medium: '紧急', low: '一般' };
+    var urgencyClass = { high: 'badge-high', medium: 'badge-medium', low: 'badge-low' };
+
+    var currentFilter = 'all';
+
+    function renderComplaints() {
+      var complaints = getComplaints();
+      var container = document.getElementById('complaint-list');
+      var empty = document.getElementById('empty-state');
+
+      // Filter
+      var filtered = currentFilter === 'all' ? complaints : complaints.filter(function(c) { return c.urgency === currentFilter; });
+
+      // Update stats
+      var today = new Date().toDateString();
+      document.getElementById('stat-total').textContent = complaints.length;
+      document.getElementById('stat-high').textContent = complaints.filter(function(c){return c.urgency==='high'}).length;
+      var customers = {};
+      complaints.forEach(function(c){ customers[c.customer] = true; });
+      document.getElementById('stat-customers').textContent = Object.keys(customers).length;
+      document.getElementById('stat-today').textContent = complaints.filter(function(c){return new Date(c.timestamp).toDateString()===today}).length;
+
+      if (filtered.length === 0) {
+        container.style.display = 'none';
+        empty.style.display = 'block';
+        return;
+      }
+
+      empty.style.display = 'none';
+      container.style.display = 'flex';
+
+      // Group by customer
+      var groups = {};
+      filtered.forEach(function(c) {
+        if (!groups[c.customer]) groups[c.customer] = [];
+        groups[c.customer].push(c);
+      });
+
+      var html = '';
+      Object.keys(groups).sort().forEach(function(customer) {
+        html += '<div class="complaint-group">';
+        html += '<div class="complaint-group-header">' + customer + '<span class="complaint-group-count">' + groups[customer].length + ' 条记录</span></div>';
+        groups[customer].forEach(function(c) {
+          var ts = new Date(c.timestamp);
+          var timeStr = ts.getFullYear()+'-'+(ts.getMonth()+1)+'-'+ts.getDate()+' '+ts.getHours()+':'+String(ts.getMinutes()).padStart(2,'0');
+          html += '<div class="complaint-card">';
+          html += '<div class="complaint-card-header"><h4>' + (c.contactPerson || '匿名') + '</h4>';
+          html += '<div class="complaint-badges">';
+          html += '<span class="complaint-badge ' + (urgencyClass[c.urgency]||'') + '">' + (urgencyLabels[c.urgency]||c.urgency) + '</span>';
+          html += '<span class="complaint-badge badge-quality">' + (catLabels[c.category]||c.category) + '</span>';
+          html += '</div></div>';
+          html += '<div class="complaint-meta"><span>📞 ' + (c.phone||'未填写') + '</span><span>📦 ' + (c.orderRef||'无') + '</span><span>🕐 ' + timeStr + '</span></div>';
+          html += '<div class="complaint-desc"><strong>问题描述：</strong>' + (c.description||'') + '</div>';
+          html += '</div>';
+        });
+        html += '</div>';
+      });
+      container.innerHTML = html;
+    }
+
+    function filterComplaints(filter) {
+      currentFilter = filter;
+      document.querySelectorAll('.dash-btn').forEach(function(b) { b.classList.remove('active'); });
+      event.target.classList.add('active');
+      renderComplaints();
+    }
+
+    function clearAll() {
+      if (confirm('确定要清空所有客诉数据吗？此操作不可撤销。')) {
+        saveComplaints([]);
+        renderComplaints();
+      }
+    }
+
+    // Initial render
+    renderComplaints();
+  </script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

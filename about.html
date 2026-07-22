@@ -18,16 +18,16 @@
     .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 8vw, 80px); align-items: center; max-width: 1000px; margin: 0 auto; }
     .story-text p { line-height: 2; font-size: 1.05rem; }
     .story-stats { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
-    .story-stat { text-align: center; padding: var(--space-xl); background: var(--navy-mid); border: 1px solid rgba(200,164,92,0.06); border-radius: var(--radius-md); transition: all 0.4s; }
-    .story-stat:hover { border-color: rgba(200,164,92,0.2); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .story-stat { text-align: center; padding: var(--space-xl); background: var(--navy-mid); border: 1px solid rgba(200,164,92,0.25); border-radius: var(--radius-md); transition: all 0.4s; }
+    .story-stat:hover { border-color: rgba(200,164,92,0.25); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
     .story-stat-num { font-family: var(--font-en); font-size: 1.8rem; font-weight: 700; color: var(--gold); }
     .story-stat-label { font-size: 0.8rem; color: var(--silver); margin-top: 4px; }
 
     /* Timeline */
     #timeline-section { padding: var(--section-pad) 0; background: var(--navy-deep); position: relative; }
-    #timeline-section::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 600px; height: 1px; background: linear-gradient(90deg, transparent, rgba(200,164,92,0.2), transparent); }
+    #timeline-section::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 600px; height: 1px; background: linear-gradient(90deg, transparent, rgba(200,164,92,0.25), transparent); }
     .timeline-wrap { position: relative; max-width: 800px; margin: 0 auto; padding: var(--space-2xl) 0; }
-    .timeline-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(200,164,92,0.15); transform: translateX(-50%); }
+    .timeline-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(200,164,92,0.25); transform: translateX(-50%); }
     .timeline-line-fill { position: absolute; left: 50%; top: 0; width: 1px; background: linear-gradient(180deg, var(--gold-dark), var(--gold), var(--gold-light)); transform: translateX(-50%) scaleY(0); transform-origin: top; transition: transform 0.12s linear; }
     .timeline-item { position: relative; display: grid; grid-template-columns: 1fr 60px 1fr; align-items: start; margin-bottom: var(--space-3xl); opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
     .timeline-item.visible { opacity: 1; transform: translateY(0); }
@@ -35,7 +35,7 @@
     .timeline-item:nth-child(odd) .timeline-content { text-align: right; }
     .timeline-dot-col { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
     .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--navy-deep); border: 2px solid var(--gold); transition: all 0.4s; }
-    .timeline-item.visible .timeline-dot { background: var(--gold); box-shadow: 0 0 16px rgba(200,164,92,0.4); }
+    .timeline-item.visible .timeline-dot { background: var(--gold); box-shadow: 0 0 16px rgba(200,164,92,0.25); }
     .timeline-year { font-family: var(--font-en); font-size: 1.5rem; font-weight: 700; color: var(--gold); margin-bottom: 4px; }
     .timeline-title { font-size: 1.05rem; font-weight: 600; color: var(--white); margin-bottom: 4px; }
     .timeline-desc { font-size: 0.85rem; color: var(--silver); line-height: 1.7; }
@@ -43,8 +43,8 @@
     /* Philosophy */
     #philosophy { padding: var(--section-pad) 0; background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%); }
     .phil-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xl); }
-    .phil-card { text-align: center; padding: var(--space-2xl); background: var(--navy-mid); border: 1px solid rgba(200,164,92,0.06); border-radius: var(--radius-md); transition: all 0.4s; }
-    .phil-card:hover { transform: translateY(-6px); border-color: rgba(200,164,92,0.2); box-shadow: var(--shadow-lg); }
+    .phil-card { text-align: center; padding: var(--space-2xl); background: var(--navy-mid); border: 1px solid rgba(200,164,92,0.25); border-radius: var(--radius-md); transition: all 0.4s; }
+    .phil-card:hover { transform: translateY(-6px); border-color: rgba(200,164,92,0.25); box-shadow: var(--shadow-lg); }
     .phil-char { font-size: 3.5rem; font-weight: 900; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; margin-bottom: var(--space-md); }
     .phil-card h3 { margin-bottom: var(--space-sm); }
     .phil-card p { font-size: 0.9rem; line-height: 1.85; }
@@ -67,7 +67,8 @@
     <nav>
       <a href="index.html" class="nav-logo"><img loading="lazy" src="assets/logo.svg" alt="精艺达" width="40" height="40"><div class="nav-logo-text"><span class="nav-logo-cn">精艺达</span><span class="nav-logo-en">Jingyida</span></div></a>
       <ul class="nav-links">
-        <li><a href="index.html">首页</a></li><li><a href="about.html">关于我们</a></li><li><a href="equipment.html">装备展示</a></li><li><a href="products.html">产品中心</a></li><li><a href="quality.html">成果展示</a></li><li><a href="contact.html">联系我们</a></li>
+        <li><a href="index.html">首页</a></li><li><a href="about.html">关于我们</a></li><li><a href="equipment.html">装备展示</a></li><li><a href="products.html">产品中心</a></li><li><a href="quality.html">成果展示</a></li><li><a href="service.html">客诉反馈</a></li>
+        <li><a href="contact.html">联系我们</a></li>
       </ul>
       <button class="menu-toggle" aria-label="菜单"><span></span><span></span><span></span></button>
     </nav>
@@ -185,5 +186,7 @@
   <div id="back-to-top">↑</div>
 
   <script src="js/main.js" defer></script>
+
+
 </body>
 </html>
