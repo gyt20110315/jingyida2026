@@ -29,8 +29,8 @@
 
     /* Form */
     .contact-form-wrap {
-      background: var(--navy-mid);
-      border: 1px solid rgba(200, 164, 92, 0.08);
+      background:#F8F9FB;
+      border: 1px solid rgba(0,56,168, 0.08);
       border-radius: var(--radius-lg);
       padding: var(--space-2xl);
     }
@@ -42,7 +42,7 @@
     .contact-form-wrap > p {
       font-size: 0.9rem;
       margin-bottom: var(--space-2xl);
-      color: var(--silver);
+      color:#6B7280;
     }
 
     .form-row {
@@ -59,8 +59,8 @@
     }
 
     .contact-info-card {
-      background: var(--navy-mid);
-      border: 1px solid rgba(200, 164, 92, 0.08);
+      background:#F8F9FB;
+      border: 1px solid rgba(0,56,168, 0.08);
       border-radius: var(--radius-md);
       padding: var(--space-xl);
       display: flex;
@@ -69,7 +69,7 @@
     }
 
     .contact-info-card:hover {
-      border-color: rgba(200, 164, 92, 0.2);
+      border-color: rgba(0,56,168, 0.2);
       box-shadow: var(--shadow-md);
     }
 
@@ -77,12 +77,12 @@
       width: 44px;
       height: 44px;
       flex-shrink: 0;
-      border: 1px solid rgba(200, 164, 92, 0.2);
+      border: 1px solid rgba(0,56,168, 0.2);
       border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--gold);
+      color:#0038A8;
     }
 
     .contact-info-card h4 {
@@ -92,13 +92,13 @@
 
     .contact-info-card p {
       font-size: 0.85rem;
-      color: var(--silver);
+      color:#6B7280;
       line-height: 1.7;
       margin: 0;
     }
 
     .contact-info-card a {
-      color: var(--gold);
+      color:#0038A8;
       font-family: var(--font-en);
       font-size: 0.85rem;
     }
@@ -106,15 +106,15 @@
     /* Map placeholder */
     .map-placeholder {
       aspect-ratio: 16/9;
-      background: var(--navy-mid);
-      border: 1px solid rgba(200, 164, 92, 0.08);
+      background:#F8F9FB;
+      border: 1px solid rgba(0,56,168, 0.08);
       border-radius: var(--radius-md);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
       gap: var(--space-md);
-      color: var(--silver);
+      color:#6B7280;
       overflow: hidden;
       position: relative;
     }
@@ -124,8 +124,8 @@
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(rgba(200,164,92,0.25) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(200,164,92,0.25) 1px, transparent 1px);
+        linear-gradient(rgba(0,56,168,0.25) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,56,168,0.25) 1px, transparent 1px);
       background-size: 40px 40px;
       mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, black 30%, transparent 70%);
       -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, black 30%, transparent 70%);
@@ -142,13 +142,13 @@
       position: relative;
       z-index: 1;
       font-size: 0.85rem;
-      color: var(--silver);
+      color:#6B7280;
     }
 
     /* CTA Section */
     #contact-cta {
       padding: var(--section-4xl) 0;
-      background: var(--navy-deep);
+      background:#F5F6F8;
       text-align: center;
       position: relative;
     }
@@ -161,7 +161,7 @@
       transform: translateX(-50%);
       width: 600px;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(200,164,92,0.25), transparent);
+      background: linear-gradient(90deg, transparent, rgba(0,56,168,0.25), transparent);
     }
 
     @media (max-width: 768px) {
@@ -173,21 +173,19 @@
 <body>
   <a href="#main-content" class="skip-link">跳到主要内容</a>
 
-  <div id="loader">
-    <div class="loader-container">
-      <div class="loader-glass">
-        <svg class="loader-ring" viewBox="0 0 140 140">
-          <defs>
-            <linearGradient id="loaderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#4da8f0"/>
-              <stop offset="50%" stop-color="#2d6fbf"/>
-              <stop offset="100%" stop-color="#1a4d8f"/>
-            </linearGradient>
-          </defs>
-          <circle class="loader-ring-bg" cx="70" cy="70" r="65"/>
-          <circle class="loader-ring-fill" cx="70" cy="70" r="65"/>
-        </svg>
-        <div class="loader-percent">0<sup>%</sup></div>
+    <div id="loader">
+    <div class="loader-core">
+      <div class="loader-ring"></div>
+      <div class="loader-ring"></div>
+      <div class="loader-ring"></div>
+      <div class="loader-ring"></div>
+      <div class="loader-ring"></div>
+      <div class="loader-spoke"></div><div class="loader-spoke"></div><div class="loader-spoke"></div><div class="loader-spoke"></div>
+      <div class="loader-spoke"></div><div class="loader-spoke"></div><div class="loader-spoke"></div><div class="loader-spoke"></div>
+      <div class="loader-hub"></div>
+      <div class="loader-slogan">以精密之名，铸就卓越品质<span class="en">PRECISION &amp; EXCELLENCE</span></div>
+    </div>
+  </div>
       </div>
       <div class="loader-label">加载中</div>
       <div class="loader-brand">JINGYIDA TECHNOLOGY</div>
@@ -328,8 +326,8 @@
       <div class="container">
         <div class="reveal">
           <span class="section-label centered">合作共赢</span>
-          <h2 style="margin-bottom:var(--space-md);">从<span style="color:var(--gold);">精密</span>到<span style="color:var(--gold);">智造</span>，不止于加工</h2>
-          <p style="color:var(--silver);max-width:500px;margin:0 auto var(--space-2xl);">
+          <h2 style="margin-bottom:var(--space-md);">从<span style="color:#0038A8;">精密</span>到<span style="color:#0038A8;">智造</span>，不止于加工</h2>
+          <p style="color:#6B7280;max-width:500px;margin:0 auto var(--space-2xl);">
             无论您需要小批量定制还是大批量稳定交付，精艺达团队随时准备为您提供专业解决方案。
           </p>
           <a href="mailto:info@jingyida.com" class="btn btn-outline btn-lg btn-arrow">直接发送邮件</a>

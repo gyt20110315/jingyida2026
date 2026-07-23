@@ -95,13 +95,13 @@
 }
 
 @keyframes borderGlow {
-  0%, 100% { border-color: rgba(200, 164, 92, 0.3); }
-  50% { border-color: rgba(200, 164, 92, 0.7); }
+  0%, 100% { border-color: rgba(0,56,168, 0.3); }
+  50% { border-color: rgba(0,56,168, 0.7); }
 }
 
 @keyframes glowPulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(200, 164, 92, 0.1); }
-  50% { box-shadow: 0 0 40px rgba(200, 164, 92, 0.25); }
+  0%, 100% { box-shadow: 0 0 20px rgba(0,56,168, 0.1); }
+  50% { box-shadow: 0 0 40px rgba(0,56,168, 0.25); }
 }
 
 /* Rotations */
@@ -355,8 +355,8 @@ body.loaded .hero-reveal-tagline {
 }
 
 @keyframes subtleGlow {
-  0%, 100% { box-shadow: 0 0 20px rgba(200, 164, 92, 0.04); }
-  50% { box-shadow: 0 0 40px rgba(200, 164, 92, 0.1); }
+  0%, 100% { box-shadow: 0 0 20px rgba(0,56,168, 0.04); }
+  50% { box-shadow: 0 0 40px rgba(0,56,168, 0.1); }
 }
 
 @keyframes gradientShift {
@@ -395,11 +395,11 @@ body.loaded .hero-reveal-tagline {
   padding: 1px;
   background: linear-gradient(90deg,
     transparent 0%,
-    rgba(200,164,92,0.1) 20%,
-    rgba(200,164,92,0.4) 40%,
-    rgba(212,184,122,0.6) 50%,
-    rgba(200,164,92,0.4) 60%,
-    rgba(200,164,92,0.1) 80%,
+    rgba(0,56,168,0.1) 20%,
+    rgba(0,56,168,0.4) 40%,
+    rgba(30,95,187,0.6) 50%,
+    rgba(0,56,168,0.4) 60%,
+    rgba(0,56,168,0.1) 80%,
     transparent 100%
   );
   background-size: 300% 100%;
@@ -438,7 +438,7 @@ body.loaded .hero-reveal-tagline {
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at var(--sx, 50%) var(--sy, 50%),
-    rgba(200,164,92,0.12) 0%,
+    rgba(0,56,168,0.12) 0%,
     transparent 60%);
   opacity: 0;
   transition: opacity 0.3s;

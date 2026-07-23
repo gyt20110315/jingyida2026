@@ -55,66 +55,33 @@ const JYD = {
   },
 
   // ================================================================
-  // ---- Loader (Simple & Reliable) ----
+  // ---- Loader (Precision Core) ----
   // ================================================================
   Loader: {
     init() {
       var loader = document.getElementById('loader');
       if (!loader) return;
 
-      var ringFill = loader.querySelector('.loader-ring-fill');
-      var percentEl = loader.querySelector('.loader-percent');
-      var circumference = 408;
-      var progress = 0;
-
-      if (ringFill) {
-        ringFill.style.strokeDasharray = circumference;
-        ringFill.style.strokeDashoffset = circumference;
+      function hide() {
+        loader.classList.add('hidden');
+        document.body.classList.add('loaded');
       }
 
-      function setProgress(val) {
-        progress = val;
-        if (ringFill) {
-          ringFill.style.strokeDashoffset = circumference - (val/100)*circumference;
-        }
-        if (percentEl) {
-          percentEl.innerHTML = val + '<sup>%</sup>';
-        }
-      }
-
-      // Animate progress with simple timeouts
-      function step(val, delay) {
-        setTimeout(function() { setProgress(val); }, delay);
-      }
-      step(15, 150);
-      step(35, 400);
-      step(55, 700);
-      step(72, 1100);
-      step(85, 1600);
-      step(94, 2200);
-      step(99, 2800);
-
-      function hideLoader() {
-        setProgress(100);
-        setTimeout(function() {
-          loader.classList.add('hidden');
-          document.body.classList.add('loaded');
-        }, 400);
-      }
-
-      // Hide on window.load
+      // Auto-dismiss after animation (~5.5s total)
       if (document.readyState === 'complete') {
-        hideLoader();
+        setTimeout(hide, 5500);
       } else {
-        window.addEventListener('load', hideLoader);
+        window.addEventListener('load', function() {
+          setTimeout(hide, 5500);
+        });
       }
 
       // Hard fallback
       setTimeout(function() {
         if (loader && !loader.classList.contains('hidden')) {
-          hideLoader();
+          hide();
         }
-      }, 4000);
+      }, 7000);
     },
   },
 
@@ -1164,7 +1131,7 @@ const JYD = {
           speedY: 0.1 + Math.random() * 0.2,
           speedX: (Math.random() - 0.5) * 0.06,
           opacity: 0.35 + Math.random() * 0.40,
-          color: Math.random() > 0.25 ? '200,164,92' : '180,210,240'
+          color: Math.random() > 0.25 ? '0,56,168' : '100,160,230'
         });
       }
 

@@ -46,7 +46,7 @@
     .hero-ambient-orb.orb-2 {
       width: 400px; height: 400px;
       bottom: -10%; right: -8%;
-      background: radial-gradient(circle, rgba(200, 164, 92, 0.25) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(0,56,168, 0.25) 0%, transparent 70%);
       animation: ambientFloat 22s ease-in-out infinite reverse;
     }
     .hero-ambient-orb.orb-3 {
@@ -72,8 +72,8 @@
       pointer-events: none;
       opacity: 0.05;
       background-image:
-        linear-gradient(rgba(200,164,92,0.3) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(200,164,92,0.3) 1px, transparent 1px);
+        linear-gradient(rgba(0,56,168,0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,56,168,0.3) 1px, transparent 1px);
       background-size: 80px 80px;
       mask-image: radial-gradient(ellipse 60% 50% at 50% 50%, black 40%, transparent 70%);
       -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 50%, black 40%, transparent 70%);
@@ -86,7 +86,7 @@
       transform: translateX(-50%);
       width: 800px;
       height: 500px;
-      background: radial-gradient(ellipse, rgba(200,164,92,0.08) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(0,56,168,0.08) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -97,7 +97,7 @@
       transform: translateX(-50%);
       width: 600px;
       height: 200px;
-      background: radial-gradient(ellipse, rgba(10,22,40,0.9) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(255,255,255,0.9) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -112,6 +112,12 @@
 
     .hero-content .accent-line {
       width: 80px;
+      transform-origin: left;
+      animation: heroLineIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.3s both;
+    }
+    @keyframes heroLineIn {
+      from { transform: scaleX(0); opacity: 0; }
+      to { transform: scaleX(1); opacity: 1; }
     }
 
     .hero-content h1 {
@@ -121,11 +127,17 @@
       letter-spacing: -0.03em;
       margin-bottom: var(--space-lg);
       max-width: 800px;
-      text-shadow: 0 0 120px rgba(200, 164, 92, 0.06);
+      animation: heroSlideIn 1s cubic-bezier(0.16,1,0.3,1) 0.5s both;
+    }
+    @keyframes heroSlideIn {
+      0% { transform: translateX(-60px) skewX(-8deg) scaleX(1.08); opacity: 0; filter: blur(4px); }
+      60% { transform: translateX(4px) skewX(1deg) scaleX(0.98); opacity: 1; filter: blur(0); }
+      80% { transform: translateX(-2px) skewX(-0.5deg); }
+      100% { transform: translateX(0) skewX(0) scaleX(1); opacity: 1; filter: blur(0); }
     }
 
     .hero-content h1 .gold {
-      background: linear-gradient(135deg, #E0C88A 0%, #C8A45C 40%, #A8853A 100%);
+      background: linear-gradient(135deg, #1E5FBB 0%, #0038A8 40%, #002060 100%);
       background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -137,10 +149,11 @@
       font-family: var(--font-cn);
       font-size: clamp(1rem, 1.8vw, 1.25rem);
       font-weight: 400;
-      color: var(--silver);
+      color: #374151;
       margin-bottom: var(--space-sm);
       max-width: 560px;
       line-height: 1.8;
+      animation: heroSlideIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.7s both;
     }
 
     .hero-tagline {
@@ -148,15 +161,17 @@
       font-size: 0.8rem;
       font-weight: 500;
       letter-spacing: 0.15em;
-      color: var(--gold);
+      color: #0038A8;
       text-transform: uppercase;
       margin-bottom: var(--space-2xl);
+      animation: heroSlideIn 0.8s cubic-bezier(0.16,1,0.3,1) 0.85s both;
     }
 
     .hero-actions {
       display: flex;
       gap: var(--space-md);
       flex-wrap: wrap;
+      animation: heroSlideIn 0.8s cubic-bezier(0.16,1,0.3,1) 1.0s both;
     }
 
     .hero-scroll {
@@ -228,13 +243,13 @@
       font-family: var(--font-en);
       font-size: 1.8rem;
       font-weight: 700;
-      color: var(--gold);
+      color:#0038A8;
       margin-bottom: var(--space-2xs);
     }
 
     .intro-highlight-label {
       font-size: 0.8rem;
-      color: var(--silver);
+      color:#6B7280;
       letter-spacing: 0.03em;
     }
 
@@ -242,7 +257,7 @@
     #pillars {
       position: relative;
       padding: var(--section-pad) 0;
-      background: var(--navy-deep);
+      background:#F5F6F8;
     }
 
     #pillars::before {
@@ -253,7 +268,7 @@
       transform: translateX(-50%);
       width: 600px;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(200,164,92,0.2), transparent);
+      background: linear-gradient(90deg, transparent, rgba(0,56,168,0.2), transparent);
     }
 
     .pillars-grid {
@@ -275,20 +290,20 @@
       left: 10%;
       right: 10%;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(200,164,92,0.2), transparent);
+      background: linear-gradient(90deg, transparent, rgba(0,56,168,0.2), transparent);
       transition: all 0.4s;
     }
 
     .pillar-card:hover::after {
       left: 0; right: 0;
-      background: linear-gradient(90deg, transparent, rgba(200,164,92,0.4), transparent);
+      background: linear-gradient(90deg, transparent, rgba(0,56,168,0.4), transparent);
     }
 
     .pillar-icon {
       width: 44px;
       height: 44px;
       margin-bottom: var(--space-md);
-      color: var(--gold);
+      color:#0038A8;
       opacity: 0.85;
       transition: all 0.4s;
     }
@@ -305,7 +320,7 @@
     }
 
     .pillar-card p {
-      color: var(--silver);
+      color:#6B7280;
       font-size: 0.88rem;
       line-height: 1.85;
       max-width: 320px;
@@ -322,12 +337,12 @@
       font-family: var(--font-en);
       font-size: 1.4rem;
       font-weight: 700;
-      color: var(--gold);
+      color:#0038A8;
     }
 
     .pillar-stat-unit {
       font-size: 0.8rem;
-      color: var(--silver);
+      color:#6B7280;
     }
 
     /* ===== Equipment Preview ===== */
@@ -345,8 +360,8 @@
     }
 
     .equip-card {
-      background: var(--navy-mid);
-      border: 1px solid rgba(200, 164, 92, 0.08);
+      background:#F8F9FB;
+      border: 1px solid rgba(0,56,168, 0.08);
       border-radius: var(--radius-md);
       overflow: hidden;
       cursor: pointer;
@@ -356,13 +371,13 @@
 
     .equip-card:hover {
       transform: translateY(-8px);
-      box-shadow: var(--shadow-lg), 0 8px 40px rgba(200, 164, 92, 0.15);
-      border-color: rgba(200, 164, 92, 0.2);
+      box-shadow: var(--shadow-lg), 0 8px 40px rgba(0,56,168, 0.15);
+      border-color: rgba(0,56,168, 0.2);
     }
 
     .equip-card-image {
       aspect-ratio: 4/3;
-      background: var(--navy-light);
+      background:#EEF0F4;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -391,7 +406,7 @@
       font-family: var(--font-en);
       font-size: 0.7rem;
       letter-spacing: 0.1em;
-      color: var(--gold);
+      color:#0038A8;
       text-transform: uppercase;
       margin-bottom: var(--space-xs);
     }
@@ -405,7 +420,7 @@
       display: flex;
       gap: var(--space-lg);
       font-size: 0.8rem;
-      color: var(--silver);
+      color:#6B7280;
     }
 
     .equip-card-body .machine-specs span {
@@ -440,7 +455,7 @@
     #stats {
       position: relative;
       padding: var(--space-4xl) 0;
-      background: var(--navy-deep);
+      background:#F5F6F8;
     }
 
     .stats-grid {
@@ -462,7 +477,7 @@
       top: 20%;
       height: 60%;
       width: 1px;
-      background: linear-gradient(180deg, transparent, rgba(200,164,92,0.15), transparent);
+      background: linear-gradient(180deg, transparent, rgba(0,56,168,0.15), transparent);
     }
 
     .stat-item:last-child::after {
@@ -475,28 +490,28 @@
       font-size: clamp(2.5rem, 5vw, 3.5rem);
       font-weight: 700;
       letter-spacing: -0.02em;
-      color: var(--white);
+      color:#111827;
       margin-bottom: var(--space-xs);
       transition: color 0.6s var(--ease-smooth);
     }
 
     .stat-item:hover .stat-number {
-      color: var(--gold);
+      color:#0038A8;
     }
 
     .stat-number .suffix {
-      color: var(--gold);
+      color:#0038A8;
       margin-left: 2px;
     }
 
     .stat-label {
       font-size: 0.9rem;
-      color: var(--silver);
+      color:#6B7280;
     }
 
     .stat-desc {
       font-size: 0.75rem;
-      color: var(--silver);
+      color:#6B7280;
       opacity: 0.6;
       margin-top: var(--space-2xs);
     }
@@ -518,7 +533,7 @@
       transform: translate(-50%, -50%);
       width: 700px;
       height: 400px;
-      background: radial-gradient(ellipse, rgba(200,164,92,0.1) 0%, transparent 70%);
+      background: radial-gradient(ellipse, rgba(0,56,168,0.1) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -534,7 +549,7 @@
 
     .cta-content p {
       font-size: 1.1rem;
-      color: var(--silver);
+      color:#6B7280;
       max-width: 500px;
       margin: 0 auto var(--space-2xl);
     }
@@ -620,21 +635,19 @@
   <a href="#main-content" class="skip-link">跳到主要内容</a>
 
   <!-- Loader -->
-  <div id="loader">
-    <div class="loader-container">
-      <div class="loader-glass">
-        <svg class="loader-ring" viewBox="0 0 140 140">
-          <defs>
-            <linearGradient id="loaderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#4da8f0"/>
-              <stop offset="50%" stop-color="#2d6fbf"/>
-              <stop offset="100%" stop-color="#1a4d8f"/>
-            </linearGradient>
-          </defs>
-          <circle class="loader-ring-bg" cx="70" cy="70" r="65"/>
-          <circle class="loader-ring-fill" cx="70" cy="70" r="65"/>
-        </svg>
-        <div class="loader-percent">0<sup>%</sup></div>
+    <div id="loader">
+    <div class="loader-core">
+      <div class="loader-ring"></div>
+      <div class="loader-ring"></div>
+      <div class="loader-ring"></div>
+      <div class="loader-ring"></div>
+      <div class="loader-ring"></div>
+      <div class="loader-spoke"></div><div class="loader-spoke"></div><div class="loader-spoke"></div><div class="loader-spoke"></div>
+      <div class="loader-spoke"></div><div class="loader-spoke"></div><div class="loader-spoke"></div><div class="loader-spoke"></div>
+      <div class="loader-hub"></div>
+      <div class="loader-slogan">以精密之名，铸就卓越品质<span class="en">PRECISION &amp; EXCELLENCE</span></div>
+    </div>
+  </div>
       </div>
       <div class="loader-label">加载中</div>
       <div class="loader-brand">JINGYIDA TECHNOLOGY</div>
@@ -712,10 +725,10 @@
             <span class="section-label">关于精艺达</span>
             <h2>始于 2009，以精密制造为核心</h2>
             <p style="margin-top:var(--space-lg);font-size:1.05rem;line-height:2;">
-              无锡精艺达科技有限公司是一家以<span style="color:var(--white);font-weight:500;">“精密制造”</span>为核心，聚焦航空航天、半导体零部件及高端装备领域的高新技术企业。从最初的单一加工车间起步，经过十余年的深耕发展，我们已成长为拥有完整研发、生产、检测体系的行业标杆企业。
+              无锡精艺达科技有限公司是一家以<span style="color:#111827;font-weight:500;">“精密制造”</span>为核心，聚焦航空航天、半导体零部件及高端装备领域的高新技术企业。从最初的单一加工车间起步，经过十余年的深耕发展，我们已成长为拥有完整研发、生产、检测体系的行业标杆企业。
             </p>
-            <p style="color:var(--silver);line-height:2;">
-              累计服务超过<span style="color:var(--gold);font-weight:600;">200家</span>国内外知名客户，涵盖航空航天龙头企业、半导体设备核心供应商及高端汽车零部件制造商。
+            <p style="color:#6B7280;line-height:2;">
+              累计服务超过<span style="color:#0038A8;font-weight:600;">200家</span>国内外知名客户，涵盖航空航天龙头企业、半导体设备核心供应商及高端汽车零部件制造商。
             </p>
             <div class="intro-highlights">
               <div class="intro-highlight">
@@ -744,7 +757,7 @@
       <div class="container">
         <div class="section-header text-center reveal">
           <span class="section-label centered">核心价值</span>
-          <h2>以<span style="color:var(--gold);">人</span>为根本，以<span style="color:var(--gold);">质</span>为生命</h2>
+          <h2>以<span style="color:#0038A8;">人</span>为根本，以<span style="color:#0038A8;">质</span>为生命</h2>
           <p>三维价值驱动，构建可持续发展的精密制造标杆企业</p>
         </div>
 
@@ -939,7 +952,7 @@
       <div class="container">
         <div class="cta-content reveal">
           <span class="section-label centered">未来展望</span>
-          <h2>从<span style="color:var(--gold);">精密</span>到<span style="color:var(--gold);">智造</span></h2>
+          <h2>从<span style="color:#0038A8;">精密</span>到<span style="color:#0038A8;">智造</span></h2>
           <p>不止于加工。我们正在构建智能化、数字化的精密制造新范式，以技术突破持续推动产业升级。</p>
           <div class="cta-actions">
             <a href="contact.html" class="btn btn-gold btn-lg btn-arrow">与我们合作</a>
@@ -1039,8 +1052,8 @@
       visibility: visible;
     }
     .modal-container {
-      background: var(--navy-mid);
-      border: 1px solid rgba(200, 164, 92, 0.15);
+      background:#F8F9FB;
+      border: 1px solid rgba(0,56,168, 0.15);
       border-radius: var(--radius-lg);
       max-width: 640px;
       width: 100%;
@@ -1062,8 +1075,8 @@
       height: 36px;
       border-radius: 50%;
       background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(200, 164, 92, 0.2);
-      color: var(--gold);
+      border: 1px solid rgba(0,56,168, 0.2);
+      color:#0038A8;
       font-size: 1.3rem;
       cursor: pointer;
       display: flex;
@@ -1072,13 +1085,13 @@
       transition: all 0.2s var(--ease-smooth);
     }
     .modal-close:hover {
-      background: rgba(200, 164, 92, 0.1);
-      border-color: var(--gold);
+      background: rgba(0,56,168, 0.1);
+      border-color:#0038A8;
     }
     .modal-machine-header {
       margin-bottom: var(--space-xl);
       padding-bottom: var(--space-lg);
-      border-bottom: 1px solid rgba(200, 164, 92, 0.1);
+      border-bottom: 1px solid rgba(0,56,168, 0.1);
     }
     .modal-machine-header h2 {
       margin-bottom: var(--space-xs);
@@ -1091,7 +1104,7 @@
       font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: var(--gold);
+      color:#0038A8;
       margin-bottom: var(--space-md);
       font-family: var(--font-en);
     }
@@ -1100,24 +1113,24 @@
       border-collapse: collapse;
     }
     .spec-table tr {
-      border-bottom: 1px solid rgba(200, 164, 92, 0.06);
+      border-bottom: 1px solid rgba(0,56,168, 0.06);
     }
     .spec-table td {
       padding: var(--space-sm) var(--space-md);
       font-size: 0.9rem;
     }
     .spec-label {
-      color: var(--silver);
+      color:#6B7280;
       width: 40%;
     }
     .spec-value {
       font-family: var(--font-mono);
-      color: var(--white);
+      color:#111827;
       font-weight: 500;
     }
     .modal-desc p {
       line-height: 1.9;
-      color: var(--silver);
+      color:#6B7280;
     }
   </style>
 
@@ -1389,7 +1402,7 @@
             ctx.beginPath();
             ctx.moveTo(px, py);
             ctx.lineTo(smx, smy);
-            ctx.strokeStyle = 'rgba(200,164,92,' + la + ')';
+            ctx.strokeStyle = 'rgba(0,56,168,' + la + ')';
             ctx.lineWidth = 0.4;
             ctx.stroke();
           }
@@ -1397,15 +1410,15 @@
 
         // Center glow
         var cg = ctx.createRadialGradient(cx, cy, 0, cx, cy, 40 * sc);
-        cg.addColorStop(0, 'rgba(200,164,92,0.2)');
-        cg.addColorStop(0.5, 'rgba(200,164,92,0.08)');
+        cg.addColorStop(0, 'rgba(0,56,168,0.2)');
+        cg.addColorStop(0.5, 'rgba(0,56,168,0.08)');
         cg.addColorStop(1, 'rgba(0,0,0,0)');
         ctx.beginPath(); ctx.arc(cx, cy, 40 * sc, 0, Math.PI * 2); ctx.fillStyle = cg; ctx.fill();
 
         // Mouse glow
         if (mx > 0 && my > 0) {
           var mg = ctx.createRadialGradient(smx, smy, 0, smx, smy, 90);
-          mg.addColorStop(0, 'rgba(200,164,92,0.1)');
+          mg.addColorStop(0, 'rgba(0,56,168,0.1)');
           mg.addColorStop(1, 'rgba(0,0,0,0)');
           ctx.beginPath(); ctx.arc(smx, smy, 90, 0, Math.PI * 2); ctx.fillStyle = mg; ctx.fill();
         }
@@ -1416,7 +1429,7 @@
         for (var ri = 0; ri < ringRadii.length; ri++) {
           ctx.beginPath();
           ctx.arc(cx, cy, ringRadii[ri] * sc, 0, Math.PI * 2);
-          ctx.strokeStyle = 'rgba(200,164,92,' + ringOp[ri] + ')';
+          ctx.strokeStyle = 'rgba(0,56,168,' + ringOp[ri] + ')';
           ctx.lineWidth = ri === 1 ? 1.2 : 0.5;
           ctx.setLineDash(ri === 0 ? [4, 12] : ri === 1 ? [] : [2, 8]);
           ctx.stroke();

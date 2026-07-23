@@ -18,33 +18,33 @@
     .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 8vw, 80px); align-items: center; max-width: 1000px; margin: 0 auto; }
     .story-text p { line-height: 2; font-size: 1.05rem; }
     .story-stats { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
-    .story-stat { text-align: center; padding: var(--space-xl); background: var(--navy-mid); border: 1px solid rgba(200,164,92,0.25); border-radius: var(--radius-md); transition: all 0.4s; }
-    .story-stat:hover { border-color: rgba(200,164,92,0.25); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-    .story-stat-num { font-family: var(--font-en); font-size: 1.8rem; font-weight: 700; color: var(--gold); }
-    .story-stat-label { font-size: 0.8rem; color: var(--silver); margin-top: 4px; }
+    .story-stat { text-align: center; padding: var(--space-xl); background:#F8F9FB; border: 1px solid rgba(0,56,168,0.25); border-radius: var(--radius-md); transition: all 0.4s; }
+    .story-stat:hover { border-color: rgba(0,56,168,0.25); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .story-stat-num { font-family: var(--font-en); font-size: 1.8rem; font-weight: 700; color:#0038A8; }
+    .story-stat-label { font-size: 0.8rem; color:#6B7280; margin-top: 4px; }
 
     /* Timeline */
-    #timeline-section { padding: var(--section-pad) 0; background: var(--navy-deep); position: relative; }
-    #timeline-section::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 600px; height: 1px; background: linear-gradient(90deg, transparent, rgba(200,164,92,0.25), transparent); }
+    #timeline-section { padding: var(--section-pad) 0; background:#F5F6F8; position: relative; }
+    #timeline-section::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 600px; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,56,168,0.25), transparent); }
     .timeline-wrap { position: relative; max-width: 800px; margin: 0 auto; padding: var(--space-2xl) 0; }
-    .timeline-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(200,164,92,0.25); transform: translateX(-50%); }
+    .timeline-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(0,56,168,0.25); transform: translateX(-50%); }
     .timeline-line-fill { position: absolute; left: 50%; top: 0; width: 1px; background: linear-gradient(180deg, var(--gold-dark), var(--gold), var(--gold-light)); transform: translateX(-50%) scaleY(0); transform-origin: top; transition: transform 0.12s linear; }
     .timeline-item { position: relative; display: grid; grid-template-columns: 1fr 60px 1fr; align-items: start; margin-bottom: var(--space-3xl); opacity: 0; transform: translateY(30px); transition: opacity 0.7s, transform 0.7s; }
     .timeline-item.visible { opacity: 1; transform: translateY(0); }
     .timeline-content { padding: 0 var(--space-lg); }
     .timeline-item:nth-child(odd) .timeline-content { text-align: right; }
     .timeline-dot-col { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; }
-    .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--navy-deep); border: 2px solid var(--gold); transition: all 0.4s; }
-    .timeline-item.visible .timeline-dot { background: var(--gold); box-shadow: 0 0 16px rgba(200,164,92,0.25); }
-    .timeline-year { font-family: var(--font-en); font-size: 1.5rem; font-weight: 700; color: var(--gold); margin-bottom: 4px; }
-    .timeline-title { font-size: 1.05rem; font-weight: 600; color: var(--white); margin-bottom: 4px; }
-    .timeline-desc { font-size: 0.85rem; color: var(--silver); line-height: 1.7; }
+    .timeline-dot { width: 12px; height: 12px; border-radius: 50%; background:#F5F6F8; border: 2px solid var(--gold); transition: all 0.4s; }
+    .timeline-item.visible .timeline-dot { background: var(--gold); box-shadow: 0 0 16px rgba(0,56,168,0.25); }
+    .timeline-year { font-family: var(--font-en); font-size: 1.5rem; font-weight: 700; color:#0038A8; margin-bottom: 4px; }
+    .timeline-title { font-size: 1.05rem; font-weight: 600; color:#111827; margin-bottom: 4px; }
+    .timeline-desc { font-size: 0.85rem; color:#6B7280; line-height: 1.7; }
 
     /* Philosophy */
     #philosophy { padding: var(--section-pad) 0; background: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%); }
     .phil-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xl); }
-    .phil-card { text-align: center; padding: var(--space-2xl); background: var(--navy-mid); border: 1px solid rgba(200,164,92,0.25); border-radius: var(--radius-md); transition: all 0.4s; }
-    .phil-card:hover { transform: translateY(-6px); border-color: rgba(200,164,92,0.25); box-shadow: var(--shadow-lg); }
+    .phil-card { text-align: center; padding: var(--space-2xl); background:#F8F9FB; border: 1px solid rgba(0,56,168,0.25); border-radius: var(--radius-md); transition: all 0.4s; }
+    .phil-card:hover { transform: translateY(-6px); border-color: rgba(0,56,168,0.25); box-shadow: var(--shadow-lg); }
     .phil-char { font-size: 3.5rem; font-weight: 900; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; margin-bottom: var(--space-md); }
     .phil-card h3 { margin-bottom: var(--space-sm); }
     .phil-card p { font-size: 0.9rem; line-height: 1.85; }
@@ -61,6 +61,16 @@
   </style>
 </head>
 <body>
+  <div id="loader">
+    <div class="loader-core">
+      <div class="loader-ring"></div><div class="loader-ring"></div><div class="loader-ring"></div><div class="loader-ring"></div><div class="loader-ring"></div>
+      <div class="loader-spoke"></div><div class="loader-spoke"></div><div class="loader-spoke"></div><div class="loader-spoke"></div>
+      <div class="loader-spoke"></div><div class="loader-spoke"></div><div class="loader-spoke"></div><div class="loader-spoke"></div>
+      <div class="loader-hub"></div>
+      <div class="loader-slogan">以精密之名，铸就卓越品质<span class="en">PRECISION & EXCELLENCE</span></div>
+    </div>
+  </div>
+
   <a href="#main-content" class="skip-link">跳到主要内容</a>
 
   <header>
@@ -96,8 +106,8 @@
         </div>
         <div class="story-grid">
           <div class="story-text reveal-left">
-            <p>无锡精艺达科技有限公司成立于<span style="color:var(--gold);font-weight:600;">2009年</span>，最初是一家专注于精密零部件加工的小型车间。凭借对品质近乎执着的追求，公司创始人带领团队攻克了一个又一个技术难关，逐步在行业内建立起口碑。</p>
-            <p>经过十余年的持续投入与技术积累，我们已从单一的加工服务商，成长为拥有<span style="color:var(--white);font-weight:500;">完整研发、生产、检测体系</span>的行业标杆企业，累计服务超过<span style="color:var(--gold);font-weight:600;">200家</span>国内外知名客户，涵盖航空航天龙头企业、半导体设备核心供应商及高端汽车零部件制造商。</p>
+            <p>无锡精艺达科技有限公司成立于<span style="color:#0038A8;font-weight:600;">2009年</span>，最初是一家专注于精密零部件加工的小型车间。凭借对品质近乎执着的追求，公司创始人带领团队攻克了一个又一个技术难关，逐步在行业内建立起口碑。</p>
+            <p>经过十余年的持续投入与技术积累，我们已从单一的加工服务商，成长为拥有<span style="color:#111827;font-weight:500;">完整研发、生产、检测体系</span>的行业标杆企业，累计服务超过<span style="color:#0038A8;font-weight:600;">200家</span>国内外知名客户，涵盖航空航天龙头企业、半导体设备核心供应商及高端汽车零部件制造商。</p>
           </div>
           <div class="story-stats reveal-right">
             <div class="story-stat"><div class="story-stat-num">200+</div><div class="story-stat-label">全球客户</div></div>
