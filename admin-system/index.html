@@ -7,27 +7,27 @@
 <title>精艺达 · 客诉管理系统</title>
 <style>
 :root {
-  --navy-deep: #050C16; --navy: #0A1628; --navy-mid: #0D1E38;
-  --gold: #C8A45C; --gold-light: #D4B87A; --gold-dark: #A07830;
-  --silver: #8B9CB8; --silver-light: #A8B8CC; --white: #FFF;
+  --navy-deep: #F5F6F8; --navy: #FFFFFF; --navy-mid: #F8F9FB;
+  --gold: #0038A8; --gold-light: #1E5FBB; --gold-dark: #002060;
+  --silver: #6B7280; --silver-light: #4B5563; --white: #111827;
   --radius-xl: 24px; --radius-lg: 16px; --radius-md: 10px;
-  --accent-gradient: linear-gradient(135deg,#D4B87A,#C8A45C,#A07830);
+  --accent-gradient: linear-gradient(135deg,#1E5FBB,#0038A8,#002060);
   --font-cn: 'PingFang SC','Microsoft YaHei','Hiragino Sans GB',sans-serif;
   --font-en: -apple-system,'Segoe UI','Helvetica Neue',sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;background:var(--navy-deep);color:var(--silver);-webkit-font-smoothing:antialiased}
-body{font-family:var(--font-cn);min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse 60% 50% at 50% 50%,#0d1e38 0%,#050C16 100%)}
-.login-card{background:rgba(13,30,56,0.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(200,164,92,0.1);border-radius:var(--radius-xl);padding:48px 32px;width:100%;max-width:420px;margin:20px}
+body{font-family:var(--font-cn);min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse 60% 50% at 50% 50%,#F8F9FB 0%,#F5F6F8 100%)}
+.login-card{background:rgba(255,255,255,0.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(200,164,92,0.1);border-radius:var(--radius-xl);padding:48px 32px;width:100%;max-width:420px;margin:20px}
 .login-icon{width:56px;height:56px;margin:0 auto 24px;border-radius:50%;background:rgba(200,164,92,0.08);border:1px solid rgba(200,164,92,0.2);display:flex;align-items:center;justify-content:center;color:var(--gold)}
-.login-card h2{text-align:center;color:var(--white);margin-bottom:4px;font-family:var(--font-en);font-weight:700;font-size:1.3rem}
+.login-card h2{text-align:center;color: #111827;margin-bottom:4px;font-family:var(--font-en);font-weight:700;font-size:1.3rem}
 .login-sub{text-align:center;font-size:0.85rem;color:var(--silver);margin-bottom:32px}
 .form-group{margin-bottom:20px}
 .form-label{display:block;font-size:0.78rem;color:var(--silver-light);margin-bottom:6px}
-.form-input{width:100%;padding:12px 16px;background:rgba(10,22,40,0.5);border:1px solid rgba(200,164,92,0.15);border-radius:var(--radius-md);color:var(--white);font-size:0.95rem;font-family:var(--font-cn);transition:all .3s}
+.form-input{width:100%;padding:12px 16px;background:rgba(255,255,255,0.5);border:1px solid rgba(200,164,92,0.15);border-radius:var(--radius-md);color: #111827;font-size:0.95rem;font-family:var(--font-cn);transition:all .3s}
 .form-input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(200,164,92,0.12)}
 .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 28px;border-radius:var(--radius-md);font-size:0.9rem;font-weight:600;cursor:pointer;border:none;transition:all .35s;font-family:var(--font-cn);width:100%}
-.btn-gold{background:var(--accent-gradient);color:#0a1218;box-shadow:0 4px 16px rgba(200,164,92,0.15)}
+.btn-gold{background:var(--accent-gradient);color:#FFFFFF;box-shadow:0 4px 16px rgba(200,164,92,0.15)}
 .btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(200,164,92,0.25)}
 .login-error{text-align:center;font-size:0.8rem;color:#e74c3c;margin-top:16px;display:none}
 .login-footer{text-align:center;margin-top:24px;font-size:0.75rem}

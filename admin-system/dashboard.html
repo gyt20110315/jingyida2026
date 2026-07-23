@@ -7,10 +7,10 @@
 <title>客诉仪表盘 · 精艺达</title>
 <style>
 :root {
-  --navy-deep:#050C16;--navy:#0A1628;--navy-mid:#0D1E38;--navy-light:#112642;--navy-surface:#15294A;
-  --gold:#C8A45C;--gold-light:#D4B87A;--silver:#8B9CB8;--silver-light:#A8B8CC;--white:#FFF;
+  --navy-deep:#F5F6F8;--navy:#FFFFFF;--navy-mid:#F8F9FB;--navy-light:#112642;--navy-surface:#15294A;
+  --gold:#0038A8;--gold-light:#1E5FBB;--silver:#6B7280;--silver-light:#4B5563;--white:#111827;
   --radius-xl:24px;--radius-lg:16px;--radius-md:10px;--radius-sm:6px;
-  --accent-gradient:linear-gradient(135deg,#D4B87A,#C8A45C,#A07830);
+  --accent-gradient:linear-gradient(135deg,#1E5FBB,#0038A8,#002060);
   --font-cn:'PingFang SC','Microsoft YaHei','Hiragino Sans GB',sans-serif;
   --font-en:-apple-system,'Segoe UI','Helvetica Neue',sans-serif;
   --font-serif:'Songti SC','STSong','SimSun',serif;
@@ -19,16 +19,16 @@
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;background:var(--navy-deep);color:var(--silver);-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
-body{font-family:var(--font-cn);background:radial-gradient(ellipse 60% 50% at 50% 30%,#0d1e38 0%,#050C16 100%);min-height:100vh}
+body{font-family:var(--font-cn);background:radial-gradient(ellipse 60% 50% at 50% 30%,#F8F9FB 0%,#F5F6F8 100%);min-height:100vh}
 
 /* Header */
-header{position:sticky;top:0;z-index:100;background:rgba(10,22,40,0.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:0.5px solid rgba(255,255,255,0.06)}
+header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.9);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:0.5px solid rgba(255,255,255,0.06)}
 nav{display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px;max-width:1200px;margin:0 auto}
-.nav-brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--white);font-size:1rem}
+.nav-brand{display:flex;align-items:center;gap:10px;font-weight:700;color: #111827;font-size:1rem}
 .nav-brand span{font-family:var(--font-en);font-size:0.55rem;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase}
 .nav-actions{display:flex;gap:12px;align-items:center}
-.nav-btn{padding:6px 16px;border-radius:20px;font-size:0.78rem;cursor:pointer;border:0.5px solid rgba(200,164,92,0.2);background:rgba(200,164,92,0.06);color:var(--gold);transition:all .3s;font-family:var(--font-cn);text-decoration:none}
-.nav-btn:hover{background:rgba(200,164,92,0.15);border-color:var(--gold)}
+.nav-btn{padding:6px 16px;border-radius:20px;font-size:0.78rem;cursor:pointer;border:0.5px solid rgba(0,56,168,0.2);background:rgba(0,56,168,0.06);color:var(--gold);transition:all .3s;font-family:var(--font-cn);text-decoration:none}
+.nav-btn:hover{background:rgba(0,56,168,0.15);border-color:var(--gold)}
 .nav-btn.danger{border-color:rgba(231,76,60,0.25);color:#e74c3c}
 .nav-btn.danger:hover{background:rgba(231,76,60,0.1)}
 
@@ -37,26 +37,26 @@ main{padding:24px;max-width:1200px;margin:0 auto}
 
 /* Stats */
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}
-.stat-card{text-align:center;padding:24px 16px;background:rgba(13,30,56,0.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(200,164,92,0.06);border-radius:var(--radius-lg)}
+.stat-card{text-align:center;padding:24px 16px;background:rgba(255,255,255,0.7);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(0,56,168,0.06);border-radius:var(--radius-lg)}
 .stat-num{font-family:var(--font-serif);font-size:2rem;font-weight:900;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .stat-label{font-size:0.78rem;color:var(--silver);margin-top:4px}
 
 /* Filters */
 .filter-bar{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
-.filter-btn{padding:6px 18px;border-radius:20px;font-size:0.78rem;cursor:pointer;border:0.5px solid rgba(200,164,92,0.15);background:rgba(200,164,92,0.04);color:var(--silver);transition:all .25s;font-family:var(--font-cn)}
-.filter-btn:hover,.filter-btn.active{background:rgba(200,164,92,0.15);border-color:var(--gold);color:var(--white)}
+.filter-btn{padding:6px 18px;border-radius:20px;font-size:0.78rem;cursor:pointer;border:0.5px solid rgba(0,56,168,0.15);background:rgba(0,56,168,0.04);color:var(--silver);transition:all .25s;font-family:var(--font-cn)}
+.filter-btn:hover,.filter-btn.active{background:rgba(0,56,168,0.15);border-color:var(--gold);color: #111827}
 
 /* Groups */
 .group{margin-bottom:32px}
-.group-header{font-size:1.05rem;font-weight:600;color:var(--white);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid rgba(200,164,92,0.08);display:flex;justify-content:space-between}
+.group-header{font-size:1.05rem;font-weight:600;color: #111827;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid rgba(0,56,168,0.08);display:flex;justify-content:space-between}
 .group-count{font-size:0.75rem;color:var(--silver);font-weight:400}
 
 /* Cards */
-.card{background:rgba(13,30,56,0.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(200,164,92,0.06);border-radius:var(--radius-lg);padding:20px;margin-bottom:12px;transition:all .3s;cursor:pointer}
-.card:hover{border-color:rgba(200,164,92,0.15);box-shadow:var(--shadow-lg)}
-.card.expanded{border-color:rgba(200,164,92,0.25);box-shadow:0 0 0 2px rgba(200,164,92,0.08),var(--shadow-lg)}
+.card{background:rgba(255,255,255,0.7);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(0,56,168,0.06);border-radius:var(--radius-lg);padding:20px;margin-bottom:12px;transition:all .3s;cursor:pointer}
+.card:hover{border-color:rgba(0,56,168,0.15);box-shadow:var(--shadow-lg)}
+.card.expanded{border-color:rgba(0,56,168,0.25);box-shadow:0 0 0 2px rgba(0,56,168,0.08),var(--shadow-lg)}
 .card-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px}
-.card-top h4{font-size:0.95rem;color:var(--white);margin:0;display:flex;align-items:center;gap:8px}
+.card-top h4{font-size:0.95rem;color: #111827;margin:0;display:flex;align-items:center;gap:8px}
 .card-arrow{font-size:0.7rem;color:var(--gold);transition:transform .3s;display:inline-block}
 .card.expanded .card-arrow{transform:rotate(180deg)}
 .card-summary{font-size:0.8rem;color:var(--silver);margin-top:6px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
@@ -65,21 +65,38 @@ main{padding:24px;max-width:1200px;margin:0 auto}
 .badge-high{background:rgba(231,76,60,0.15);color:#e74c3c;border:0.5px solid rgba(231,76,60,0.25)}
 .badge-medium{background:rgba(243,156,18,0.15);color:#f39c12;border:0.5px solid rgba(243,156,18,0.25)}
 .badge-low{background:rgba(46,204,113,0.12);color:#2ecc71;border:0.5px solid rgba(46,204,113,0.2)}
-.badge-cat{background:rgba(200,164,92,0.1);color:var(--gold);border:0.5px solid rgba(200,164,92,0.2)}
+.badge-cat{background:rgba(0,56,168,0.1);color:var(--gold);border:0.5px solid rgba(0,56,168,0.2)}
 .card-meta{font-size:0.72rem;color:var(--silver);margin-bottom:6px;display:flex;gap:16px;flex-wrap:wrap}
 .card-body{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.25,.46,.45,.94)}
 .card.expanded .card-body{max-height:500px}
-.card-detail{padding-top:12px;margin-top:12px;border-top:1px solid rgba(200,164,92,0.08)}
+.card-detail{padding-top:12px;margin-top:12px;border-top:1px solid rgba(0,56,168,0.08)}
 .card-detail-row{display:flex;gap:16px;margin-bottom:6px;font-size:0.78rem;flex-wrap:wrap}
 .card-detail-row strong{color:var(--silver-light);min-width:60px}
-.card-detail-row span{color:var(--white)}
-.card-detail-desc{margin-top:8px;font-size:0.82rem;color:var(--silver);line-height:1.8;background:rgba(10,22,40,0.3);padding:12px;border-radius:var(--radius-sm)}
+.card-detail-row span{color: #111827}
+.card-detail-desc{margin-top:8px;font-size:0.82rem;color:var(--silver);line-height:1.8;background:rgba(0,0,0,0.03);padding:12px;border-radius:var(--radius-sm)}
 
 .empty{text-align:center;padding:80px 20px}
 .empty svg{opacity:0.25;margin-bottom:20px}
-.empty h3{color:var(--white);margin-bottom:8px}
+.empty h3{color: #111827;margin-bottom:8px}
 .empty p{color:var(--silver);font-size:0.85rem}
 
+/* AI Modal */
+.ai-modal{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .3s}
+.ai-modal.active{opacity:1}
+.ai-modal-card{background:rgba(255,255,255,0.95);border:1px solid rgba(0,56,168,0.2);border-radius:var(--radius-xl);max-width:620px;width:100%;max-height:85vh;overflow-y:auto;padding:32px;transform:translateY(20px);transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
+.ai-modal.active .ai-modal-card{transform:translateY(0)}
+.ai-header{font-size:1.2rem;font-weight:700;color: #111827;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid rgba(0,56,168,0.2);display:flex;align-items:center;gap:8px}
+.ai-section{margin-bottom:20px}
+.ai-label{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--gold);margin-bottom:8px;font-family:var(--font-en)}
+.ai-meter{flex:1;height:8px;background:rgba(0,0,0,0.06);border-radius:4px;overflow:hidden}
+.ai-meter-fill{height:100%;border-radius:4px;transition:width 1s}
+.ai-actions{list-style:none;padding:0}
+.ai-actions li{padding:6px 0;font-size:0.85rem;color:var(--silver);line-height:1.7}
+.ai-template{width:100%;height:120px;background:rgba(255,255,255,0.5);border:1px solid rgba(0,56,168,0.15);border-radius:var(--radius-md);color:var(--silver-light);font-size:0.8rem;padding:12px;resize:none;font-family:var(--font-cn);line-height:1.7}
+.ai-btn{display:inline-block;margin-top:8px;padding:6px 14px;border-radius:16px;font-size:0.75rem;cursor:pointer;border:0.5px solid rgba(0,56,168,0.3);background:rgba(0,56,168,0.08);color:var(--gold);transition:all .25s;font-family:var(--font-cn)}
+.ai-btn:hover{background:rgba(0,56,168,0.2);border-color:var(--gold);box-shadow:0 0 12px rgba(0,56,168,0.2)}
+.ai-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.04);border:0.5px solid rgba(0,56,168,0.2);color:var(--gold);cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all .25s}
+.ai-close:hover{background:rgba(0,56,168,0.15);border-color:var(--gold)}
 @media(max-width:768px){.stats-row{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
@@ -111,7 +128,7 @@ main{padding:24px;max-width:1200px;margin:0 auto}
 
   <div id="list"></div>
   <div class="empty" id="empty">
-    <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="30" stroke="#C8A45C" stroke-width="1"/><path d="M22 22h20v20H22z" stroke="#C8A45C" stroke-width="1"/></svg>
+    <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="30" stroke="#0038A8" stroke-width="1"/><path d="M22 22h20v20H22z" stroke="#0038A8" stroke-width="1"/></svg>
     <h3>暂无客诉记录</h3><p>客户提交的反馈将显示在这里</p>
   </div>
 </main>
@@ -173,12 +190,113 @@ function render(){
       html+='<div class="card-detail-row"><strong>提交时间</strong><span>'+ts+'</span></div>';
       html+='<div class="card-detail-row"><strong>公司名称</strong><span>'+cust+'</span></div>';
       html+='<div class="card-detail-desc"><strong>问题描述：</strong><br>'+(c.description||'暂无描述')+'</div>';
+      html+='<button class="ai-btn" onclick="event.stopPropagation();showAI('+JSON.stringify(c).replace(/"/g,'&quot;')+')">🤖 AI 分析</button>';
       html+='</div></div></div>';
     });
     html+='</div>';
   });
   list.innerHTML=html;
 }
+
+// ===== AI Analysis Engine =====
+function analyzeComplaint(c){
+  var desc=(c.description||'').toLowerCase();
+  var cat=c.category||'';
+  var urg=c.urgency||'low';
+
+  // Sentiment analysis
+  var negWords=['问题','故障','不良','损坏','延迟','错误','投诉','不满','严重','退货','赔偿','返工','缺陷','偏差','超标','裂纹','划伤','生锈','漏','断','裂'];
+  var posWords=['满意','感谢','好评','不错','还行','推荐'];
+  var negCount=0,posCount=0;
+  negWords.forEach(function(w){if(desc.indexOf(w)>=0)negCount++});
+  posWords.forEach(function(w){if(desc.indexOf(w)>=0)posCount++});
+  var sentiment=negCount>posCount?'负面':posCount>negCount?'中性偏正':'中性';
+  var sentimentScore=Math.min(95, 30+negCount*15-posCount*10);
+
+  // Risk assessment
+  var riskWords=['安全','事故','停产','伤亡','环保','合规','召回','批量','法律','索赔','泄漏','爆炸'];
+  var highRiskWords=['安全','事故','停产','召回','法律','索赔'];
+  var hasHighRisk=false,hasRisk=false;
+  riskWords.forEach(function(w){if(desc.indexOf(w)>=0)hasRisk=true});
+  highRiskWords.forEach(function(w){if(desc.indexOf(w)>=0)hasHighRisk=true});
+  var riskLevel=urg==='high'||hasHighRisk?'高风险':urg==='medium'||hasRisk?'中风险':'低风险';
+
+  // Root cause analysis
+  var causes={
+    quality:'可能原因：加工工艺参数偏离、刀具磨损未及时更换、质检环节疏漏。建议核查该批次的SPC数据和首件检验记录。',
+    delivery:'可能原因：排产计划冲突、原材料到货延迟、物流环节异常。建议核查ERP排产记录并与物流供应商确认。',
+    spec:'可能原因：图纸版本未同步、技术交底不充分、量具未按期校准。建议核对客户最新图纸版本并对量具进行重新校准。',
+    damage:'可能原因：包装防护不足、运输过程冲击、装卸操作不当。建议升级包装方案并追溯物流环节监控记录。',
+    service:'可能原因：响应机制不完善、信息传递滞后、服务标准未统一。建议优化客诉升级流程并定期进行服务培训。',
+    other:'可能原因：需进一步调查。建议安排质量工程师在24小时内与客户直接沟通获取更多信息。'
+  };
+  var rootCause=causes[cat]||causes.other;
+
+  // Suggested actions
+  var actions=[];
+  if(urg==='high')actions.push('🛑 立即启动4小时应急响应流程');
+  if(cat==='quality'){actions.push('📐 对该批次产品启动全检并追溯SPC记录');actions.push('🔧 核查对应设备的刀具寿命与维护日志')}
+  if(cat==='delivery'){actions.push('📦 优先排产并协调加急物流');actions.push('📞 主动通知客户更新预计交付时间')}
+  if(cat==='spec'){actions.push('📋 与客户确认最新版技术图纸和规范');actions.push('📏 对在制品进行全尺寸复检')}
+  if(cat==='damage'){actions.push('📸 要求客户提供损坏部位照片');actions.push('📦 评估包装方案是否需要升级')}
+  if(cat==='service'){actions.push('📝 记录客诉处理全过程并归档');actions.push('👤 指派专人一对一跟进处理')}
+  if(hasRisk)actions.push('⚠️ 上报质量经理并启动风险评审');
+  actions.push('📊 将本客诉纳入月度质量会议Review');
+  if(urg!=='low')actions.push('📞 质量工程师在'+ (urg==='high'?'4':'24') +'小时内联系客户');
+
+  // Response template
+  var template='尊敬的'+ (c.contactPerson||c.customer||'客户') +'：\n\n感谢您的反馈。针对您提出的'+(catLabels[cat]||'问题')+'，我们已启动内部调查流程。'+(urg==='high'?'我们将在4小时内与您取得联系并同步处理进展。':'我们将尽快核实情况并在24小时内给您明确答复。')+'\n\n此致\n无锡精艺达科技有限公司 质量部';
+
+  return {
+    sentiment:sentiment, sentimentScore:sentimentScore,
+    riskLevel:riskLevel, riskDetail:hasHighRisk?'存在高风险关键词，需立即响应':hasRisk?'存在风险关键词，建议优先处理':'常规风险，按标准流程处理',
+    rootCause:rootCause,
+    actions:actions,
+    responseTemplate:template,
+    processingTime:urg==='high'?'建议4小时内完成初步响应':urg==='medium'?'建议24小时内完成初步响应':'建议3个工作日内完成处理'
+  };
+}
+
+function showAI(c){
+  var ai=analyzeComplaint(c);
+  var html='<div class="ai-modal-content">';
+  html+='<div class="ai-header">🤖 AI 客诉智能分析</div>';
+
+  // Sentiment
+  html+='<div class="ai-section"><div class="ai-label">情绪分析</div>';
+  html+='<div style="display:flex;align-items:center;gap:12px;">';
+  html+='<div class="ai-meter"><div class="ai-meter-fill" style="width:'+ai.sentimentScore+'%;background:'+(ai.sentimentScore>70?'#e74c3c':ai.sentimentScore>40?'#f39c12':'#2ecc71')+'"></div></div>';
+  html+='<span style="font-weight:600;color:'+(ai.sentimentScore>70?'#e74c3c':'#f39c12')+'">'+ai.sentiment+' ('+ai.sentimentScore+'%)</span></div></div>';
+
+  // Risk
+  html+='<div class="ai-section"><div class="ai-label">风险评估</div>';
+  html+='<p style="color:'+(ai.riskLevel==='高风险'?'#e74c3c':'#f39c12')+';font-weight:600;">'+ai.riskLevel+'</p>';
+  html+='<p style="font-size:0.8rem;color:var(--silver);">'+ai.riskDetail+'</p></div>';
+
+  // Root cause
+  html+='<div class="ai-section"><div class="ai-label">根因分析</div><p style="font-size:0.85rem;line-height:1.7;">'+ai.rootCause+'</p></div>';
+
+  // Actions
+  html+='<div class="ai-section"><div class="ai-label">建议处理措施</div><ul class="ai-actions">';
+  ai.actions.forEach(function(a){html+='<li>'+a+'</li>'});
+  html+='</ul></div>';
+
+  // Timeline
+  html+='<div class="ai-section"><div class="ai-label">处理时效</div><p style="font-weight:600;color:var(--gold);">⏱ '+ai.processingTime+'</p></div>';
+
+  // Response template
+  html+='<div class="ai-section"><div class="ai-label">回复模板 <button class="nav-btn" style="font-size:0.7rem;padding:2px 10px;" onclick="copyTemplate()">复制</button></div>';
+  html+='<textarea id="ai-template" class="ai-template" readonly>'+ai.responseTemplate+'</textarea></div>';
+
+  html+='</div>';
+
+  document.getElementById('ai-body').innerHTML=html;
+  document.getElementById('ai-modal').style.display='flex';
+  setTimeout(function(){document.getElementById('ai-modal').classList.add('active')},10);
+}
+
+function closeAI(){document.getElementById('ai-modal').classList.remove('active');setTimeout(function(){document.getElementById('ai-modal').style.display='none'},300)}
+function copyTemplate(){var t=document.getElementById('ai-template');t.select();document.execCommand('copy');alert('回复模板已复制到剪贴板')}
 
 function clearAll(){
   if(confirm('确定清空所有客诉数据？此操作不可撤销。')){localStorage.setItem(KEY,'[]');render()}
@@ -187,5 +305,13 @@ function logout(){sessionStorage.removeItem('jya');location.href='index.html'}
 
 render();
 </script>
+
+<div class="ai-modal" id="ai-modal" onclick="if(event.target===this)closeAI()">
+  <div class="ai-modal-card" style="position:relative">
+    <button class="ai-close" onclick="closeAI()">✕</button>
+    <div id="ai-body"></div>
+  </div>
+</div>
+
 </body>
 </html>
