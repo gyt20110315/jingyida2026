@@ -303,6 +303,33 @@ function clearAll(){
 }
 function logout(){sessionStorage.removeItem('jya');location.href='index.html'}
 
+// Google Sheets backend (optional — set your URL below)
+var SHEETS_API = ''; // 填入你的 Google Apps Script Web 应用 URL
+
+function loadFromSheets(){
+  if(!SHEETS_API) return;
+  fetch(SHEETS_API).then(function(r){return r.json()}).then(function(rows){
+    var complaints=rows.map(function(r){
+      return {
+        customer:r['公司']||r.customer||'',
+        contactPerson:r['联系人']||r.contactPerson||'',
+        phone:r['电话']||r.phone||'',
+        orderRef:r['订单号']||r.orderRef||'',
+        category:((r['类型']||r.category||'other')+'').toLowerCase(),
+        urgency:((r['紧急度']||r.urgency||'low')+'').toLowerCase(),
+        description:r['描述']||r.description||'',
+        timestamp:r['时间']||r.timestamp||new Date().toISOString(),
+        id: Date.now().toString(36)+Math.random().toString(36)
+      };
+    }).reverse();
+    localStorage.setItem(KEY, JSON.stringify(complaints));
+    render();
+  }).catch(function(){});
+}
+
+// Try loading from Sheets on startup
+loadFromSheets();
+
 render();
 </script>
 

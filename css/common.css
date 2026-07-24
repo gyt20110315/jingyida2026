@@ -1359,19 +1359,29 @@ footer {
   }
 }
 
+/* ===== Mobile Optimization ===== */
+@media (max-width: 480px) {
+  html { font-size: 15px; }
+  h1 { font-size: clamp(1.8rem, 8vw, 2.4rem) !important; }
+  h2 { font-size: clamp(1.4rem, 6vw, 1.8rem) !important; }
+  .btn { padding: 12px 20px; font-size: 0.85rem; min-height: 44px; }
+  .btn-lg { padding: 14px 24px; }
+  .section { padding: 40px 0; }
+  .container { padding: 0 12px; }
+  nav { padding: 0 12px; }
+  .page-hero { min-height: 35vh; padding: 60px 12px 40px; }
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .timeline-line, .timeline-line-fill { left: 16px; }
+  .timeline-item { grid-template-columns: 32px 1fr; gap: 8px; }
+  .timeline-item:nth-child(odd) .timeline-content { text-align: left; }
+  .nav-links { width: min(85vw, 320px); }
+}
+
 /* ===== Touch Device Overrides ===== */
 @media (hover: none) and (pointer: coarse) {
-  .card:hover {
-    transform: none;
-  }
-
-  .card:active {
-    transform: scale(0.98);
-  }
-
-  [data-tilt] {
-    transform: none !important;
-  }
+  .card:hover { transform: none; }
+  .card:active { transform: scale(0.98); }
+  [data-tilt] { transform: none !important; }
 }
 
 /* ===== Reduced Motion ===== */
