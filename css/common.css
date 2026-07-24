@@ -1377,6 +1377,34 @@ footer {
   .nav-links { width: min(85vw, 320px); }
 }
 
+/* ===== Focus & Accessibility ===== */
+a:focus-visible, button:focus-visible, .btn:focus-visible {
+  outline: 2px solid #0038A8;
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+:focus:not(:focus-visible) { outline: none; }
+
+/* ===== Print Styles ===== */
+@media print {
+  *, *::before, *::after { background: #fff !important; color: #000 !important; box-shadow: none !important; text-shadow: none !important; }
+  header, footer, #scroll-progress, #back-to-top, .section-hint, .page-jump, #loader, canvas, .hero-scroll, .menu-toggle { display: none !important; }
+  body { font-size: 12pt; line-height: 1.5; }
+  h1, h2, h3, h4 { page-break-after: avoid; }
+  .container { max-width: 100%; padding: 0; }
+  img { max-width: 100% !important; page-break-inside: avoid; }
+  a { text-decoration: underline; }
+  .page-hero { min-height: auto; padding: 20px 0; }
+  .page-hero h1 { font-size: 24pt; }
+}
+
+/* ===== Image CLS Prevention ===== */
+img { aspect-ratio: attr(width) / attr(height); }
+
+/* ===== Improved Micro-interactions ===== */
+.btn:active { transform: scale(0.95); transition: transform 0.1s; }
+.card:active { transform: scale(0.98); }
+
 /* ===== Touch Device Overrides ===== */
 @media (hover: none) and (pointer: coarse) {
   .card:hover { transform: none; }
